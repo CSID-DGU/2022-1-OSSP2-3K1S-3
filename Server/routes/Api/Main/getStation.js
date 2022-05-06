@@ -1,38 +1,39 @@
 const request = require('request')
-const BikeserviceKey = '42496c485370696238316479436577'
-//공공데이터 포털에서 받은 내 서비스키 
+const bike = require('./bikeStation');
+const busServiceKey = 't5N%2FFqNynkqx15wlqztjL4KgGPu4RnntvpSnvcC2Jx6Czvtphqeg8sXDPp%2BdMI48sTmABuKEDErpcqzM8dRZxw%3D%3D'
 
+//공공데이터 포털에서 받은 내 서비스키 
 var parse = require('json-parse');
-// const { route } = require('.');
-// const app = require('../app');
-// const { router, render } = require('../app');
 
 //따릉이 스테이션 정보 불러오기
-const getBikeStation = (callback) => {      
+const getStation = (userLatitude, userLongitude, callback) => {      
+    const bikeData = bike.bikeStationArr.filter(data => data.longitude <= (userLongitude + 0.005) && data.longitude >= (userLongitude - 0.005) && data.latitude <= (userLatitude + 0.005) && data.latitude >= (userLatitude - 0.005));
+    var busData = JSON;
+    var busDesc = [];
 
-    console.log("따릉이 호출 완료");            //진입햇는지 확인용
-    
-    var url = 'http://openapi.seoul.go.kr:8088';
-    var queryParams = '/' + BikeserviceKey; /* Service Key*/
-    queryParams += '/' + encodeURIComponent('json'); /* */
-    queryParams += '/' + encodeURIComponent('bikeList'); /* */
-    queryParams += '/' + encodeURIComponent('1001'); /* */
-    queryParams += '/' + encodeURIComponent('2000'); /* */
+    var url = 'http://ws.bus.go.kr/api/rest/stationinfo/getStationByPos';
+    var queryParams = '?serviceKey=' + busServiceKey ; /* Service Key*/
+    queryParams += '&tmX=' + encodeURIComponent(userLongitude); /* */
+    queryParams += '&tmY=' + encodeURIComponent(userLatitude); /* */
+    queryParams += '&radius=' + encodeURIComponent(500); /* */
+    queryParams += '&resultType=' + encodeURIComponent('json'); /* */
 
-request({
+    request({
     url: url + queryParams,
     method: 'GET'
-}, function (error, response, body) {
-    console.log(url + queryParams)
+    }, function (error, response, body) {
+    // console.log(url + queryParams)
     console.log('Status', response.statusCode);
     // console.log('Headers', JSON.stringify(response.headers));
-    console.log('Reponse received', body);
+    busData = JSON.parse(body);
+    busDesc = busData.msgBody.itemList;    
 
-        callback(undefined,{    //body를 air이름으로 만들어서 index.js에 보내준다
-            bike:body
-        })
-        });
+    callback(undefined,{   
+        bikeStation: bikeData,
+        busStation: busDesc
+    });
+    });
         
 }
 
-module.exports = getBikeStation;
+module.exports = getStation;

@@ -9,7 +9,6 @@ var usersRouter = require('./routes/users');
 const res = require('express/lib/response');
 const router = require('./routes/index');
 const getStation = require('./routes/Api/Main/getStation');
-const bike = require('./routes/Api/Main/bikeStation');
 
 
 var app = express();
@@ -27,28 +26,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+//메인 뷰 따릉이 및 버스 정류장 제공 API
 app.get('/Api/Main/getStation', (req, res) => {
   console.log("[call getStation Api]");
 
   const userLongitude = req.body.long;
   const userLatitude = req.body.lati;
 
-  // getStation((error, {bike} = {}) => {
-  //   if (error) {
-  //     console.log("Error to bike");
-  //     return res.send({error})
-  //   }
-  //   res.send(bike);
-  //   console.log(bike);
-  // })
-
-
-  console.log(userLongitude, userLatitude);
-  const bikeData = bike.bikeStationArr.filter(data => data.longitude <= (userLongitude + 0.005) && data.longitude >= (userLongitude - 0.005) && data.latitude <= (userLatitude + 0.005) && data.latitude >= (userLatitude - 0.005))
-
-  res.json({status: res.statusCode, data: [{bikeStation: bikeData}]});
-
-  
+  getStation(userLatitude, userLongitude,(error, {bikeStation, busStation} = {}) => {
+    if (error) {
+      console.log("Error to bike");
+      return res.send({error})
+    }
+    res.json({status: res.statusCode, data: [{bike: bikeStation, bus: busStation}]});
+    // console.log(station);
+  })
 })
 
 // catch 404 and forward to error handler
