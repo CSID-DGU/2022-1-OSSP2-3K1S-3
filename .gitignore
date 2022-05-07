@@ -280,7 +280,7 @@ $RECYCLE.BIN/
 *.class
 
 # Generated files
-bin/
+App/bin/
 gen/
 out/
 
