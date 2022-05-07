@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recommend_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#292929">
+
+    <ImageView
+        android:id="@+id/yellowLine5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/yellow_rectangle_4" />
+
+    <ImageView
+        android:id="@+id/yellowLine6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/yellowLine8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yellowLine5"
+        app:layout_constraintVertical_bias="0.25"
+        app:srcCompat="@drawable/yellow_rectangle_4" />
+
+    <ImageView
+        android:id="@+id/yellowLine7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        app:layout_constraintBottom_toTopOf="@+id/yellowLine8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yellowLine5"
+        app:layout_constraintVertical_bias="0.75"
+        app:srcCompat="@drawable/yellow_rectangle_4" />
+
+    <ImageView
+        android:id="@+id/yellowLine8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/yellow_rectangle_4" />
+
+    <ImageView
+        android:id="@+id/recommendBox"
+        android:layout_width="363dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/yellowLine5"
+        app:srcCompat="@drawable/white_rectangle_1" />
+
+    <ImageView
+        android:id="@+id/detail_recommend"
+        android:layout_width="198dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/recommendBox"
+        app:layout_constraintEnd_toEndOf="@+id/recommendBox"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="@+id/recommendBox"
+        app:layout_constraintTop_toTopOf="@+id/recommendBox"
+        app:layout_constraintVertical_bias="0.32999998"
+        app:srcCompat="@drawable/detail_recommend" />
+
+    <ImageView
+        android:id="@+id/recommendBox1"
+        android:layout_width="363dp"
+        android:layout_height="501dp"
+        app:layout_constraintBottom_toBottomOf="@+id/yellowLine8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recommendBox"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/recommend_box" />
+
+    <ImageView
+        android:id="@+id/recommendBox2"
+        android:layout_width="363dp"
+        android:layout_height="501dp"
+        app:layout_constraintBottom_toBottomOf="@+id/yellowLine8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recommendBox"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/recommend_box" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/recommendBox1"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="@+id/recommendBox1"
+        app:layout_constraintTop_toBottomOf="@+id/recommendBox"
+        app:srcCompat="@drawable/like" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="75dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="176dp"
+        app:layout_constraintEnd_toEndOf="@+id/recommendBox1"
+        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintStart_toStartOf="@+id/recommendBox1"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:srcCompat="@drawable/hate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
