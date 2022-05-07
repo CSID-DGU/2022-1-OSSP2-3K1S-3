@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#292929">
+
+    <ImageView
+        android:id="@+id/nav_bar2"
+        android:layout_width="417dp"
+        android:layout_height="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/nav_bar" />
+
+    <ImageView
+        android:id="@+id/yellow_rectangle_3"
+        android:layout_width="77dp"
+        android:layout_height="344dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/yellow_rectangle_3" />
+
+    <ImageView
+        android:id="@+id/ex_img"
+        android:layout_width="415dp"
+        android:layout_height="390dp"
+        app:layout_constraintBottom_toTopOf="@+id/nav_bar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ex_img" />
+
+    <ImageView
+        android:id="@+id/text_box_1"
+        android:layout_width="340dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/yellow_rectangle_3"
+        app:srcCompat="@drawable/text_box" />
+
+    <ImageView
+        android:id="@+id/text_box_2"
+        android:layout_width="340dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_box_1"
+        app:srcCompat="@drawable/text_box" />
+
+    <ImageView
+        android:id="@+id/search_button"
+        android:layout_width="156dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_box_2"
+        app:srcCompat="@drawable/button_box" />
+
+    <ImageView
+        android:id="@+id/alarm_button"
+        android:layout_width="63dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.896"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_box_2"
+        app:srcCompat="@drawable/white_circle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
