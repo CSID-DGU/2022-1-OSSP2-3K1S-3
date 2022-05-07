@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainview_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#292929">
+
+    <ImageView
+        android:id="@+id/yellow3"
+        android:layout_width="88dp"
+        android:layout_height="334dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/yellow_rectangle_3" />
+
+    <ImageView
+        android:id="@+id/search_button"
+        android:layout_width="156dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.141"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textbox2"
+        app:srcCompat="@drawable/button_box" />
+
+    <ImageView
+        android:id="@+id/textbox2"
+        android:layout_width="340dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentBtn"
+        app:srcCompat="@drawable/text_box" />
+
+    <ImageButton
+        android:id="@+id/currentBtn"
+        android:layout_width="339dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#00FFFFFF"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/yellow3"
+        app:srcCompat="@drawable/text_box"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/routeSearchBtn"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/search_button"
+        app:layout_constraintEnd_toEndOf="@+id/search_button"
+        app:layout_constraintStart_toStartOf="@+id/search_button"
+        app:layout_constraintTop_toTopOf="@+id/search_button"
+        app:srcCompat="@drawable/route_search"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/alarmBtn"
+        android:layout_width="61dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#00FFFFFF"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.894"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textbox2"
+        app:srcCompat="@drawable/white_circle"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/alarmOn"
+        android:layout_width="61dp"
+        android:layout_height="61dp"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/alarmBtn"
+        app:layout_constraintEnd_toEndOf="@+id/alarmBtn"
+        app:layout_constraintStart_toStartOf="@+id/alarmBtn"
+        app:layout_constraintTop_toTopOf="@+id/alarmBtn"
+        app:srcCompat="@drawable/alarm_1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
