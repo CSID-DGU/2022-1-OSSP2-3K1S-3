@@ -14,44 +14,61 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/yellow_rectangle_3" />
+        app:srcCompat="@drawable/yellow_line3" />
 
     <ImageView
-        android:id="@+id/search_button"
-        android:layout_width="156dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.141"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textbox2"
-        app:srcCompat="@drawable/button_box" />
-
-    <ImageView
-        android:id="@+id/textbox2"
+        android:id="@+id/currentBox"
         android:layout_width="340dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentBtn"
-        app:srcCompat="@drawable/text_box" />
-
-    <ImageButton
-        android:id="@+id/currentBtn"
-        android:layout_width="339dp"
-        android:layout_height="54dp"
+        android:layout_height="55dp"
         android:layout_marginTop="28dp"
-        android:backgroundTint="#00FFFFFF"
-        android:padding="0sp"
-        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/yellow3"
-        app:srcCompat="@drawable/text_box"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:srcCompat="@drawable/mainview_text" />
+
+    <EditText
+        android:id="@+id/inputCurrent"
+        android:layout_width="327dp"
+        android:layout_height="42dp"
+        android:hint="현재 위치"
+        app:layout_constraintBottom_toBottomOf="@+id/currentBox"
+        app:layout_constraintEnd_toEndOf="@+id/currentBox"
+        app:layout_constraintStart_toStartOf="@+id/currentBox"
+        app:layout_constraintTop_toTopOf="@+id/currentBox"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <ImageView
+        android:id="@+id/destinationBox"
+        android:layout_width="340dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentBox"
+        app:srcCompat="@drawable/mainview_text" />
+
+    <EditText
+        android:id="@+id/inputDestination"
+        android:layout_width="327dp"
+        android:layout_height="42dp"
+        android:hint="목적지"
+        app:layout_constraintBottom_toBottomOf="@+id/destinationBox"
+        app:layout_constraintEnd_toEndOf="@+id/destinationBox"
+        app:layout_constraintStart_toStartOf="@+id/destinationBox"
+        app:layout_constraintTop_toTopOf="@+id/destinationBox"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <ImageView
+        android:id="@+id/searchBox"
+        android:layout_width="155dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/destinationBox"
+        app:srcCompat="@drawable/mainview_searchbtn" />
 
     <ImageButton
         android:id="@+id/routeSearchBtn"
@@ -59,26 +76,39 @@
         android:layout_height="40dp"
         android:backgroundTint="#00FFFFFF"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="@+id/search_button"
-        app:layout_constraintEnd_toEndOf="@+id/search_button"
-        app:layout_constraintStart_toStartOf="@+id/search_button"
-        app:layout_constraintTop_toTopOf="@+id/search_button"
+        app:layout_constraintBottom_toBottomOf="@+id/searchBox"
+        app:layout_constraintEnd_toEndOf="@+id/searchBox"
+        app:layout_constraintStart_toStartOf="@+id/searchBox"
+        app:layout_constraintTop_toTopOf="@+id/searchBox"
         app:srcCompat="@drawable/route_search"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <ImageButton
+        android:id="@+id/currentBtn"
+        android:layout_width="155dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBox"
+        app:srcCompat="@drawable/mainview_searchbtn"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
         android:id="@+id/alarmBtn"
-        android:layout_width="61dp"
-        android:layout_height="61dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="#00FFFFFF"
         android:padding="0sp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.894"
+        app:layout_constraintHorizontal_bias="0.898"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textbox2"
-        app:srcCompat="@drawable/white_circle"
+        app:layout_constraintTop_toBottomOf="@+id/destinationBox"
+        app:srcCompat="@drawable/mainview_alarm"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
@@ -92,5 +122,27 @@
         app:layout_constraintStart_toStartOf="@+id/alarmBtn"
         app:layout_constraintTop_toTopOf="@+id/alarmBtn"
         app:srcCompat="@drawable/alarm_1" />
+
+    <TextView
+        android:id="@+id/test_latlon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="현재 위도/경도\n불러오기"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/currentBtn"
+        app:layout_constraintEnd_toEndOf="@+id/currentBtn"
+        app:layout_constraintStart_toStartOf="@+id/currentBtn"
+        app:layout_constraintTop_toTopOf="@+id/currentBtn" />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yellow3"
+        tools:context=".MapsActivity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
