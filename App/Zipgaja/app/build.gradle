@@ -2,6 +2,10 @@ plugins {
     id 'com.android.application'
 }
 
+// Properties 선언 및 키값을 불러옴
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     compileSdk 32
 
@@ -13,6 +17,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "GooGle_API_KEY", properties['gg_api_key']
+
     }
 
     buildTypes {

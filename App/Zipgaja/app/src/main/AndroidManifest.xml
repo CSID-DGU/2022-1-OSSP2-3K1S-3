@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.zipgaja">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -15,7 +16,7 @@
         <!-- 구글 지도 사용을 위한 API KEY -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDmw7HF9sopnede2ve0HWdg66zij8QZSJo" />
+            android:value="${GooGle_API_KEY}" />
 
         <activity
             android:name=".SplashActivity"
@@ -33,7 +34,8 @@
 
     <!-- -->
     <!-- 사용할 Open GL 라이브러리 설정-->
-    <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+    <uses-feature android:glEsVersion="0x00020000" android:required="true"
+        tools:ignore="ManifestOrder" />
     <!--지도 사용 권한-->
     <permission android:name="com.example.kjy.an66_googlelbs.permission.MAP_RECEIVE"
         android:protectionLevel="signature"/>
