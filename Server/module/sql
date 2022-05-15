@@ -1,0 +1,32 @@
+create table route(
+id INT NOT NULL,
+start_point INT NOT NULL,
+end_point INT NOT NULL,
+PRIMARY KEY(id)
+);
+
+create table recommend(
+reco_id INT NOT NULL,
+route_id INT NOT NULL,
+good1 INT,
+good2 INT,
+good3 INT,
+good4 INT,
+good5 VARCHAR(100),
+PRIMARY KEY(reco_id),
+FOREIGN KEY(route_id) REFERENCES route(id)
+);
+
+create table not_recommend (
+notre_id INT NOT NULL,
+reco_id INT NOT NULL,
+route_id INT NOT NULL,
+bad1 INT,
+bad2 INT,
+bad3 INT,
+bad4 INT,
+bad5 VARCHAR(100),
+PRIMARY KEY(notre_id),
+FOREIGN KEY(reco_id) REFERENCES recommend(reco_id),
+FOREIGN KEY(route_id) REFERENCES route(id)
+);

@@ -9,7 +9,8 @@ var usersRouter = require('./routes/users');
 const res = require('express/lib/response');
 const router = require('./routes/index');
 const getStation = require('./routes/Api/Main/getStation');
-
+const db = require("../module/db_connect");
+const conn = db.conn();
 
 var app = express();
 
@@ -40,6 +41,66 @@ app.get('/Api/Main/getStation', (req, res) => {
     }
     res.json({status: res.statusCode, data: [{bike: bikeStation, bus: busStation}]});
     // console.log(station);
+  })
+})
+
+// 추천 비추천 데이터 API
+app.post('/Api/Recommend/good', (req, res) => { // 요청시 추천 데이터 값이 갱신된다.
+  const route_id = req.body.id; // 경로에 대한 키 값
+  const good1 = req.body.good1? 1:0; // true or false
+  const good2 = req.body.good2? 1:0; // true or false
+  const good3 = req.body.good3? 1:0; // true or false
+  const good4 = req.body.good4? 1:0; // true or false
+  const good5 = req.body.good5; // 문자열
+
+  conn.query('SELECT * FROM recommend WHERE route_id=?', [route_id], function(err, recommend, fields){
+    if(err){ // 새로 값을 생성해준다.
+      console.log("존재하지 않습니다."); 
+      conn.query('INSERT INTO recommend VALUES(?, ?, ?, ?, ? ,?, ?)',[route_id, route_id, good1, good2, good3, good4, good5], (err, result) => {
+        if(err) throw err;
+          
+        console.log('success');
+        conn.end(); // DB 접속 종료
+        res.end();
+      })
+    }else{ // 있으므로 값을 갱신해준다.
+      const sql = 'UPDATE recommend SET good1 = good1 + ?, good2 = good2 + ?, good3 = good3 + ?, good4 = good4 + ?, good5 = good5 + ?';
+      conn.query(sql, [good1, good2, good3, good4, good5], (err, results) => {
+        if (err) throw err;
+        conn.end(); 
+        res.end();
+      }) 
+    }
+  })
+})
+
+
+app.post('/Api/Recommend/bad', (req, res) => { // 요청시 비추천 데이터 값이 갱신된다..
+  const route_id = req.body.id; // 경로에 대한 키 값
+  const bad1 = req.body.bad1? 1:0; // true or false
+  const bad2 = req.body.bad2? 1:0; // true or false
+  const bad3 = req.body.bad3? 1:0; // true or false
+  const bad4 = req.body.bad4? 1:0; // true or false
+  const bad5 = req.body.bad5; // 문자열
+
+  conn.query('SELECT * FROM recommend WHERE route_id=?', [route_id], function(err, recommend, fields){
+    if(err){ // 새로 값을 생성해준다.
+      console.log("존재하지 않습니다.");
+      conn.query('INSERT INTO not_recommend VALUES(?, ?, ?, ?, ?, ? ,?, ?)',[route_id, route_id, route_id, bad1, bad2, bad3, bad4, bad5], (err, result) => {
+        if(err) throw err;
+          
+        console.log('success');
+        conn.end(); // DB 접속 종료
+        res.end();
+      })
+    }else{ // 있으므로 값을 갱신해준다.
+      const sql = 'UPDATE not_recommend SET bad1 = bad1 + ?, bad2 = bad2 + ?, bad3 = bad3 + ?, bad4 = bad4 + ?, bad5 = bad5 + ?';
+      conn.query(sql, [bad1, bad2, bad3, bad4, bad5], (err, results) => {
+        if (err) throw err;
+        conn.end(); 
+        res.end();
+      }) 
+    }
   })
 })
 
