@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 const res = require('express/lib/response');
 const router = require('./routes/index');
 const getStation = require('./routes/Api/Main/getStation');
-const db = require("../module/db_connect");
+const db = require("./module/db_connect");
 const conn = db.conn();
 
 var app = express();
