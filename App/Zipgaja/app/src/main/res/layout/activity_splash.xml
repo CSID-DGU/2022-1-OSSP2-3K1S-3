@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/gray_rectangle_1" />
+        app:srcCompat="@drawable/gray_line1" />
 
     <ImageView
         android:id="@+id/gray2"
@@ -29,17 +29,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.76"
-        app:srcCompat="@drawable/gray_rectangle_2" />
+        app:srcCompat="@drawable/gray_line2" />
 
     <ImageView
-        android:id="@+id/yello2"
+        android:id="@+id/yellow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gray1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/yellow_line1" />
+
+    <ImageView
+        android:id="@+id/yellow2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/gray1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.748"
-        app:srcCompat="@drawable/yellow_rectangle_2" />
+        app:srcCompat="@drawable/yellow_line2" />
 
     <ImageView
         android:id="@+id/sign"
@@ -54,17 +65,6 @@
         app:srcCompat="@drawable/sign" />
 
     <ImageView
-        android:id="@+id/yellow1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/gray1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/yellow_rectangle_1" />
-
-    <ImageView
         android:id="@+id/brown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.191"
-        app:srcCompat="@drawable/brown_rectangle" />
+        app:srcCompat="@drawable/brown_line" />
 
     <ImageView
         android:id="@+id/owl"
@@ -87,7 +87,7 @@
         app:srcCompat="@drawable/owl" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/logo"
         android:layout_width="213dp"
         android:layout_height="87dp"
         app:layout_constraintBottom_toBottomOf="@+id/yellow1"
@@ -96,6 +96,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.723"
-        app:srcCompat="@drawable/zipgaja" />
+        app:srcCompat="@drawable/zipgaja_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
