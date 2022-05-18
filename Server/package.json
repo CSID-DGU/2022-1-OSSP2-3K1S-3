@@ -12,9 +12,11 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "json-parse": "^1.0.3",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "request": "^2.88.2"
   },
   "main": "app.js",
   "author": "",

@@ -19,7 +19,7 @@ FOREIGN KEY(route_id) REFERENCES route(id)
 
 create table not_recommend (
 notre_id INT NOT NULL,
-reco_id INT NOT NULL,
+-- reco_id INT NOT NULL,
 route_id INT NOT NULL,
 bad1 INT,
 bad2 INT,
@@ -27,6 +27,6 @@ bad3 INT,
 bad4 INT,
 bad5 VARCHAR(100),
 PRIMARY KEY(notre_id),
-FOREIGN KEY(reco_id) REFERENCES recommend(reco_id),
+-- FOREIGN KEY(reco_id) REFERENCES recommend(reco_id),
 FOREIGN KEY(route_id) REFERENCES route(id)
 );

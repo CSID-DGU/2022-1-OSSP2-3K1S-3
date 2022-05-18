@@ -15,8 +15,10 @@ module.exports.conn = function(){
             return;
         }
         console.log("Mysql DB Connect완료! ID : " + conn.threadId);
+        
     });
     return conn;
+   
 }
 
 
