@@ -10,8 +10,6 @@ const res = require('express/lib/response');
 const router = require('./routes/index');
 const getStation = require('./routes/Api/Main/getStation');
 const db = require("./module/db_connect");
-const { NULL } = require('mysql/lib/protocol/constants/types');
-
 
 var app = express();
 
