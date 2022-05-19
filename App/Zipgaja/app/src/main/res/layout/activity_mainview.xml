@@ -10,7 +10,9 @@
     <ImageView
         android:id="@+id/yellow3"
         android:layout_width="88dp"
-        android:layout_height="334dp"
+        android:layout_height="280dp"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,7 +32,7 @@
         android:id="@+id/inputCurrent"
         android:layout_width="327dp"
         android:layout_height="42dp"
-        android:hint="현재 위치"
+        android:hint="출발지"
         app:layout_constraintBottom_toBottomOf="@+id/currentBox"
         app:layout_constraintEnd_toEndOf="@+id/currentBox"
         app:layout_constraintStart_toStartOf="@+id/currentBox"
@@ -84,19 +86,6 @@
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <ImageButton
-        android:id="@+id/currentBtn"
-        android:layout_width="155dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#00FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.128"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBox"
-        app:srcCompat="@drawable/mainview_searchbtn"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
         android:id="@+id/alarmBtn"
         android:layout_width="55dp"
         android:layout_height="55dp"
@@ -111,8 +100,21 @@
         app:srcCompat="@drawable/mainview_alarm"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <ImageButton
+        android:id="@+id/currentBtn"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#00FFFFFF"
+        android:padding="0sp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/currentBox"
+        app:layout_constraintEnd_toEndOf="@+id/currentBox"
+        app:layout_constraintTop_toTopOf="@+id/currentBox"
+        app:srcCompat="@drawable/mainview_alarm"
+        tools:ignore="SpeakableTextPresentCheck" />
+
     <ImageView
-        android:id="@+id/alarmOn"
+        android:id="@+id/alarmOff"
         android:layout_width="61dp"
         android:layout_height="61dp"
         android:padding="0sp"
@@ -121,13 +123,13 @@
         app:layout_constraintEnd_toEndOf="@+id/alarmBtn"
         app:layout_constraintStart_toStartOf="@+id/alarmBtn"
         app:layout_constraintTop_toTopOf="@+id/alarmBtn"
-        app:srcCompat="@drawable/alarm_1" />
+        app:srcCompat="@drawable/alarm_0" />
 
     <TextView
         android:id="@+id/test_latlon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="현재 위도/경도\n불러오기"
+        android:text="현재\n위치"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/currentBtn"
         app:layout_constraintEnd_toEndOf="@+id/currentBtn"
