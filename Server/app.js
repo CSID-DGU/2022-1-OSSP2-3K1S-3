@@ -56,7 +56,13 @@ app.get('/Api/route/lessmoney', (req, res) => {
   const endLong = req.body.eLong;
   const endLati = req.body.eLati;
 
-  getLessMRoute(startLong, startLati, endLong, endLati);    
+  getLessMRoute(startLong, startLati, endLong, endLati,(error, {bothStationCorrect}) => {
+    if (error) {
+      console.log('error');
+      return res.send({error});
+    }
+    res.json({status: res.statusCode, data: bothStationCorrect});
+  });    
 })
 
 // 추천 비추천 데이터 API
