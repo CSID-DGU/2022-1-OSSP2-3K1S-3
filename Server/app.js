@@ -11,6 +11,8 @@ const router = require('./routes/index');
 const getStation = require('./routes/Api/Main/getStation');
 const db = require("./module/db_connect");
 
+const conn = db.conn();
+
 var app = express();
 
 // view engine setup

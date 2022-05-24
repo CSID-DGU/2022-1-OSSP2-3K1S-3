@@ -8,64 +8,64 @@
     android:background="#292929">
 
     <ImageView
-        android:id="@+id/yellowLine1"
+        android:id="@+id/centerLine1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/yellow_rectangle_4" />
+        app:srcCompat="@drawable/yellow_line4" />
 
     <ImageView
-        android:id="@+id/yellowLine2"
+        android:id="@+id/centerLine2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/yellowLine3"
+        app:layout_constraintBottom_toTopOf="@+id/centerLine4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yellowLine1"
+        app:layout_constraintTop_toBottomOf="@+id/centerLine1"
         app:layout_constraintVertical_bias="0.25"
-        app:srcCompat="@drawable/yellow_rectangle_4" />
+        app:srcCompat="@drawable/yellow_line4" />
 
     <ImageView
-        android:id="@+id/yellowLine3"
+        android:id="@+id/centerLine3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/centerLine4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/centerLine1"
+        app:layout_constraintVertical_bias="0.75"
+        app:srcCompat="@drawable/yellow_line4" />
+
+    <ImageView
+        android:id="@+id/centerLine4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/yellow_rectangle_4" />
+        app:srcCompat="@drawable/yellow_line4" />
 
     <ImageView
-        android:id="@+id/yellowLine4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/yellowLine3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yellowLine1"
-        app:layout_constraintVertical_bias="0.75"
-        app:srcCompat="@drawable/yellow_rectangle_4" />
-
-    <ImageView
-        android:id="@+id/searchBox"
+        android:id="@+id/searchList_title"
         android:layout_width="363dp"
         android:layout_height="97dp"
         android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/yellowLine1"
-        app:srcCompat="@drawable/white_rectangle_1" />
+        app:layout_constraintTop_toTopOf="@+id/centerLine1"
+        app:srcCompat="@drawable/title_box" />
 
     <ImageView
-        android:id="@+id/search_result"
+        android:id="@+id/searchResult"
         android:layout_width="144dp"
         android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="@+id/searchBox"
-        app:layout_constraintEnd_toEndOf="@+id/searchBox"
+        app:layout_constraintBottom_toBottomOf="@+id/searchList_title"
+        app:layout_constraintEnd_toEndOf="@+id/searchList_title"
         app:layout_constraintHorizontal_bias="0.086"
-        app:layout_constraintStart_toStartOf="@+id/searchBox"
-        app:layout_constraintTop_toTopOf="@+id/searchBox"
+        app:layout_constraintStart_toStartOf="@+id/searchList_title"
+        app:layout_constraintTop_toTopOf="@+id/searchList_title"
         app:layout_constraintVertical_bias="0.333"
         app:srcCompat="@drawable/search_result" />
 
@@ -76,8 +76,8 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBox"
-        app:srcCompat="@drawable/result_box" />
+        app:layout_constraintTop_toBottomOf="@+id/searchList_title"
+        app:srcCompat="@drawable/searchlist_resultbox" />
 
     <ImageView
         android:id="@+id/resultBox2"
@@ -87,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resultBox1"
-        app:srcCompat="@drawable/result_box" />
+        app:srcCompat="@drawable/searchlist_resultbox" />
 
     <ImageView
         android:id="@+id/resultBox3"
@@ -97,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resultBox2"
-        app:srcCompat="@drawable/result_box" />
+        app:srcCompat="@drawable/searchlist_resultbox" />
 
     <ImageView
         android:id="@+id/resultBox4"
@@ -106,8 +106,8 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/yellowLine3"
-        app:srcCompat="@drawable/result_box" />
+        app:layout_constraintTop_toTopOf="@+id/centerLine4"
+        app:srcCompat="@drawable/searchlist_resultbox" />
 
     <ImageButton
         android:id="@+id/recommendDetailBtn1"
@@ -121,11 +121,56 @@
         app:layout_constraintEnd_toEndOf="@+id/resultBox1"
         app:layout_constraintHorizontal_bias="0.923"
         app:layout_constraintStart_toStartOf="@+id/resultBox1"
-        app:srcCompat="@drawable/black_rectangle_1"
+        app:srcCompat="@drawable/searchlist_recommendbtn"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/recommendDetailBtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="#00FFFFFF"
+        android:minHeight="48dp"
+        android:padding="0sp"
+        app:layout_constraintBottom_toBottomOf="@+id/resultBox2"
+        app:layout_constraintEnd_toEndOf="@+id/resultBox2"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="@+id/resultBox2"
+        app:srcCompat="@drawable/searchlist_recommendbtn"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/recommendDetailBtn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="#00FFFFFF"
+        android:minHeight="48dp"
+        android:padding="0sp"
+        app:layout_constraintBottom_toBottomOf="@+id/resultBox3"
+        app:layout_constraintEnd_toEndOf="@+id/resultBox3"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="@+id/resultBox3"
+        app:srcCompat="@drawable/searchlist_recommendbtn"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/recommendDetailBtn4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="#00FFFFFF"
+        android:minHeight="48dp"
+        android:padding="0sp"
+        app:layout_constraintBottom_toBottomOf="@+id/resultBox4"
+        app:layout_constraintEnd_toEndOf="@+id/resultBox4"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="@+id/resultBox4"
+        app:srcCompat="@drawable/searchlist_recommendbtn"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/thumb1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn1"
@@ -134,4 +179,71 @@
         app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn1"
         app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn1"
         app:srcCompat="@drawable/thumb" />
+
+    <ImageView
+        android:id="@+id/thumb2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn2"
+        app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn2"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn2"
+        app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn2"
+        app:srcCompat="@drawable/thumb" />
+
+    <ImageView
+        android:id="@+id/thumb3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn3"
+        app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn3"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn3"
+        app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn3"
+        app:srcCompat="@drawable/thumb" />
+
+    <ImageView
+        android:id="@+id/thumb4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn4"
+        app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn4"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn4"
+        app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn4"
+        app:srcCompat="@drawable/thumb" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="14dp"
+        android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/searchList_title"
+        app:layout_constraintEnd_toEndOf="@+id/searchList_title"
+        app:layout_constraintStart_toStartOf="@+id/searchList_title"
+        app:layout_constraintTop_toBottomOf="@+id/searchResult"
+        app:layout_constraintVertical_bias="0.25"
+        app:srcCompat="@drawable/arrow" />
+
+    <TextView
+        android:id="@+id/currentLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="출발지"
+        app:layout_constraintBottom_toBottomOf="@+id/searchList_title"
+        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintStart_toStartOf="@+id/searchList_title"
+        app:layout_constraintTop_toBottomOf="@+id/searchResult"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <TextView
+        android:id="@+id/destinationLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="목적지"
+        app:layout_constraintBottom_toBottomOf="@+id/searchList_title"
+        app:layout_constraintEnd_toEndOf="@+id/searchList_title"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/searchResult"
+        app:layout_constraintVertical_bias="0.25" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
