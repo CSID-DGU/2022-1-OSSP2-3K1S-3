@@ -18,7 +18,8 @@
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.16",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "sync-request": "^6.1.0"
   },
   "main": "app.js",
   "author": "",
