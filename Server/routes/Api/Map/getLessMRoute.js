@@ -1,11 +1,62 @@
-const request = require('request')
+const request = require('request');
+const s_request = require('sync-request');
 const {bus_location} = require('./nightBusData');
 var polyline = require('@mapbox/polyline');
 const { route } = require('../..');
+const { json } = require('express/lib/response');
 
 var routeData = [];
+var distanceData = [];
+var start = [];
+var end = [];
+var GloballocationArr = [];
+var bothStationCorrect = [];
+var busRoutef = "";
 
-const getLessMRoute = async (startLong, startLati, endLong, endLati) => {
+
+function getLessMRoute (startLong, startLati, endLong, endLati, callback){
+    routeData = [];
+    distanceData = [];
+    bothStationCorrect = [];
+    getOneRoute(startLong, startLati, endLong, endLati, "all");
+
+    //둘다 정류장이 존재할때 
+    bothStationCorrect = [{"route": busRoutef}]
+    for(var i = 0; i < GloballocationArr.length; i++) {
+        if (i == 0) {
+            bothStationCorrect.push({"name": "출발지", "time": calcWalkingTime(distanceData[i]), "cost": 0, "type": "walk"});
+        }
+        if (i == 1) {
+            bothStationCorrect.push({"name": GloballocationArr[i][0].station_name, "time": calcBusTime(GloballocationArr.length - 3), "cost": 2250, "type": "bus"});
+        }
+        if (i == GloballocationArr.length - 1) {
+            bothStationCorrect.push({"name": "목적지", "time": calcWalkingTime(distanceData[i]), "cost": 0, "type": "walk"});
+        }
+    }
+
+    //1. 내주변 정류장에 시작위치 에서 끝위치 까지 가는 버스존재
+    //2. 내주변 정류장은 있는데 끝까지 한번에 가는 버스가 없을때 // -> 시작위치에서 종료위치까지 가는 버스노선이 출발하는 정류장까지 따릉이 or 택시로 보내고 거기서 끝버스 까지 이동
+    //3. 내주변 정류장 없고 끝 버스 없음 -> 사고발생 -> 주변에 버스 정류장이없어서 택시타라 
+    //4. 내주변 정류장 없는데 끝버스 있음 -> 종료위치 주변에 버정이 있을때 -> 시작위치에서 종료위치까지 가는 버스노선이 출발하는 정류장까지 따릉이 or 택시로 보내고 거기서 끝버스 까지 이동
+    
+
+    callback(undefined, {
+        bothStationCorrect: bothStationCorrect
+    })
+
+}
+async function calcRouteData(startLong, startLati, endLong, endLati) {
+    return await sendOSRM(startLong, startLati, endLong, endLati); 
+}
+function callBusDistance(arr) {
+    var dis = 0.0;
+    for(var i = 1; i < arr.length - 2; i++) {
+        dis += arr[i]
+    }
+    return dis;
+}
+
+async function getOneRoute (startLong, startLati, endLong, endLati, type){
     //주변에 있는 버스정류장 조회
     startBusData = getStartBusData(startLati, startLong);
     endBusData = getEndBusData(endLati, endLong);
@@ -54,23 +105,34 @@ const getLessMRoute = async (startLong, startLati, endLong, endLati) => {
         return x[4] - y[4];
     });
     endLocation = setBus(endBusName, endLocation);
+    start = startLocation;
+    end = endLocation;
     console.log(startLocation,endLocation);
 
     //환승가능한지 조회
     isTransfer(startLocation, endLocation);
-
-    //osrm 호출 부분 (정류장 마다 호출해서 조회)
-    const timer = ms => new Promise(res => setTimeout(res, ms));
-    // console.log(startLocation[0][5] - endLocation[0][5]);
+    if (type == "all") {
+        var locationArr = [[{"latitude": startLati, "longitude": startLong}, {"latitude": startLocation[0][2], "longitude": startLocation[0][3]}]];
+    }
+    else if (type == "bus") {
+        var locationArr = [];
+    }
     //버스1개만을 타고갈때 + 시작위치 - 끝 위치 일경우 노선을 -- 해주면서 조회 한 후 비동기적으로 osrm호출
     if (startLocation[0][5] - endLocation[0][5] > 0) {
         for(var i = startLocation[0][5]; i >= endLocation[0][5]; i --) {
             location = bus_location.filter(data => data.station_num == i && data.name == startLocation[0][0]);
             nextLocation = bus_location.filter(data => data.station_num == i - 1 && data.name == endLocation[0][0]);
-            await connectOSRM(location[0].longitude, location[0].latitude, nextLocation[0].longitude, nextLocation[0].latitude);
-            await timer(600);
+            locationArr.push([location[0], nextLocation[0]]);
         }
-    }
+        if (type == "all") {
+            locationArr.push([{"latitude": endLati, "longitude": endLong}, {"latitude": endLocation[0][2], "longitude": endLocation[0][3]}]);
+        }
+        GloballocationArr = locationArr;
+        console.log(locationArr[0][0].latitude);
+        //osrm 호출 부분 (정류장 마다 호출해서 조회)
+        var data = locationArr.map((request) => sendOSRM(request));
+    };
+  
     //인코딩 된 값을 합쳐서 다시 디코딩 해서 경로를 만듬 
     var routeValue = [];
     for(var i = 0; i < routeData.length; i++) {
@@ -80,27 +142,40 @@ const getLessMRoute = async (startLong, startLati, endLong, endLati) => {
     }
     //만들어진 버스 루트
     var busRoute = polyline.encode(routeValue);
-    console.log(busRoute);
+    busRoutef = busRoute;
+
+    return busRoute;
 }
+
+async function sendOSRM(req) {
+    return await connectOSRM(req);
+}
+
+//걸어서 가는 시간 계산 (분수)
+function calcWalkingTime(distance) {
+    return distance / 60.0;
+}
+
+function calcBusTime(stationNum) {
+    return stationNum * 1.5;
+}
+
 
 //osrm과 연동해서 경로 데이터 불러오기
-const connectOSRM = async(sLong, sLati, eLong, eLati) =>{
+async function connectOSRM (req) {
+    // sLong, sLati, eLong, eLati
     var url = 'http://3.82.223.178/route/v1/driving/';
-    var queryParams =  sLong + "," + sLati + ";" + eLong + "," + eLati;
+    // var queryParams =  sLong + "," + sLati + ";" + eLong + "," + eLati;
+    var queryParams = req[0].longitude + "," + req[0].latitude + ";" + req[1].longitude + "," + req[1].latitude;
+    
+    var route = s_request('GET', url + queryParams);
+    var jsonRoute = JSON.parse(route.getBody('utf8'));
+    routeData.push(polyline.decode(jsonRoute.routes[0].geometry));
+    
+    distanceData.push(jsonRoute.routes[0].distance);
 
-    request({
-    url: url + queryParams,
-    method: 'GET'
-    }, function (error, response, body) {
-    console.log(url + queryParams);
-    console.log('Status', response.statusCode);
-    // console.log('Headers', JSON.stringify(response.headers));
-    var route = JSON.parse(body);
-    routeData.push(polyline.decode(route.routes[0].geometry));
-    });
+    return;
 }
-
-
 
 //환승 확인 (구현중)
 function isTransfer(start, end){
@@ -115,7 +190,7 @@ function isTransfer(start, end){
 }
 
 
-
+//현위치에서 가장 적게 걸리는 버스 정류장 조회
 const setBus = (arr1, arr2) => {
     var sol = [];
     for(var i = 0; i < arr2.length; i++){
