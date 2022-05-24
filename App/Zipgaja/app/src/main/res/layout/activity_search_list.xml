@@ -228,7 +228,7 @@
         android:id="@+id/currentLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="현재 위치"
+        android:text="출발지"
         app:layout_constraintBottom_toBottomOf="@+id/searchList_title"
         app:layout_constraintEnd_toStartOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="@+id/searchList_title"

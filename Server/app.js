@@ -11,6 +11,7 @@ const router = require('./routes/index');
 const getStation = require('./routes/Api/Main/getStation');
 const getLessMRoute = require('./routes/Api/Map/getLessMRoute')
 const db = require("./module/db_connect");
+
 const conn = db.conn();
 
 var app = express();
@@ -67,64 +68,178 @@ app.get('/Api/route/lessmoney', (req, res) => {
 
 // 추천 비추천 데이터 API
 app.post('/Api/Recommend/good', (req, res) => { // 요청시 추천 데이터 값이 갱신된다.
+  const conn = db.conn();
   const route_id = req.body.id; // 경로에 대한 키 값
   const good1 = req.body.good1? 1:0; // true or false
   const good2 = req.body.good2? 1:0; // true or false
   const good3 = req.body.good3? 1:0; // true or false
   const good4 = req.body.good4? 1:0; // true or false
-  const good5 = req.body.good5; // 문자열
-
+  const good = req.body.good; // 문자열
   conn.query('SELECT * FROM recommend WHERE route_id=?', [route_id], function(err, recommend, fields){
-    if(err){ // 새로 값을 생성해준다.
-      console.log("존재하지 않습니다."); 
-      conn.query('INSERT INTO recommend VALUES(?, ?, ?, ?, ? ,?, ?)',[route_id, route_id, good1, good2, good3, good4, good5], (err, result) => {
-        if(err) throw err;
+    if(err) throw err;     
+    if(recommend[0] == null){
+        conn.query('INSERT INTO recommend VALUES(?, ?, ?, ?, ? ,?)',[route_id, route_id, good1, good2, good3, good4], (err, result) => {
+          conn.query('INSERT INTO reco_string VALUES(?, ?, ?)',[1, route_id, good], (err, result) => {
+            if(err) throw err;
+            conn.end(); // DB 접속 종료
+          })
+          if(err) throw err;
           
-        console.log('success');
-        conn.end(); // DB 접속 종료
-        res.end();
-      })
-    }else{ // 있으므로 값을 갱신해준다.
-      const sql = 'UPDATE recommend SET good1 = good1 + ?, good2 = good2 + ?, good3 = good3 + ?, good4 = good4 + ?, good5 = good5 + ?';
-      conn.query(sql, [good1, good2, good3, good4, good5], (err, results) => {
-        if (err) throw err;
-        conn.end(); 
-        res.end();
-      }) 
-    }
+          res.end();
+        })
+      }else{
+        const sql1 = 'UPDATE recommend SET good1 = good1 + ?, good2 = good2 + ?, good3 = good3 + ?, good4 = good4 + ?';
+        const sql2 = 'INSERT INTO reco_string VALUES(?, ?, ?)';
+        conn.query(sql1, [good1, good2, good3, good4], (err, results) => {
+          conn.query('SELECT * FROM reco_string WHERE route_id = ?', [route_id], (err, results) =>{
+            if (err) throw err;
+          a = results[results.length - 1].string_id; // 문자열에 갱신할 값을 가져온다.
+          conn.query(sql2, [a + 1, route_id, good], (err, results) => {
+            if(err) throw err;
+            conn.end(); 
+          }) 
+        })
+          if (err) throw err;
+          res.end();
+        }) 
+      }
   })
 })
 
-
 app.post('/Api/Recommend/bad', (req, res) => { // 요청시 비추천 데이터 값이 갱신된다..
+  const conn = db.conn();
   const route_id = req.body.id; // 경로에 대한 키 값
   const bad1 = req.body.bad1? 1:0; // true or false
   const bad2 = req.body.bad2? 1:0; // true or false
   const bad3 = req.body.bad3? 1:0; // true or false
   const bad4 = req.body.bad4? 1:0; // true or false
-  const bad5 = req.body.bad5; // 문자열
+  const bad = req.body.bad; // 문자열
 
-  conn.query('SELECT * FROM recommend WHERE route_id=?', [route_id], function(err, recommend, fields){
-    if(err){ // 새로 값을 생성해준다.
-      console.log("존재하지 않습니다.");
-      conn.query('INSERT INTO not_recommend VALUES(?, ?, ?, ?, ?, ? ,?, ?)',[route_id, route_id, route_id, bad1, bad2, bad3, bad4, bad5], (err, result) => {
-        if(err) throw err;
-          
-        console.log('success');
-        conn.end(); // DB 접속 종료
-        res.end();
-      })
-    }else{ // 있으므로 값을 갱신해준다.
-      const sql = 'UPDATE not_recommend SET bad1 = bad1 + ?, bad2 = bad2 + ?, bad3 = bad3 + ?, bad4 = bad4 + ?, bad5 = bad5 + ?';
-      conn.query(sql, [bad1, bad2, bad3, bad4, bad5], (err, results) => {
-        if (err) throw err;
-        conn.end(); 
+  conn.query('SELECT * FROM not_recommend WHERE route_id=?', [route_id], function(err, not_recommend, fields){
+    if(err) throw err;
+      if(not_recommend[0] == null){ // 기존 경로에 대한 route_id가 존재하지 않을 때
+        conn.query('INSERT INTO not_recommend VALUES(?, ?, ?, ?, ? ,?)',[route_id, route_id, bad1, bad2, bad3, bad4], (err, result) => {
+          if(err) throw err;
+          conn.query('INSERT INTO notre_string VALUES(?, ?, ?)',[1, route_id, bad], (err, result) => {
+            if(err) throw err;
+            conn.end(); // DB 접속 종료
+          })        
+          res.end();
+        })
+      }else{ // 기존 경로에 대한 route_id가 존재할 때
+        const sql1 = 'UPDATE not_recommend SET bad1 = bad1 + ?, bad2 = bad2 + ?, bad3 = bad3 + ?, bad4 = bad4 + ?';
+        const sql2 = 'INSERT INTO notre_string VALUES(?, ?, ?)';
+        conn.query(sql1, [bad1, bad2, bad3, bad4], (err, results) => {
+          if (err) throw err;
+          conn.query('SELECT * FROM notre_string WHERE route_id = ?', [route_id], (err, results) =>{
+            if (err) throw err;
+          a = results[results.length - 1].string_id; // 문자열에 갱신할 값을 가져온다.
+          conn.query(sql2, [a + 1, route_id, bad], (err, results) => {
+            if(err) throw err;
+            conn.end(); 
+          })
+          })
         res.end();
       }) 
     }
   })
 })
 
+// API 추천, 비추천 상세보기 상위 2개 항목과 상위 기타항목
+app.get('/Api/Detail', (req, res) => {
+  const conn = db.conn();
+  const route_id = req.body.id; // 경로 id에 대한 추천 상세보기
+  conn.query('SELECT * FROM recommend WHERE route_id =?', [route_id], (err, result) => { 
+    if(err) throw err;
+    if(result[0] == null){ // 해당 값이 없을 경우 0으로 반환
+      a = 0;
+      b = 0;
+      a1 = null;
+      a2 = null;
+    }
+    else{ // 해당 값 추천 상위 2항목과 기타 2항목 추출
+      c = [result[0].good1, result[0].good2, result[0].good3, result[0].good4];
+      c.sort(function(a, b){
+        return b - a;
+      });
+      a = c[0];
+      b = c[1];
+      conn.query('SELECT * FROM reco_string WHERE route_id = ?',[route_id], (err, results) =>{
+        if(err) throw err;
+        if(results.length >= 2){
+          a1 = results[results.length - 1].good;
+          a2 = results[results.length - 2].good;
+        }
+        else if(results.length == 1){
+          a1 = results[results.length - 1].good;
+          a2 = null;
+        }
+        else{
+          a1= null;
+          a2= null;
+        }
+      })
+    }
+    conn.query('SELECT * FROM not_recommend WHERE route_id =?', [route_id], (err, result) => {
+      if(err) throw err;
+      if(result[0] == null){ // 해당 값이 없을 경우 0으로 반환
+        x = 0;
+        y = 0;
+        x1 = null;
+        x2 = null;
+        conn.end();
+        res.json({good1: a, good2: b, good3: a1, good4: a2, bad1: x, bad2: y, bad3: x1, bad4: x2})
+   
+      }
+      else{ // 해당 값 비추천 상위 2항목과 기타 2항목 추출
+        d = [result[0].ba1, result[0].bad2, result[0].bad3, result[0].bad4];
+        d.sort(function(a, b){
+          return b-a;
+        });
+        x = d[0];
+        y = d[1];
+        conn.query('SELECT * FROM notre_string WHERE route_id = ?',[route_id], (err, results) =>{
+          if(err) throw err;
+          if(results.length >= 2){
+            x1 = results[results.length - 1].bad;
+            x2 = results[results.length - 2].bad;
+          }
+          else if(results.length == 1){
+            x1 = results[results.length - 1].good;
+            x2 = null;
+          }
+          else{
+            x1= null;
+            x2= null;
+          }
+          conn.end();
+          res.json({good1: a, good2: b, good3: a1, good4: a2, bad1: x, bad2: y, bad3: x1, bad4: x2})
+
+       })
+      }
+    })
+  })
+})
+
+// API 추천 수 
+app.get('/Api/reco_number', (req, res) => {
+  var good_sum = 0;
+  const conn = db.conn();
+  const route_id = req.body.id; // 경로 id에 대한 추천 상세보기
+  conn.query('SELECT * FROM recommend WHERE route_id =?', [route_id], (err, result) => {
+    if(err) throw err;
+    if(result[0] == null){ // 해당 값 없으면 0
+      good_sum = 0;
+    }
+    else{
+      good_sum = result[0].good1 + result[0].good2 + result[0].good3 + result[0].good4;
+    }
+    conn.end();
+    res.json({sum: good_sum});
+    // res.end();
+  })
+ 
+})
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
