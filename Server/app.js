@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 const res = require('express/lib/response');
 const router = require('./routes/index');
 const getStation = require('./routes/Api/Main/getStation');
+const getLessMRoute = require('./routes/Api/Map/getLessMRoute')
 const db = require("./module/db_connect");
 
 const conn = db.conn();
@@ -43,6 +44,26 @@ app.get('/Api/Main/getStation', (req, res) => {
     res.json({status: res.statusCode, data: [{bike: bikeStation, bus: busStation}]});
     // console.log(station);
   })
+})
+
+
+//경로탐색
+app.get('/Api/route/lessmoney', (req, res) => {
+  console.log("[call lessmoney Api]");
+
+  const startLong = req.body.sLong;
+  const startLati = req.body.sLati;
+
+  const endLong = req.body.eLong;
+  const endLati = req.body.eLati;
+
+  getLessMRoute(startLong, startLati, endLong, endLati,(error, {bothStationCorrect}) => {
+    if (error) {
+      console.log('error');
+      return res.send({error});
+    }
+    res.json({status: res.statusCode, data: bothStationCorrect});
+  });    
 })
 
 // 추천 비추천 데이터 API
