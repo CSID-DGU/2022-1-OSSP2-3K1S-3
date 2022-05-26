@@ -9,7 +9,8 @@ var usersRouter = require('./routes/users');
 const res = require('express/lib/response');
 const router = require('./routes/index');
 const getStation = require('./routes/Api/Main/getStation');
-const getLessMRoute = require('./routes/Api/Map/getLessMRoute')
+const getLessMRoute = require('./routes/Api/Map/getLessMRoute');
+const getSearchResult = require('./routes/Api/Map/getSearchResult');
 const db = require("./module/db_connect");
 
 const conn = db.conn();
@@ -46,6 +47,28 @@ app.get('/Api/Main/getStation', (req, res) => {
   })
 })
 
+//경로 검색결과 리스트 조회
+app.get('/Api/route/searchList', (req, res) => {
+  console.log("[call searchList Api]");
+
+  const startLong = req.body.sLong;
+  const startLati = req.body.sLati;
+  const startName = req.body.sName;
+
+  const endLong = req.body.eLong;
+  const endLati = req.body.eLati;
+  const endName = req.body.eName;
+
+  const type = req.body.type;
+
+  getSearchResult(startLong, startLati, startName, endLong, endLati, endName ,type, (error, {routeData} = {}) => {
+    if(error) {
+      console.log("Error to searchResult");
+      return res.send({error});
+    }
+    res.json({status: res.statusCode, data: [{route: routeData}]})
+  });
+});
 
 //경로탐색
 app.get('/Api/route/lessmoney', (req, res) => {
