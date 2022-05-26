@@ -1,7 +1,9 @@
 create table route(
 id INT NOT NULL,
-start_point INT NOT NULL,
-end_point INT NOT NULL,
+start_long DOUBLE NOT NULL, 
+start_lati DOUBLE NOT NULL,
+end_long DOUBLE NOT NULL,
+end_lati DOUBLE NOT NULL,
 PRIMARY KEY(id)
 );
 
