@@ -14,7 +14,6 @@ var allroute = [];
 async function pushData(sLong, sLati, sName, eLong, eLati, eName, type) {
     //버스에 대한 정보
     allroute.push(getbusData(sLong, sLati, sName, eLong, eLati, eName));
-    allroute.push(calculTaxi(sLong, sLati, sName, eLong, eLati, eName));
     return;
 }
 //type에 따라 낮은가격순/인기순/낮은시간순
@@ -24,7 +23,7 @@ function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
         allroute = [];
         pushData(sLong, sLati, sName, eLong, eLati, eName, type);
         //금액순으로 정렬
-        var routeData = allroute.sort(function(x,y){
+        var routeData = allroute[0].sort(function(x,y){
             return x.cost - y.cost;
         });
         callback(undefined,{   
@@ -36,7 +35,7 @@ function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
         allroute = [];
         pushData(sLong, sLati, sName, eLong, eLati, eName, type);
         //추천순으로 정렬
-        var routeData = allroute.sort(function(x,y){
+        var routeData = allroute[0].sort(function(x,y){
             return x.recommend - y.recommend;
         });
 
@@ -49,7 +48,7 @@ function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
         allroute = [];
         pushData(sLong, sLati, sName, eLong, eLati, eName, type);
         //시간순으로 정렬
-        var routeData = allroute.sort(function(x,y){
+        var routeData = allroute[0].sort(function(x,y){
             return x.time - y.time;
         });
 
@@ -62,7 +61,6 @@ function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
 }
 
 function getbusData(sLong, sLati, sName, eLong, eLati, eName) {
-    console.log(calcBusRoute(sLong, sLati, sName, eLong, eLati, eName));
     return (calcBusRoute(sLong, sLati, sName, eLong, eLati, eName));
     
 }
@@ -121,16 +119,58 @@ function calcBusRoute(sLong, sLati, sName, eLong, eLati, eName) {
     eBusName = eBusName.filter((v,i) => eBusName.indexOf(v) === i);
 
     var startLocation = startBusNum.sort(function(x,y){
-        return x[4] - y[4]
+        return x[4] - y[4];
     });
     startLocation = setBus(startBusName, startLocation);
 
     var endLocation = endBusNum.sort(function(x,y){
-        return x[4] - y[4]
+        return x[4] - y[4];
     });
     endLocation = setBus(endBusName, endLocation);
     var routeData = isLocate(startLocation,endLocation,sBusName,eBusName);
-    return routeData;
+
+    //시작 위치로 부터 따릉이 경로
+    var bikeRoute = [];
+    for(var i = 0; i < routeData.length; i++) {
+        var temp = calculateBicycle(sLong, sLati, sName, routeData[i][0][3], routeData[i][0][2], eName);
+        bikeRoute.push(temp);
+    }
+    var eBikeRoute = [];
+    //도착 위치로 부터 따릉이 경로
+    for(var i = 0; i < routeData.length; i++) {
+        var temp = calculateBicycle(routeData[i][0][3], routeData[i][0][2], sName, eLong, eLati,eName);
+        eBikeRoute.push(temp);
+    }
+
+    var returndata = [];
+
+    //따릉이 포함 데이터
+    console.log(bikeRoute[0][1][0]);
+
+    for(var i = 0; i < routeData.length; i++) {
+        var timeData = calcuBike(bikeRoute[i][0][0].longitude, bikeRoute[i][0][0].latitude, bikeRoute[i][1][0].longitude, bikeRoute[i][1][0].latitude) +
+        calcBusTime(Math.abs(routeData[i][0][5] - routeData[i][1][5]));
+        var priceData = 2150 + 2000;
+        var esBus = routeData[i][0][6] + "(" + routeData[i][0][0] +"번 버스) -> " + " " + routeData[i][1][6] ;
+        var reco = i + 123
+        returndata.push({type: "bus", time: timeData, cost: priceData, route: [sName, bikeRoute[i][0][0].name + "(따릉이)", bikeRoute[i][1][0].name + "(따릉이)", esBus,  eBikeRoute[i][0][0].name + "(따릉이)", eBikeRoute[i][1][0].name + "(따릉이)", eName], recommend: reco})
+
+    }
+
+    //따릉이 미포함 데이터
+    for(var i = 0; i < routeData.length; i++) {
+        var timeData = calcWalkingTime(getDistance(sLati, sLong, routeData[i][0][2], routeData[i][0][3])) + 
+        calcBusTime(Math.abs(routeData[i][0][5] - routeData[i][1][5]))+
+        calcWalkingTime(getDistance(routeData[i][1][2], routeData[i][1][3], eLati, eLong));
+        var priceData = 2150;
+        var esBus = routeData[i][0][6] + "(" + routeData[i][0][0] +"번 버스) -> " + " " + routeData[i][1][6] ;
+        var reco = i + 123
+        returndata.push({type: "bus", time: timeData, cost: priceData, route: [sName, esBus, eName], recommend: reco})
+    }
+
+    returndata.push(calculTaxi(sLong, sLati, sName, eLong, eLati, eName));
+
+    return returndata;
 }
 
 function isLocate(startData, endData, startName, endName) {
@@ -144,41 +184,29 @@ function isLocate(startData, endData, startName, endName) {
         }
     }
     return response;
-
-}
-
-
-
-function userLocateStaion(startLong, startLati, startBusData) {   
-       //위치 주변 버스정류장에서 탈 수 있는 버스 조회
-       startBusName = startBusData.filter(data => data.name).map(data => data.name);
-       startBusName = startBusName.filter((v, i)=> startBusName.indexOf(v) === i);
-   
-       startBusNum = startBusData.filter(data => [data.name, 
-           data.node_id, 
-           data.latitude, 
-           data.longitude, 
-           getDistance(startLati, startLong, data.latitude, data.longitude),
-           data.stationNum]).map(data =>[
-                data.name, 
-                data.node_id, 
-                data.latitude, 
-                data.longitude, 
-                getDistance(startLati, startLong, data.latitude, data.longitude),
-                data.station_num,
-                data.station_name]);
-       
-       var startLocation = startBusNum.sort(function(x,y){
-           return x[4] - y[4]
-       });
-       var startOriginLocation = startLocation;
-       startLocation = setBus(startBusName, startLocation);
-       return startLocation;
 }
 
 function calculTaxi(startLong, startLati, sName, endLong, endLati, eName) {
     //서울시내 최대 속도로 돌았을때, 분당 800미터 가능
     return {type: "taxi", time: getDistance(startLong, startLati, endLong, endLati) / 300, cost: calcMoney(startLong, startLati, endLong, endLati), route: [sName ,eName], recommend: 500};
+}
+
+function calcuBike(startLong, startLati, endLong, endLati) {
+    var bikeTemp = getDistance(startLati, startLong, endLati, endLong) / 260
+    return bikeTemp;
+}
+function calcMoney(sLong, sLati, endLong, endLati) {
+    var distance = getDistance(sLati, sLong, endLati, endLong);
+    var expay = 0;
+    if (distance > 2000) {        
+        expay = (distance - 2000) % 132;
+        expay * 120;
+        return distance + expay;
+    }
+    else {
+        return 4600;
+    }
+
 }
 
 function calculateBicycle(startLong, startLati, sName, endLong, endLati, eName) {
@@ -193,7 +221,7 @@ function calculateBicycle(startLong, startLati, sName, endLong, endLati, eName) 
          }
     }
     if (endBikeData.length == 0) {
-         for (var i = 0; i < 15; i ++ ){
+         for (var i = 2; i < 15; i ++ ){
             endBikeData = getEndBikeData(endLati, endLong, i * 0.01);
              if (endBikeData.length > 0) {
                  break;
@@ -206,17 +234,17 @@ function calculateBicycle(startLong, startLati, sName, endLong, endLati, eName) 
         startNearBike.push([startBikeData[i], getDistance(startLati, startLong, startBikeData[i].latitude, startBikeData[i].longitude)]);
     }
     for(var i = 0; i < endBikeData.length; i++) {
-        endNearBike.push([endBikeData[i], getDistance(startLati, startLong, endBikeData[i].latitude, endBikeData[i].longitude)]);
+        endNearBike.push([endBikeData[i], getDistance(endLati, endLong, endBikeData[i].latitude, endBikeData[i].longitude)]);
     }
 
-    var startLocation = startNearBike.sort(function(x,y){
+    var sBikeLocation = startNearBike.sort(function(x,y){
         return x[1] - y[1];
     });
-    var endlocation = endNearBike.sort(function(x,y){
+    var eBikeLocation = endNearBike.sort(function(x,y){
         return x[1] - y[1];
     });
 
-    // console.log(startLocation[0], endlocation[0], "start,end");
+    return [sBikeLocation[0], eBikeLocation[0]];
 }
 
 
