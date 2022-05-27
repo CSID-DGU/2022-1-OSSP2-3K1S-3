@@ -11,8 +11,6 @@ const router = require('./routes/index');
 const getStation = require('./routes/Api/Main/getStation');
 const db = require("./module/db_connect");
 
-const conn = db.conn();
-
 var app = express();
 
 // view engine setup
@@ -126,6 +124,9 @@ app.post('/Api/Recommend/bad', (req, res) => { // 요청시 비추천 데이터 
 
 // API 추천, 비추천 상세보기 상위 2개 항목과 상위 기타항목
 app.get('/Api/Detail', (req, res) => {
+
+  // 스타트 경도와 위도에 대해서 쿼리를 돌리고 추천 수 뽑아내기 -> 우선 reco에서 해준다.
+  // 해당하는 추천 수의 를 뽀아준다. 
   const conn = db.conn();
   const route_id = req.body.id; // 경로 id에 대한 추천 상세보기
   conn.query('SELECT * FROM recommend WHERE route_id =?', [route_id], (err, result) => { 
@@ -202,6 +203,9 @@ app.get('/Api/Detail', (req, res) => {
 
 // API 추천 수 
 app.get('/Api/reco_number', (req, res) => {
+  
+  // 스타트 경도와 위도에 대해서 쿼리를 돌리고 추천 수 뽑아내기
+  // 해당하는 추천 수의 를 뽀아준다.
   var good_sum = 0;
   const conn = db.conn();
   const route_id = req.body.id; // 경로 id에 대한 추천 상세보기
@@ -217,8 +221,8 @@ app.get('/Api/reco_number', (req, res) => {
     res.json({sum: good_sum});
     // res.end();
   })
- 
 })
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

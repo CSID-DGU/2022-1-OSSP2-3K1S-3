@@ -4,6 +4,10 @@ start_long DOUBLE NOT NULL,
 start_lati DOUBLE NOT NULL,
 end_long DOUBLE NOT NULL,
 end_lati DOUBLE NOT NULL,
+bus_num INT  NOT NULL,
+bus_start INT NOT NULL,
+bus_end INT NOT NULL,
+bicycle BOOLEAN NOT NULL,
 PRIMARY KEY(id)
 );
 
