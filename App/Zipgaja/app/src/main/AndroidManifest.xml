@@ -13,7 +13,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Zipgaja">
+        android:theme="@style/Theme.Zipgaja"
+        android:usesCleartextTraffic="true">
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -40,6 +41,7 @@
         <activity android:name=".MainViewActivity" />
         <activity android:name=".SearchListActivity" />
         <activity android:name=".RecommendDetailActivity" />
+        <activity android:name=".LessActivity"/>
     </application>
 
     <!-- -->
