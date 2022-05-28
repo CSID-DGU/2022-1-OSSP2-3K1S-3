@@ -2,9 +2,15 @@ searchRoute = require('./getLessMRoute');
 const { route } = require('../..');
 const {bus_location} = require('./nightBusData');
 const {bikeStationArr} = require('../Main/bikeStation');
+const db = require("../../../module/db_connect");
+
+
 
 var startData = [];
 var allroute = [];
+var routeID = 0;
+var returndata = [];
+
 
 //1. 내주변 정류장에 시작위치 에서 끝위치 까지 가는 버스존재
     //2. 내주변 정류장은 있는데 끝까지 한번에 가는 버스가 없을때 // -> 시작위치에서 종료위치까지 가는 버스노선이 출발하는 정류장까지 따릉이 or 택시로 보내고 거기서 끝버스 까지 이동
@@ -13,7 +19,7 @@ var allroute = [];
     
 async function pushData(sLong, sLati, sName, eLong, eLati, eName, type) {
     //버스에 대한 정보
-    allroute.push(getbusData(sLong, sLati, sName, eLong, eLati, eName));
+    allroute.push(await getbusData(sLong, sLati, sName, eLong, eLati, eName));
     return;
 }
 //type에 따라 낮은가격순/인기순/낮은시간순
@@ -142,18 +148,17 @@ function calcBusRoute(sLong, sLati, sName, eLong, eLati, eName) {
         eBikeRoute.push(temp);
     }
 
-    var returndata = [];
 
     //따릉이 포함 데이터
     console.log(bikeRoute[0][1][0]);
 
     for(var i = 0; i < routeData.length; i++) {
-        var timeData = calcuBike(bikeRoute[i][0][0].longitude, bikeRoute[i][0][0].latitude, bikeRoute[i][1][0].longitude, bikeRoute[i][1][0].latitude) +
-        calcBusTime(Math.abs(routeData[i][0][5] - routeData[i][1][5]));
-        var priceData = 2150 + 2000;
-        var esBus = routeData[i][0][6] + "(" + routeData[i][0][0] +"번 버스) -> " + " " + routeData[i][1][6] ;
-        var reco = i + 123
-        returndata.push({type: "bus", time: timeData, cost: priceData, route: [sName, bikeRoute[i][0][0].name + "(따릉이)", bikeRoute[i][1][0].name + "(따릉이)", esBus,  eBikeRoute[i][0][0].name + "(따릉이)", eBikeRoute[i][1][0].name + "(따릉이)", eName], recommend: reco})
+        // var timeData = calcuBike(bikeRoute[i][0][0].longitude, bikeRoute[i][0][0].latitude, bikeRoute[i][1][0].longitude, bikeRoute[i][1][0].latitude) +
+        // calcBusTime(Math.abs(routeData[i][0][5] - routeData[i][1][5]));
+        // var priceData = 2150 + 2000;
+        // var esBus = routeData[i][0][6] + "(" + routeData[i][0][0] +"번 버스) -> " + " " + routeData[i][1][6] ;
+        // var reco = i + 123
+        callbackToPush(sLong,sLati,eLong,eLati,routeData,bikeRoute,eBikeRoute, i, sName, eName);
 
     }
 
@@ -165,12 +170,45 @@ function calcBusRoute(sLong, sLati, sName, eLong, eLati, eName) {
         var priceData = 2150;
         var esBus = routeData[i][0][6] + "(" + routeData[i][0][0] +"번 버스) -> " + " " + routeData[i][1][6] ;
         var reco = i + 123
-        returndata.push({type: "bus", time: timeData, cost: priceData, route: [sName, esBus, eName], recommend: reco})
+        callbackNoBikeToPush(sLong, sLati, eLong, eLati, routeData, i, sName, eName);
+        
     }
 
     returndata.push(calculTaxi(sLong, sLati, sName, eLong, eLati, eName));
 
-    return returndata;
+    return;
+}
+function callbackNoBikeToPush(sLong, sLati, eLong, eLati,routeData, i, sName, eName) {
+    var timeData = calcWalkingTime(getDistance(sLati, sLong, routeData[i][0][2], routeData[i][0][3])) + 
+        calcBusTime(Math.abs(routeData[i][0][5] - routeData[i][1][5]))+
+        calcWalkingTime(getDistance(routeData[i][1][2], routeData[i][1][3], eLati, eLong));
+        var priceData = 2150;
+        var esBus = routeData[i][0][6] + "(" + routeData[i][0][0] +"번 버스) -> " + " " + routeData[i][1][6] ;
+        var reco = i + 123
+
+        updateRouteTable(sLong, sLati, eLong, eLati, routeData[i][0][0], routeData[i][0][5], routeData[i][1][5], 0, 0, 0, 0, 0, 0, 0, 0, (error, {routeID} = {}) => {
+            if(error) {
+                console.log("Error to searchResult");
+                return ;
+              }
+            returndata.push({routeID: routeID, type: "bus", time: timeData, cost: priceData, route: [sName, esBus, eName], recommend: reco})
+        })
+}
+function callbackToPush(sLong, sLati, eLong, eLati,routeData, bikeRoute,eBikeRoute, i, sName, eName) {
+    var priceData = 2150 + 2000;
+    var esBus = routeData[i][0][6] + "(" + routeData[i][0][0] +"번 버스) -> " + " " + routeData[i][1][6] ;
+    var reco = i + 123
+    var timeData = calcuBike(bikeRoute[i][0][0].longitude, bikeRoute[i][0][0].latitude, bikeRoute[i][1][0].longitude, bikeRoute[i][1][0].latitude) +
+    calcBusTime(Math.abs(routeData[i][0][5] - routeData[i][1][5]));
+
+    updateRouteTable(sLong, sLati, eLong, eLati, routeData[i][0][0], routeData[i][0][5], routeData[i][1][5], bikeRoute[i][0][0].longitude, bikeRoute[i][0][0].latitude, bikeRoute[i][1][0].longitude, bikeRoute[i][1][0].latitude, eBikeRoute[i][0][0].longitude, eBikeRoute[i][0][0].latitude, eBikeRoute[i][1][0].longitude, eBikeRoute[i][1][0].latitude, (error, {routeID} = {}) => {
+        if(error) {
+            console.log("Error to searchResult");
+            return ;
+          }
+        
+        returndata.push({routeID: routeID, type: "bus", time: timeData, cost: priceData, route: [sName, bikeRoute[i][0][0].name + "(따릉이)", bikeRoute[i][1][0].name + "(따릉이)", esBus,  eBikeRoute[i][0][0].name + "(따릉이)", eBikeRoute[i][1][0].name + "(따릉이)", eName], recommend: reco})
+    }) 
 }
 
 function isLocate(startData, endData, startName, endName) {
@@ -317,5 +355,42 @@ const getEndBikeData = (latitude, longitude, distance) => {
     const endPointBikeStation = bikeStationArr.filter(data => data.longitude <= (longitude + distance) && data.longitude >= (longitude - distance) && data.latitude <= (latitude + distance) && data.latitude >= (latitude - distance));
     return endPointBikeStation;
 }
+
+
+const updateRouteTable = (sLong, sLati, eLong, eLati, busNum, busStart, busEnd, sBikeLong, sBikeLati, eBikeLong, eBikelati, fsBikeLong, fsBikeLati, feBikeLong, feBikeLati, callback) => {
+    const conn = db.conn();
+    const start_long = sLong;
+    const start_lati = sLati;
+    const end_long = eLong;
+    const end_lati = eLati;
+    const bus_num = busNum;
+    const bus_start = busStart;
+    const bus_end = busEnd;
+    const s_bike_long = sBikeLong;
+    const s_bike_lati = sBikeLati;
+    const e_bike_long = eBikeLong;
+    const e_bike_lati = eBikelati;
+
+    
+    conn.query('INSERT INTO route (start_long, end_long, start_lati, end_lati, bus_start , bus_end, s_bike_long, s_bike_lati, e_bike_long, e_bike_lati, bus_num, fs_bike_long, fs_bike_lati, fe_bike_long, fe_bike_lati) VALUES ('+ start_long + "," + end_long+ "," +start_lati+ "," +end_lati+ "," +bus_start+ "," +bus_end+ "," +s_bike_long+ "," +s_bike_lati+ "," + e_bike_long+ "," + e_bike_lati+ ",'" + bus_num+"',"+ fsBikeLong + "," + fsBikeLati + ","+feBikeLong + "," + feBikeLati + ")", function(err, route, fields){
+      if(err) throw err;     
+      if(route[0] == null){
+          conn.query('INSERT INTO route (start_long, end_long, start_lati, end_lati, bus_start , bus_end, s_bike_long, s_bike_lati, e_bike_long, e_bike_lati, bus_num, fs_bike_long, fs_bike_lati, fe_bike_long, fe_bike_lati) VALUES ('+ start_long + "," + end_long+ "," +start_lati+ "," +end_lati+ "," +bus_start+ "," +bus_end+ "," +s_bike_long+ "," +s_bike_lati+ "," + e_bike_long+ "," + e_bike_lati+ ",'" + bus_num+"',"+ fsBikeLong + "," + fsBikeLati + ","+feBikeLong + "," + feBikeLati + ")", (err, result) => {
+            if(err) throw err;
+            console.log(result.insertId); 
+            routeID = result.insertId;
+            conn.end();
+            callback(undefined,{   
+                routeID: routeID
+            });
+            return;
+            })
+        }
+    })
+
+    
+
+    
+} 
 
 module.exports = main;
