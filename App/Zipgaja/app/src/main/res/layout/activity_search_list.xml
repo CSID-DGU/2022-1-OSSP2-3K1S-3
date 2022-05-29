@@ -246,4 +246,39 @@
         app:layout_constraintTop_toBottomOf="@+id/searchResult"
         app:layout_constraintVertical_bias="0.25" />
 
+    <ImageButton
+        android:id="@+id/sortBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/searchList_title"
+        app:layout_constraintEnd_toEndOf="@+id/searchList_title"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="@+id/searchList_title"
+        app:layout_constraintTop_toTopOf="@+id/searchList_title"
+        app:layout_constraintVertical_bias="0.292"
+        app:srcCompat="@drawable/sort_btn" />
+
+    <ImageView
+        android:id="@+id/white_tri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/sortBtn"
+        app:layout_constraintEnd_toEndOf="@+id/sortBtn"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="@+id/sortBtn"
+        app:layout_constraintTop_toTopOf="@+id/sortBtn"
+        app:srcCompat="@drawable/white_triangle" />
+
+    <TextView
+        android:id="@+id/sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="정렬기준"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/sortBtn"
+        app:layout_constraintEnd_toStartOf="@+id/white_tri"
+        app:layout_constraintStart_toStartOf="@+id/sortBtn"
+        app:layout_constraintTop_toTopOf="@+id/sortBtn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
