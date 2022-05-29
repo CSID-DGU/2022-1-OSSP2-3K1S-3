@@ -128,7 +128,8 @@ app.get('/Api/Detail', (req, res) => {
   // 스타트 경도와 위도에 대해서 쿼리를 돌리고 추천 수 뽑아내기 -> 우선 reco에서 해준다.
   // 해당하는 추천 수의 를 뽀아준다. 
   const conn = db.conn();
-  const route_id = req.body.id; // 경로 id에 대한 추천 상세보기
+  const route_id = req.param('id'); // get 호출이므로 body로 받을 수 없다. querystring으로 받기
+  // const route_id = req.body.id; // 경로 id에 대한 추천 상세보기
   conn.query('SELECT * FROM recommend WHERE route_id =?', [route_id], (err, result) => { 
     if(err) throw err;
     if(result[0] == null){ // 해당 값이 없을 경우 0으로 반환
@@ -204,18 +205,27 @@ app.get('/Api/Detail', (req, res) => {
 // API 추천 수 
 app.get('/Api/reco_number', (req, res) => {
   
-  // 스타트 경도와 위도에 대해서 쿼리를 돌리고 추천 수 뽑아내기
-  // 해당하는 추천 수의 를 뽀아준다.
+  input_start_lati; // 입력받은 시작 위도
+  input_start_long; // 입력받은 시작 경도
+  input_end_lati; // 입력받은 끝 위도
+  input_end_long; // 입력받은 끝 경도
+  // 반경 시작과 끝에 대한 id를 뽑아낸다.
+  const sql = 'SELECT ( 6371 * acos ( cos ( radians(start_lati) ) * cos( radians(?) ) * cos( radians(start_long) - radians(?) ) + sin ( radians(start_lati) ) * sin( radians(?) ))) AS distance1, ( 6371 * acos ( cos ( radians(end_lati) ) * cos( radians(?) ) * cos( radians(end_long) - radians(?) ) + sin ( radians(end_lati) ) * sin( radians(?) ))) AS distance2, id FROM route HAVING (distance1 <= 0.3 AND distance2 <= 0.3) ORDER BY id'
+
   var good_sum = 0;
   const conn = db.conn();
-  const route_id = req.body.id; // 경로 id에 대한 추천 상세보기
-  conn.query('SELECT * FROM recommend WHERE route_id =?', [route_id], (err, result) => {
-    if(err) throw err;
-    if(result[0] == null){ // 해당 값 없으면 0
-      good_sum = 0;
-    }
-    else{
-      good_sum = result[0].good1 + result[0].good2 + result[0].good3 + result[0].good4;
+  conn.query(sql, [input_start_lati, input_start_long, input_start_lati, input_end_lati, input_end_long, input_end_lati], (err, results) => {
+    for(i=0; i<results.length; i++){ // 경로 id 뽑아내기
+      route_id = results[i].id;
+      conn.query('SELECT * FROM recommend WHERE route_id =?', [route_id], (err, result) => {
+        if(err) throw err;
+        if(result[0] == null){ // 해당 값 없으면 0
+          good_sum += 0;
+        }
+        else{
+          good_sum += result[0].good1 + result[0].good2 + result[0].good3 + result[0].good4;
+        }
+      })
     }
     conn.end();
     res.json({sum: good_sum});
