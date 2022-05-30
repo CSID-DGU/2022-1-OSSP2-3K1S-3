@@ -9,14 +9,16 @@ var allroute = [];
 var routeID = 0;
 var returndata = [];
 
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+  }
 
 async function pushData(sLong, sLati, sName, eLong, eLati, eName, type) {
     //버스에 대한 정보
-    allroute.push(getbusData(sLong, sLati, sName, eLong, eLati, eName));
-    return;
+    allroute.push(await calcBusRoute(sLong, sLati, sName, eLong, eLati, eName));
 }
 //type에 따라 낮은가격순/인기순/낮은시간순
-function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
+async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
     switch (type) {
     case "lessMoney":
         allroute = [];
@@ -47,7 +49,10 @@ function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
         allroute = [];
         pushData(sLong, sLati, sName, eLong, eLati, eName, type);
         //시간순으로 정렬
-        var routeData = allroute[0].sort(function(x,y){
+        await sleep(3000);
+        console.log(returndata);
+
+        var routeData = allroute.sort(function(x,y){
             return x.time - y.time;
         });
 
@@ -59,8 +64,7 @@ function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
     }
 }
 
-function getbusData(sLong, sLati, sName, eLong, eLati, eName) {
-    return calcBusRoute(sLong, sLati, sName, eLong, eLati, eName);
+async function getbusData(sLong, sLati, sName, eLong, eLati, eName) {
     
 }
 
@@ -142,55 +146,45 @@ async function calcBusRoute(sLong, sLati, sName, eLong, eLati, eName, callback) 
         eBikeRoute.push(temp);
     }
 
-    const data = routeData.map((routeData, index) => callbackToPush(sLong, sLati, eLong, eLati, RD, bikeRoute,eBikeRoute, index, sName, eName));
-    const data2 = routeData.map((routeData, index) => callbackNoBikeToPush(sLong, sLati, eLong, eLati, RD, index, sName, eName));
+    const data = await Promise.all(routeData.map((routeData, index) => callbackToPush(sLong, sLati, eLong, eLati, RD, bikeRoute, eBikeRoute, index, sName, eName)));
+    const data2 = await Promise.all(routeData.map((routeData, index) => callbackNoBikeToPush(sLong, sLati, eLong, eLati,RD, index, sName, eName)));
 
+    // console.log(data, data2, "??");
     returndata.push(calculTaxi(sLong, sLati, sName, eLong, eLati, eName));
 
-    return;
+    return [data, data2];
 }
 
-function callbackNoBikeToPush(sLong, sLati, eLong, eLati,routeData, index, sName, eName){
-
-    var timeData = calcWalkingTime(getDistance(sLati, sLong, routeData[0][2], routeData[0][3])) + 
-        calcBusTime(Math.abs(routeData[0][5] - routeData[1][5]))+
-        calcWalkingTime(getDistance(routeData[1][2], routeData[1][3], eLati, eLong));
+async function callbackNoBikeToPush(sLong, sLati, eLong, eLati,routeData, index, sName, eName){
+    var timeData = calcWalkingTime(getDistance(sLati, sLong, routeData[index][0][2], routeData[index][0][3])) + 
+        calcBusTime(Math.abs(routeData[index][0][5] - routeData[index][1][5]))+
+        calcWalkingTime(getDistance(routeData[index][1][2], routeData[index][1][3], eLati, eLong));
         var priceData = 2150;
-        var esBus = routeData[0][6] + "(" + routeData[0][0] +"번 버스) -> " + " " + routeData[1][6] ;
+        var esBus = routeData[index][0][6] + "(" + routeData[index][0][0] +"번 버스) -> " + " " + routeData[index][1][6] ;
         var reco = index + 123
 
         console.log(routeData[index][0][0], "adfaf", "\n");
 
-
-        updateRouteTable(sLong, sLati, eLong, eLati, routeData[index][0][0], routeData[index][0][5], routeData[index][1][5], 0, 0, 0, 0, 0, 0, 0, 0, (error, {routeID} = {}) => {
-            if(error) {
-                console.log("Error to searchResult");
-                return ;
-                }
-            console.log(routeID, error);
-            returndata.push({routeID: routeID, type: "bus", time: timeData, cost: priceData, route: [sName, esBus, eName], recommend: reco});
-            console.log("push 실행");
-        })
-        
+        var id = await updateRouteTable(sLong, sLati, eLong, eLati, routeData[index][0][0], routeData[index][0][5], routeData[index][1][5], 0, 0, 0, 0, 0, 0, 0, 0);
+        returndata.push({routeID: id, type: "bus", time: timeData, cost: priceData, route: [sName, esBus, eName], recommend: reco});
+        console.log("push 실행");
+           
+        return await id;
 }
-function callbackToPush (sLong, sLati, eLong, eLati,routeData, bikeRoute, eBikeRoute, index, sName, eName){
+async function callbackToPush (sLong, sLati, eLong, eLati,routeData, bikeRoute, eBikeRoute, index, sName, eName){
 
     var priceData = 2150 + 2000;
-    var esBus = routeData[0][6] + "(" + routeData[0][0] +"번 버스) -> " + " " + routeData[1][6] ;
+    var esBus = routeData[index][0][6] + "(" + routeData[index][0][0] +"번 버스) -> " + " " + routeData[index][1][6] ;
     var reco = index + 123
     var timeData = calcuBike(bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude, bikeRoute[index][1][0].longitude, bikeRoute[index][1][0].latitude) +
-    calcBusTime(Math.abs(routeData[0][5] - routeData[1][5]));
+    calcBusTime(Math.abs(routeData[index][0][5] - routeData[index][1][5]));
     console.log(routeData[index][0][0], "\n");
 
-    updateRouteTable(sLong, sLati, eLong, eLati, routeData[index][0][0], routeData[index][0][5], routeData[index][1][5], bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude, bikeRoute[index][1][0].longitude, bikeRoute[index][1][0].latitude, eBikeRoute[index][0][0].longitude, eBikeRoute[index][0][0].latitude, eBikeRoute[index][1][0].longitude, eBikeRoute[index][1][0].latitude, (error, {routeID} = {}) => {
-        if(error) {
-            console.log("Error to searchResult");
-            return ;
-            }
-            console.log("......2")
-        returndata.push({routeID: routeID, type: "bus", time: timeData, cost: priceData, route: [sName, bikeRoute[index][0][0].name + "(따릉이)", bikeRoute[index][1][0].name + "(따릉이)", esBus,  eBikeRoute[index][0][0].name + "(따릉이)", eBikeRoute[index][1][0].name + "(따릉이)", eName], recommend: reco})
-    }) 
-    
+    var id = await updateRouteTable(sLong, sLati, eLong, eLati, routeData[index][0][0], routeData[index][0][5], routeData[index][1][5], bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude, bikeRoute[index][1][0].longitude, bikeRoute[index][1][0].latitude, eBikeRoute[index][0][0].longitude, eBikeRoute[index][0][0].latitude, eBikeRoute[index][1][0].longitude, eBikeRoute[index][1][0].latitude);
+    returndata.push({routeID: id, type: "bus", time: timeData, cost: priceData, route: [sName, bikeRoute[index][0][0].name + "(따릉이)", bikeRoute[index][1][0].name + "(따릉이)", esBus,  eBikeRoute[index][0][0].name + "(따릉이)", eBikeRoute[index][1][0].name + "(따릉이)", eName], recommend: reco})
+    console.log(returndata, "hihi");
+
+    return await id;
 }
 
 function isLocate(startData, endData, startName, endName) {
@@ -352,12 +346,8 @@ async function updateRouteTable (sLong, sLati, eLong, eLati, busNum, busStart, b
     const s_bike_lati = sBikeLati;
     const e_bike_long = eBikeLong;
     const e_bike_lati = eBikelati;
-    
-    console.log("실행됨");
-
-    const db = async () => {
-        try {
-            console.log("실행됨");
+    try {
+        console.log("실행됨");
         let connection = await mysql.createConnection({
             host: process.env.host,
             user: process.env.user,
@@ -366,37 +356,13 @@ async function updateRouteTable (sLong, sLati, eLong, eLati, busNum, busStart, b
         })
 
         let [result] = await connection.query('INSERT INTO route (start_long, end_long, start_lati, end_lati, bus_start , bus_end, s_bike_long, s_bike_lati, e_bike_long, e_bike_lati, bus_num, fs_bike_long, fs_bike_lati, fe_bike_long, fe_bike_lati) VALUES ('+ start_long + "," + end_long+ "," +start_lati+ "," +end_lati+ "," +bus_start+ "," +bus_end+ "," +s_bike_long+ "," +s_bike_lati+ "," + e_bike_long+ "," + e_bike_lati+ ",'" + bus_num+"',"+ fsBikeLong + "," + fsBikeLati + ","+feBikeLong + "," + feBikeLati + ")");
+        console.log(result.insertId);
+        console.log("종료됨");
         return await result.insertId;
 
     } catch (error) {
         console.log(error);
     }
-}
-
-db();
-
-
-    
-
-
-    // result = conn.query('INSERT INTO route (start_long, end_long, start_lati, end_lati, bus_start , bus_end, s_bike_long, s_bike_lati, e_bike_long, e_bike_lati, bus_num, fs_bike_long, fs_bike_lati, fe_bike_long, fe_bike_lati) VALUES ('+ start_long + "," + end_long+ "," +start_lati+ "," +end_lati+ "," +bus_start+ "," +bus_end+ "," +s_bike_long+ "," +s_bike_lati+ "," + e_bike_long+ "," + e_bike_lati+ ",'" + bus_num+"',"+ fsBikeLong + "," + fsBikeLati + ","+feBikeLong + "," + feBikeLati + ")", (err, result) => {
-    //     if(err) throw err;
-    //     console.log(result.insertId, "adf");]
-    // });
-    //   if(route[0] == null){
-    //       conn.query('INSERT INTO route (start_long, end_long, start_lati, end_lati, bus_start , bus_end, s_bike_long, s_bike_lati, e_bike_long, e_bike_lati, bus_num, fs_bike_long, fs_bike_lati, fe_bike_long, fe_bike_lati) VALUES ('+ start_long + "," + end_long+ "," +start_lati+ "," +end_lati+ "," +bus_start+ "," +bus_end+ "," +s_bike_long+ "," +s_bike_lati+ "," + e_bike_long+ "," + e_bike_lati+ ",'" + bus_num+"',"+ fsBikeLong + "," + fsBikeLati + ","+feBikeLong + "," + feBikeLati + ")", (err, result) => {
-    //         if(err) throw err;
-    //         console.log(result.insertId); 
-    //         routeID = result.insertId;
-    //         conn.end();
-
-    //         })
-    //     }
-    // })
-
-    
-
-    
 } 
 
 module.exports = main;
