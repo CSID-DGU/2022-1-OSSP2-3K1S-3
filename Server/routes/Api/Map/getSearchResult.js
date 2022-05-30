@@ -49,10 +49,9 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
         allroute = [];
         pushData(sLong, sLati, sName, eLong, eLati, eName, type);
         //시간순으로 정렬
-        await sleep(3000);
-        console.log(returndata);
+        await sleep(5500);
 
-        var routeData = allroute.sort(function(x,y){
+        var routeData = returndata.sort(function(x,y){
             return x.time - y.time;
         });
 
@@ -62,10 +61,6 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
         return;
 
     }
-}
-
-async function getbusData(sLong, sLati, sName, eLong, eLati, eName) {
-    
 }
 
 /*버스 경로 탐색*/
@@ -142,15 +137,14 @@ async function calcBusRoute(sLong, sLati, sName, eLong, eLati, eName, callback) 
     var eBikeRoute = [];
     //도착 위치로 부터 따릉이 경로
     for(var i = 0; i < routeData.length; i++) {
-        var temp = calculateBicycle(routeData[i][0][3], routeData[i][0][2], sName, eLong, eLati,eName);
+        var temp = calculateBicycle(routeData[i][1][3], routeData[i][1][2], sName, eLong, eLati,eName);
         eBikeRoute.push(temp);
     }
 
     const data = await Promise.all(routeData.map((routeData, index) => callbackToPush(sLong, sLati, eLong, eLati, RD, bikeRoute, eBikeRoute, index, sName, eName)));
     const data2 = await Promise.all(routeData.map((routeData, index) => callbackNoBikeToPush(sLong, sLati, eLong, eLati,RD, index, sName, eName)));
 
-    // console.log(data, data2, "??");
-    returndata.push(calculTaxi(sLong, sLati, sName, eLong, eLati, eName));
+    returndata.push(await calculTaxi(sLong, sLati, sName, eLong, eLati, eName));
 
     return [data, data2];
 }
@@ -161,13 +155,11 @@ async function callbackNoBikeToPush(sLong, sLati, eLong, eLati,routeData, index,
         calcWalkingTime(getDistance(routeData[index][1][2], routeData[index][1][3], eLati, eLong));
         var priceData = 2150;
         var esBus = routeData[index][0][6] + "(" + routeData[index][0][0] +"번 버스) -> " + " " + routeData[index][1][6] ;
-        var reco = index + 123
+        var reco = await getRecommendData(sLong, sLati, eLong, eLati);
 
-        console.log(routeData[index][0][0], "adfaf", "\n");
 
         var id = await updateRouteTable(sLong, sLati, eLong, eLati, routeData[index][0][0], routeData[index][0][5], routeData[index][1][5], 0, 0, 0, 0, 0, 0, 0, 0);
         returndata.push({routeID: id, type: "bus", time: timeData, cost: priceData, route: [sName, esBus, eName], recommend: reco});
-        console.log("push 실행");
            
         return await id;
 }
@@ -175,14 +167,12 @@ async function callbackToPush (sLong, sLati, eLong, eLati,routeData, bikeRoute, 
 
     var priceData = 2150 + 2000;
     var esBus = routeData[index][0][6] + "(" + routeData[index][0][0] +"번 버스) -> " + " " + routeData[index][1][6] ;
-    var reco = index + 123
+    var reco = await getRecommendData(sLong, sLati, eLong, eLati);
     var timeData = calcuBike(bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude, bikeRoute[index][1][0].longitude, bikeRoute[index][1][0].latitude) +
     calcBusTime(Math.abs(routeData[index][0][5] - routeData[index][1][5]));
-    console.log(routeData[index][0][0], "\n");
-
+\
     var id = await updateRouteTable(sLong, sLati, eLong, eLati, routeData[index][0][0], routeData[index][0][5], routeData[index][1][5], bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude, bikeRoute[index][1][0].longitude, bikeRoute[index][1][0].latitude, eBikeRoute[index][0][0].longitude, eBikeRoute[index][0][0].latitude, eBikeRoute[index][1][0].longitude, eBikeRoute[index][1][0].latitude);
     returndata.push({routeID: id, type: "bus", time: timeData, cost: priceData, route: [sName, bikeRoute[index][0][0].name + "(따릉이)", bikeRoute[index][1][0].name + "(따릉이)", esBus,  eBikeRoute[index][0][0].name + "(따릉이)", eBikeRoute[index][1][0].name + "(따릉이)", eName], recommend: reco})
-    console.log(returndata, "hihi");
 
     return await id;
 }
@@ -200,9 +190,10 @@ function isLocate(startData, endData, startName, endName) {
     return response;
 }
 
-function calculTaxi(startLong, startLati, sName, endLong, endLati, eName) {
+async function calculTaxi(startLong, startLati, sName, endLong, endLati, eName) {
     //서울시내 최대 속도로 돌았을때, 분당 800미터 가능
-    return {type: "taxi", time: getDistance(startLong, startLati, endLong, endLati) / 300, cost: calcMoney(startLong, startLati, endLong, endLati), route: [sName ,eName], recommend: 500};
+    var reco = await getRecommendData(startLong, startLati, endLong, endLati);
+    return {type: "taxi", time: getDistance(startLong, startLati, endLong, endLati) / 300, cost: calcMoney(startLong, startLati, endLong, endLati), route: [sName ,eName], recommend: reco};
 }
 
 function calcuBike(startLong, startLati, endLong, endLati) {
@@ -332,6 +323,36 @@ const getEndBikeData = (latitude, longitude, distance) => {
     return endPointBikeStation;
 }
 
+async function getRecommendData(sLong, sLati, eLong, eLati) {
+  const input_start_lati = sLati; // 입력받은 시작 위도
+  const input_start_long = sLong; // 입력받은 시작 경도
+  const input_end_lati = eLati; // 입력받은 끝 위도
+  const input_end_long = eLong; // 입력받은 끝 경도
+
+  var resultSum = 0
+  var route_id = [];
+  // 반경 시작과 끝에 대한 id를 뽑아낸다.
+  const sql = 'SELECT ( 6371 * acos ( cos ( radians(start_lati) ) * cos( radians(?) ) * cos( radians(start_long) - radians(?) ) + sin ( radians(start_lati) ) * sin( radians(?) ))) AS distance1, ( 6371 * acos ( cos ( radians(end_lati) ) * cos( radians(?) ) * cos( radians(end_long) - radians(?) ) + sin ( radians(end_lati) ) * sin( radians(?) ))) AS distance2, id FROM route HAVING (distance1 <= 0.1 AND distance2 <= 0.1) ORDER BY id'
+  try {
+    let connection = await mysql.createConnection({
+        host: process.env.host,
+        user: process.env.user,
+        password: process.env.password,
+        database: process.env.database
+    })
+
+    let [result] = await connection.query(sql, [input_start_lati, input_start_long, input_start_lati, input_end_lati, input_end_long, input_end_lati]);
+    if (result.length == 0) {
+        return resultSum;
+    }
+  
+    // return await result;
+
+} catch (error) {
+    console.log(error);
+}
+
+}
 
 async function updateRouteTable (sLong, sLati, eLong, eLati, busNum, busStart, busEnd, sBikeLong, sBikeLati, eBikeLong, eBikelati, fsBikeLong, fsBikeLati, feBikeLong, feBikeLati, callback){
 
@@ -347,7 +368,6 @@ async function updateRouteTable (sLong, sLati, eLong, eLati, busNum, busStart, b
     const e_bike_long = eBikeLong;
     const e_bike_lati = eBikelati;
     try {
-        console.log("실행됨");
         let connection = await mysql.createConnection({
             host: process.env.host,
             user: process.env.user,
@@ -356,8 +376,6 @@ async function updateRouteTable (sLong, sLati, eLong, eLati, busNum, busStart, b
         })
 
         let [result] = await connection.query('INSERT INTO route (start_long, end_long, start_lati, end_lati, bus_start , bus_end, s_bike_long, s_bike_lati, e_bike_long, e_bike_lati, bus_num, fs_bike_long, fs_bike_lati, fe_bike_long, fe_bike_lati) VALUES ('+ start_long + "," + end_long+ "," +start_lati+ "," +end_lati+ "," +bus_start+ "," +bus_end+ "," +s_bike_long+ "," +s_bike_lati+ "," + e_bike_long+ "," + e_bike_lati+ ",'" + bus_num+"',"+ fsBikeLong + "," + fsBikeLati + ","+feBikeLong + "," + feBikeLati + ")");
-        console.log(result.insertId);
-        console.log("종료됨");
         return await result.insertId;
 
     } catch (error) {
