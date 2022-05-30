@@ -19,12 +19,14 @@ async function pushData(sLong, sLati, sName, eLong, eLati, eName, type) {
 }
 //type에 따라 낮은가격순/인기순/낮은시간순
 async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
+    console.log(sLong, sLati, sName, eLong, eLati, eName, type);
     switch (type) {
     case "lessMoney":
-        allroute = [];
+        returndata = [];
         pushData(sLong, sLati, sName, eLong, eLati, eName, type);
         //금액순으로 정렬
-        var routeData = allroute[0].sort(function(x,y){
+        await sleep(5500);
+        var routeData = returndata.sort(function(x,y){
             return x.cost - y.cost;
         });
         callback(undefined,{   
@@ -33,10 +35,12 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
         return;
 
     case "recommend":
-        allroute = [];
+        returndata = [];
         pushData(sLong, sLati, sName, eLong, eLati, eName, type);
+        await sleep(5500);
+
         //추천순으로 정렬
-        var routeData = allroute[0].sort(function(x,y){
+        var routeData = returndata.sort(function(x,y){
             return x.recommend - y.recommend;
         });
 
@@ -46,7 +50,7 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
         return;
 
     case "lessTime":
-        allroute = [];
+        returndata = [];
         pushData(sLong, sLati, sName, eLong, eLati, eName, type);
         //시간순으로 정렬
         await sleep(5500);
@@ -65,6 +69,7 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
 
 /*버스 경로 탐색*/
 async function calcBusRoute(sLong, sLati, sName, eLong, eLati, eName, callback) {
+    console.log("경로 계산 실행");
     var startPoint = [];
     var endPoint = [];
     for(var i = 2; i < 15; i++) {
@@ -160,7 +165,6 @@ async function callbackNoBikeToPush(sLong, sLati, eLong, eLati,routeData, index,
 
         var id = await updateRouteTable(sLong, sLati, eLong, eLati, routeData[index][0][0], routeData[index][0][5], routeData[index][1][5], 0, 0, 0, 0, 0, 0, 0, 0);
         returndata.push({routeID: id, type: "bus", time: timeData, cost: priceData, route: [sName, esBus, eName], recommend: reco});
-           
         return await id;
 }
 async function callbackToPush (sLong, sLati, eLong, eLati,routeData, bikeRoute, eBikeRoute, index, sName, eName){
@@ -170,7 +174,7 @@ async function callbackToPush (sLong, sLati, eLong, eLati,routeData, bikeRoute, 
     var reco = await getRecommendData(sLong, sLati, eLong, eLati);
     var timeData = calcuBike(bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude, bikeRoute[index][1][0].longitude, bikeRoute[index][1][0].latitude) +
     calcBusTime(Math.abs(routeData[index][0][5] - routeData[index][1][5]));
-\
+
     var id = await updateRouteTable(sLong, sLati, eLong, eLati, routeData[index][0][0], routeData[index][0][5], routeData[index][1][5], bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude, bikeRoute[index][1][0].longitude, bikeRoute[index][1][0].latitude, eBikeRoute[index][0][0].longitude, eBikeRoute[index][0][0].latitude, eBikeRoute[index][1][0].longitude, eBikeRoute[index][1][0].latitude);
     returndata.push({routeID: id, type: "bus", time: timeData, cost: priceData, route: [sName, bikeRoute[index][0][0].name + "(따릉이)", bikeRoute[index][1][0].name + "(따릉이)", esBus,  eBikeRoute[index][0][0].name + "(따릉이)", eBikeRoute[index][1][0].name + "(따릉이)", eName], recommend: reco})
 
@@ -193,7 +197,8 @@ function isLocate(startData, endData, startName, endName) {
 async function calculTaxi(startLong, startLati, sName, endLong, endLati, eName) {
     //서울시내 최대 속도로 돌았을때, 분당 800미터 가능
     var reco = await getRecommendData(startLong, startLati, endLong, endLati);
-    return {type: "taxi", time: getDistance(startLong, startLati, endLong, endLati) / 300, cost: calcMoney(startLong, startLati, endLong, endLati), route: [sName ,eName], recommend: reco};
+    var id = await updateRouteTable(startLong, startLati, endLong, endLati,'taxi', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    return {routeID: id, type: "taxi", time: getDistance(startLong, startLati, endLong, endLati) / 300, cost: calcMoney(startLong, startLati, endLong, endLati), route: [sName ,eName], recommend: reco};
 }
 
 function calcuBike(startLong, startLati, endLong, endLati) {
