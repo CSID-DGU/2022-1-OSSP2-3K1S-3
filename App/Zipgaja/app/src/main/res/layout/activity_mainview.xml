@@ -147,4 +147,13 @@
         app:layout_constraintTop_toBottomOf="@+id/yellow3"
         tools:context=".MapsActivity" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="#FFFFFF"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="9dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

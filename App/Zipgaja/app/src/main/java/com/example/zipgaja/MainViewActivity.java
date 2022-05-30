@@ -1,5 +1,7 @@
 package com.example.zipgaja;
 
+import static android.content.ContentValues.TAG;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -13,6 +15,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -20,6 +23,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,10 +36,15 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.libraries.places.api.Places;
 
 import java.io.IOException;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MainViewActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -50,6 +59,10 @@ public class MainViewActivity extends AppCompatActivity implements OnMapReadyCal
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
     };
+    private final String BASEURL = "http://ec2-107-23-186-215.compute-1.amazonaws.com:5000";
+    private TextView textView;
+    Handler handler;
+    Context mContext;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,8 +74,6 @@ public class MainViewActivity extends AppCompatActivity implements OnMapReadyCal
         SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
-
-        Places.initialize(getApplicationContext(), "MAPS_API_KEY");
 
         // 현재 위치의 위도/경도 불러오기
         ImageButton currentBtn = findViewById(R.id.currentBtn);
@@ -111,7 +122,15 @@ public class MainViewActivity extends AppCompatActivity implements OnMapReadyCal
                 Intent intent = new Intent(getApplicationContext(), SearchListActivity.class);
                 // 다음 Activity 에 출발지 목적지 전달
                 String currentAdd = inputCurrent.getText().toString();
+                if (currentAdd.length() == 0) {
+                    Toast.makeText(getApplicationContext(), "출발지가 입력되지 않았습니다.", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 String destinationAdd = inputDestination.getText().toString();
+                if (destinationAdd.length() == 0) {
+                    Toast.makeText(getApplicationContext(), "목적지가 입력되지 않았습니다.", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 // 출발지 위도/경도 추출
                 List<Address> currentList = null;
                 try {
@@ -121,7 +140,8 @@ public class MainViewActivity extends AppCompatActivity implements OnMapReadyCal
                 }
                 if (currentList != null) {
                     if (currentList.size() == 0) {
-                        System.out.println("올바른 경로가 아닙니다.");
+                        Toast.makeText(getApplicationContext(), "출발지가 올바른 위치가 아닙니다.", Toast.LENGTH_LONG).show();
+                        return;
                     }
                     else {
                         Address address = currentList.get(0);
@@ -140,7 +160,8 @@ public class MainViewActivity extends AppCompatActivity implements OnMapReadyCal
                 }
                 if (destinationList != null) {
                     if (destinationList.size() == 0) {
-                        System.out.println("올바른 경로가 아닙니다");
+                        Toast.makeText(getApplicationContext(), "목적지가 올바른 위치가 아닙니다.", Toast.LENGTH_LONG).show();
+                        return;
                     }
                     else {
                         Address address = destinationList.get(0);
@@ -252,6 +273,11 @@ public class MainViewActivity extends AppCompatActivity implements OnMapReadyCal
             Log.i("GPSLocationService", msg);
             Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
 
+            // 지울거지울거지울거지울거
+            latitude = 37.514543;
+            longitude = 127.106597;
+            // 지울거지울거지울거지울거
+
             onMapCurrent(mGoogleMap, latitude, longitude);
         }
 
@@ -271,7 +297,56 @@ public class MainViewActivity extends AppCompatActivity implements OnMapReadyCal
         markerOptions.snippet("한국의 수도");
         mGoogleMap.addMarker(markerOptions);
 
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 13));
+        StationThread stationThread = new StationThread(handler, mContext, 37.56f, 126.97f);
+        stationThread.run();
+
+//        // assets 폴더의 파일을 가져오기 위한 AssetManager
+//        AssetManager assetManager = getAssets();
+//
+//        // assets/bikeStation.json 파일을 읽기 위한 InputStream
+//        try {
+//            InputStream is = assetManager.open("jsons/bikeStation.json");
+//            InputStreamReader isr = new InputStreamReader(is);
+//            BufferedReader reader = new BufferedReader(isr);
+//
+//            StringBuffer buffer = new StringBuffer();
+//            String line = reader.readLine();
+//            while (line != null) {
+//                buffer.append(line + "\n");
+//                line = reader.readLine();
+//            }
+//
+//            String jsonData = buffer.toString();
+//
+//            // 읽어온 json 문자열 확인
+//            JSONArray jsonArray = new JSONArray(jsonData);
+//
+//            for (int i = 0;i < jsonArray.length();i++) {
+//                JSONObject jo = jsonArray.getJSONObject(i);
+//
+//                String num = jo.getString("num");
+//                String name = jo.getString("name");
+//                double latitude = Double.parseDouble(jo.getString("latitude"));
+//                double longitude = Double.parseDouble(jo.getString("longitude"));
+//
+//                MarkerOptions bikeStations = new MarkerOptions();
+//                bikeStations.position(new LatLng(latitude, longitude));
+//                bikeStations.title(name);
+//                bikeStations.snippet(num);
+//
+//                BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.bike_station);
+//                Bitmap b = bitmapdraw.getBitmap();
+//                Bitmap smallMarker = Bitmap.createScaledBitmap(b, 200, 200, false);
+//                bikeStations.icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+//
+//                mGoogleMap.addMarker(bikeStations);
+//            }
+//
+//        } catch (IOException | JSONException e) {
+//            e.printStackTrace();
+//        }
+
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 16));
     }
 
     public void onMapCurrent(@NonNull final GoogleMap googleMap, double latitude, double longitude) {
