@@ -29,7 +29,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 //메인 뷰 따릉이 및 버스 정류장 제공 API
-app.get('/Api/Main/getStation', (req, res) => {
+app.post('/Api/Main/getStation', (req, res) => {
   console.log("[call getStation Api]");
 
   const userLongitude = req.body.long;
@@ -46,7 +46,7 @@ app.get('/Api/Main/getStation', (req, res) => {
 })
 
 //경로 검색결과 리스트 조회
-app.get('/Api/route/searchList', (req, res) => {
+app.post('/Api/route/searchList', (req, res) => {
   console.log("[call searchList Api]");
 
   const startLong = req.body.sLong;
