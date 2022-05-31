@@ -42,6 +42,7 @@
         <activity android:name=".MainViewActivity" />
         <activity android:name=".SearchListActivity" />
         <activity android:name=".RecommendDetailActivity" />
+        <activity android:name=".LessActivity"/>
     </application>
 
     <!-- -->
