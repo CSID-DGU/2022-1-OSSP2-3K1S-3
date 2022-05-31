@@ -34,7 +34,7 @@ app.post('/Api/Main/getStation', (req, res) => {
 
   const userLongitude = req.body.long;
   const userLatitude = req.body.lati;
-  console.log("[getstation List requestData]", userLongitude, userLatitude);
+  console.log("[getstation List requestData]", userLongitude, userLatitude, req.body);
 
   getStation(userLatitude, userLongitude,(error, {bikeStation, busStation} = {}) => {
     if (error) {
