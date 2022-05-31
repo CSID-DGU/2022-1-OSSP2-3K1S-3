@@ -32,8 +32,8 @@ app.use('/users', usersRouter);
 app.post('/Api/Main/getStation', (req, res) => {
   console.log("[call getStation Api]");
 
-  const userLongitude = req.body.long;
-  const userLatitude = req.body.lati;
+  const userLongitude = req.body.nameValuePairs.long;
+  const userLatitude = req.body.nameValuePairs.lati;
   console.log("[getstation List requestData]", userLongitude, userLatitude, req.body);
 
   getStation(userLatitude, userLongitude,(error, {bikeStation, busStation} = {}) => {
@@ -60,7 +60,7 @@ app.post('/Api/route/searchList', (req, res) => {
 
   const type = req.body.type;
 
-  console.log("[getSearch List requestData]", startLong, startLati, startName, endLong, endLati, endName, type);
+  console.log("[getSearch List requestData]", startLong, startLati, startName, endLong, endLati, endName, type, req.body);
 
   getSearchResult(startLong, startLati, startName, endLong, endLati, endName ,type, (error, {routeData} = {}) => {
     if(error) {
