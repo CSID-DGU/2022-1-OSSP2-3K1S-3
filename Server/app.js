@@ -10,7 +10,7 @@ const res = require('express/lib/response');
 const router = require('./routes/index');
 const getStation = require('./routes/Api/Main/getStation');
 const db = require("./module/db_connect");
-
+var details = require("./routes/Api/Recommend/sumofsum");
 var app = express();
 
 // view engine setup
@@ -123,83 +123,54 @@ app.post('/Api/Recommend/bad', (req, res) => { // 요청시 비추천 데이터 
 })
 
 // API 추천, 비추천 상세보기 상위 2개 항목과 상위 기타항목
-app.get('/Api/Detail', (req, res) => {
-
-  // 스타트 경도와 위도에 대해서 쿼리를 돌리고 추천 수 뽑아내기 -> 우선 reco에서 해준다.
-  // 해당하는 추천 수의 를 뽀아준다. 
-  const conn = db.conn();
-  const route_id = req.param('id'); // get 호출이므로 body로 받을 수 없다. querystring으로 받기
-  // const route_id = req.body.id; // 경로 id에 대한 추천 상세보기
-  conn.query('SELECT * FROM recommend WHERE route_id =?', [route_id], (err, result) => { 
-    if(err) throw err;
-    if(result[0] == null){ // 해당 값이 없을 경우 0으로 반환
-      a = 0;
-      b = 0;
-      a1 = null;
-      a2 = null;
-    }
-    else{ // 해당 값 추천 상위 2항목과 기타 2항목 추출
-      c = [result[0].good1, result[0].good2, result[0].good3, result[0].good4];
-      c.sort(function(a, b){
-        return b - a;
-      });
-      a = c[0];
-      b = c[1];
-      conn.query('SELECT * FROM reco_string WHERE route_id = ?',[route_id], (err, results) =>{
-        if(err) throw err;
-        if(results.length >= 2){
-          a1 = results[results.length - 1].good;
-          a2 = results[results.length - 2].good;
-        }
-        else if(results.length == 1){
-          a1 = results[results.length - 1].good;
-          a2 = null;
-        }
-        else{
-          a1= null;
-          a2= null;
-        }
-      })
-    }
-    conn.query('SELECT * FROM not_recommend WHERE route_id =?', [route_id], (err, result) => {
-      if(err) throw err;
-      if(result[0] == null){ // 해당 값이 없을 경우 0으로 반환
-        x = 0;
-        y = 0;
-        x1 = null;
-        x2 = null;
-        conn.end();
-        res.json({good1: a, good2: b, good3: a1, good4: a2, bad1: x, bad2: y, bad3: x1, bad4: x2})
-   
-      }
-      else{ // 해당 값 비추천 상위 2항목과 기타 2항목 추출
-        d = [result[0].ba1, result[0].bad2, result[0].bad3, result[0].bad4];
-        d.sort(function(a, b){
+app.post('/Api/Detail', (req, res) => {
+  
+ async function test3(id) {
+  a = await details.detail1(id);
+  test4(a, id);
+  async function test4(a, id) {
+      b = await details.detail2(id);
+      console.log("미친놈 1, 2",a, b);
+      c = [a[0], a[1], a[2], a[3]]; // 추천 값 sorting
+      a.sort(function(a, b){
           return b-a;
-        });
-        x = d[0];
-        y = d[1];
-        conn.query('SELECT * FROM notre_string WHERE route_id = ?',[route_id], (err, results) =>{
-          if(err) throw err;
-          if(results.length >= 2){
-            x1 = results[results.length - 1].bad;
-            x2 = results[results.length - 2].bad;
-          }
-          else if(results.length == 1){
-            x1 = results[results.length - 1].good;
-            x2 = null;
-          }
-          else{
-            x1= null;
-            x2= null;
-          }
-          conn.end();
-          res.json({good1: a, good2: b, good3: a1, good4: a2, bad1: x, bad2: y, bad3: x1, bad4: x2})
+      })
+      d = [b[0], b[1], b[2], b[3]]; // 비추천 값 sorting
+      d.sort(function(a,b){
+          return b-a;
+      })
 
-       })
+      if(a[4].length >= 2){ // 추천 값 기타 항목 추리기
+          a1 = a[4][0];
+          a2 = a[4][1];
       }
-    })
-  })
+      else if(a[4].length == 1){
+          a1 = a[4][0];
+          a2 = null;
+      }
+      else{
+          a1 = null;
+          a2 = null;
+      }
+
+      if(b[4].length >= 2){ // 비추천 값 기타 항목 추리기
+          x1 = b[4][0];
+          x2 = b[4][1];
+      }
+      else if(b[4].length == 1){
+          x1 = b[4][0];
+          x2 = null;
+      }
+      else{
+          x1 = null;
+          x2 = null;
+      }
+      
+      res.json({good1: c[0], good2: c[1], good3: a1, good4: a2, bad1: d[0], bad2: d[1], bad3: x1, bad4: x2});
+  }
+}
+test3(req.body.id);
+
 })
 
 // API 추천 수 
