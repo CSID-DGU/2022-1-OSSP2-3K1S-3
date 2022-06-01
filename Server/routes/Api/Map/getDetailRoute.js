@@ -4,18 +4,12 @@ const {bus_location} = require('./nightBusData');
 const {bikeStationArr} = require('../Main/bikeStation');
 var polyline = require('@mapbox/polyline');
 const mysql = require("mysql2/promise");
-const { map } = require('../../../app');
 require("dotenv").config(); // .env 하기 위한 dotenv 라이브러리 
 
 
 
 var routeData = [];
 var distanceData = [];
-var start = [];
-var end = [];
-var GloballocationArr = [];
-var bothStationCorrect = [];
-var busRoutef = "";
 
 async function main(routeId, start, end, callback) {
     routeData = [];
@@ -39,7 +33,6 @@ async function main(routeId, start, end, callback) {
         if (startBusStation - endBusStation > 0) {
             var busStation = bus_location.filter(data => (data.station_num <= route.bus_start) && (data.station_num >= route.bus_end) && data.name == route.bus_num);
             var reversBus = busStation.slice(0).reverse().map(data => data);
-            console.log(reversBus);
             //따릉이 포함 경로일때 
             if (route.s_bike_long != 0) {
                 connectOSRM(route.start_long, route.start_lati, route.s_bike_long, route.s_bike_lati);
@@ -138,10 +131,6 @@ async function main(routeId, start, end, callback) {
         }
 
     }
-
-
-
-    console.log(route);
     // var data = locationArr.map((request) => sendOSRM(request));
     callback(undefined,{   
         route: returnData
