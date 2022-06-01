@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 const res = require('express/lib/response');
 const router = require('./routes/index');
 const getStation = require('./routes/Api/Main/getStation');
-const getLessMRoute = require('./routes/Api/Map/getLessMRoute');
+const getDetailRoute = require('./routes/Api/Map/getDetailRoute');
 const getSearchResult = require('./routes/Api/Map/getSearchResult');
 const db = require("./module/db_connect");
 
@@ -69,21 +69,19 @@ app.post('/Api/route/searchList', (req, res) => {
 });
 
 //경로탐색
-app.get('/Api/route/lessmoney', (req, res) => {
-  console.log("[call lessmoney Api]");
+app.post('/Api/route/detailRoute', (req, res) => {
+  console.log("[call detailRoute Api]");
 
-  const startLong = req.body.sLong;
-  const startLati = req.body.sLati;
+  const id = req.body.id;
+  const start = req.body.start;
+  const end = req.body.end;
 
-  const endLong = req.body.eLong;
-  const endLati = req.body.eLati;
-
-  getLessMRoute(startLong, startLati, endLong, endLati,(error, {bothStationCorrect}) => {
+  getDetailRoute(id, start, end,(error, {route}) => {
     if (error) {
       console.log('error');
       return res.send({error});
     }
-    res.json({status: res.statusCode, data: bothStationCorrect});
+    res.json({status: res.statusCode, data: route});
   });    
 })
 
