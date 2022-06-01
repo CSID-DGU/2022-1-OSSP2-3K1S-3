@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 const res = require('express/lib/response');
 const router = require('./routes/index');
 const getStation = require('./routes/Api/Main/getStation');
-const getLessMRoute = require('./routes/Api/Map/getLessMRoute');
+const getDetailRoute = require('./routes/Api/Map/getDetailRoute');
 const getSearchResult = require('./routes/Api/Map/getSearchResult');
 const db = require("./module/db_connect");
 
@@ -32,8 +32,10 @@ app.use('/users', usersRouter);
 app.post('/Api/Main/getStation', (req, res) => {
   console.log("[call getStation Api]");
 
-  const userLongitude = req.body.long;
-  const userLatitude = req.body.lati;
+  const userLongitude = req.body.nameValuePairs.long;
+  const userLatitude = req.body.nameValuePairs.lati;
+
+  console.log("log :: ", userLatitude, userLongitude);
 
   getStation(userLatitude, userLongitude,(error, {bikeStation, busStation} = {}) => {
     if (error) {
@@ -49,15 +51,16 @@ app.post('/Api/Main/getStation', (req, res) => {
 app.post('/Api/route/searchList', (req, res) => {
   console.log("[call searchList Api]");
 
-  const startLong = req.body.sLong;
-  const startLati = req.body.sLati;
-  const startName = req.body.sName;
+  const startLong = req.body.nameValuePairs.sLong;
+  const startLati = req.body.nameValuePairs.sLati;
+  const startName = req.body.nameValuePairs.sName;
 
-  const endLong = req.body.eLong;
-  const endLati = req.body.eLati;
-  const endName = req.body.eName;
+  const endLong = req.body.nameValuePairs.eLong;
+  const endLati = req.body.nameValuePairs.eLati;
+  const endName = req.body.nameValuePairs.eName;
 
-  const type = req.body.type;
+  const type = req.body.nameValuePairs.type;
+  console.log("log :: ", startLong, startLati, startName, endLong, endLati, endName ,type);
 
   getSearchResult(startLong, startLati, startName, endLong, endLati, endName ,type, (error, {routeData} = {}) => {
     if(error) {
@@ -69,21 +72,21 @@ app.post('/Api/route/searchList', (req, res) => {
 });
 
 //경로탐색
-app.get('/Api/route/lessmoney', (req, res) => {
-  console.log("[call lessmoney Api]");
+app.post('/Api/route/detailRoute', (req, res) => {
+  console.log("[call detailRoute Api]");
 
-  const startLong = req.body.sLong;
-  const startLati = req.body.sLati;
+  const id = req.body.id;
+  const start = req.body.start;
+  const end = req.body.end;
+  
+  console.log("log :: ",id, start, end);
 
-  const endLong = req.body.eLong;
-  const endLati = req.body.eLati;
-
-  getLessMRoute(startLong, startLati, endLong, endLati,(error, {bothStationCorrect}) => {
+  getDetailRoute(id, start, end,(error, {route}) => {
     if (error) {
       console.log('error');
       return res.send({error});
     }
-    res.json({status: res.statusCode, data: bothStationCorrect});
+    res.json({status: res.statusCode, data: route});
   });    
 })
 
