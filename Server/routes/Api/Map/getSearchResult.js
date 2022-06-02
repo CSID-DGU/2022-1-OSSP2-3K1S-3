@@ -373,20 +373,21 @@ async function updateRouteTable (sLong, sLati, eLong, eLati, busNum, busStart, b
     const s_bike_lati = sBikeLati;
     const e_bike_long = eBikeLong;
     const e_bike_lati = eBikelati;
+    let connection = await mysql.createConnection({
+        host: process.env.host,
+        user: process.env.user,
+        password: process.env.password,
+        database: process.env.database
+    })
     try {
-        let connection = await mysql.createConnection({
-            host: process.env.host,
-            user: process.env.user,
-            password: process.env.password,
-            database: process.env.database
-        })
-
         let [result] = await connection.query('INSERT INTO route (start_long, end_long, start_lati, end_lati, bus_start , bus_end, s_bike_long, s_bike_lati, e_bike_long, e_bike_lati, bus_num, fs_bike_long, fs_bike_lati, fe_bike_long, fe_bike_lati) VALUES ('+ start_long + "," + end_long+ "," +start_lati+ "," +end_lati+ "," +bus_start+ "," +bus_end+ "," +s_bike_long+ "," +s_bike_lati+ "," + e_bike_long+ "," + e_bike_lati+ ",'" + bus_num+"',"+ fsBikeLong + "," + fsBikeLati + ","+feBikeLong + "," + feBikeLati + ")");
-        connection.end();
         return await result.insertId;
 
     } catch (error) {
         console.log(error);
+    }
+    finally {
+        connection.end();
     }
 } 
 
