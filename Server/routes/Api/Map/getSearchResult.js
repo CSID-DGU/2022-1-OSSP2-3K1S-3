@@ -72,7 +72,7 @@ async function calcBusRoute(sLong, sLati, sName, eLong, eLati, eName, callback) 
     console.log("경로 계산 실행");
     var startPoint = [];
     var endPoint = [];
-    for(var i = 2; i < 15; i++) {
+    for(var i = 10; i < 15; i++) {
         startPoint = getStartBusData(sLati, sLong, i * 0.01);
         endPoint = getEndBusData(eLati, eLong, i * 0.01);
 
@@ -121,6 +121,7 @@ async function calcBusRoute(sLong, sLati, sName, eLong, eLati, eName, callback) 
     var eBusName = endPoint.filter(data => data.name).map(data => data.name);
     eBusName = eBusName.filter((v,i) => eBusName.indexOf(v) === i);
 
+    console.log(sBusName, eBusName);
     var startLocation = startBusNum.sort(function(x,y){
         return x[4] - y[4];
     });
@@ -337,25 +338,25 @@ async function getRecommendData(sLong, sLati, eLong, eLati) {
   var resultSum = 0
   var route_id = [];
   // 반경 시작과 끝에 대한 id를 뽑아낸다.
-  const sql = 'SELECT ( 6371 * acos ( cos ( radians(start_lati) ) * cos( radians(?) ) * cos( radians(start_long) - radians(?) ) + sin ( radians(start_lati) ) * sin( radians(?) ))) AS distance1, ( 6371 * acos ( cos ( radians(end_lati) ) * cos( radians(?) ) * cos( radians(end_long) - radians(?) ) + sin ( radians(end_lati) ) * sin( radians(?) ))) AS distance2, id FROM route HAVING (distance1 <= 0.1 AND distance2 <= 0.1) ORDER BY id'
-  try {
-    let connection = await mysql.createConnection({
-        host: process.env.host,
-        user: process.env.user,
-        password: process.env.password,
-        database: process.env.database
-    })
+//   const sql = 'SELECT ( 6371 * acos ( cos ( radians(start_lati) ) * cos( radians(?) ) * cos( radians(start_long) - radians(?) ) + sin ( radians(start_lati) ) * sin( radians(?) ))) AS distance1, ( 6371 * acos ( cos ( radians(end_lati) ) * cos( radians(?) ) * cos( radians(end_long) - radians(?) ) + sin ( radians(end_lati) ) * sin( radians(?) ))) AS distance2, id FROM route HAVING (distance1 <= 0.1 AND distance2 <= 0.1) ORDER BY id'
+//   try {
+//     let connection = await mysql.createConnection({
+//         host: process.env.host,
+//         user: process.env.user,
+//         password: process.env.password,
+//         database: process.env.database
+//     })
 
-    let [result] = await connection.query(sql, [input_start_lati, input_start_long, input_start_lati, input_end_lati, input_end_long, input_end_lati]);
-    if (result.length == 0) {
-        return resultSum;
-    }
+//     let [result] = await connection.query(sql, [input_start_lati, input_start_long, input_start_lati, input_end_lati, input_end_long, input_end_lati]);
+//     if (result.length == 0) {
+//         return resultSum;
+//     }
   
     // return await result;
 
-} catch (error) {
-    console.log(error);
-}
+// } catch (error) {
+//     console.log(error);
+// }
 
 }
 
@@ -372,20 +373,20 @@ async function updateRouteTable (sLong, sLati, eLong, eLati, busNum, busStart, b
     const s_bike_lati = sBikeLati;
     const e_bike_long = eBikeLong;
     const e_bike_lati = eBikelati;
+    let connection = await mysql.createConnection({
+        host: process.env.host,
+        user: process.env.user,
+        password: process.env.password,
+        database: process.env.database
+    })
     try {
-        let connection = await mysql.createConnection({
-            host: process.env.host,
-            user: process.env.user,
-            password: process.env.password,
-            database: process.env.database
-        })
-
         let [result] = await connection.query('INSERT INTO route (start_long, end_long, start_lati, end_lati, bus_start , bus_end, s_bike_long, s_bike_lati, e_bike_long, e_bike_lati, bus_num, fs_bike_long, fs_bike_lati, fe_bike_long, fe_bike_lati) VALUES ('+ start_long + "," + end_long+ "," +start_lati+ "," +end_lati+ "," +bus_start+ "," +bus_end+ "," +s_bike_long+ "," +s_bike_lati+ "," + e_bike_long+ "," + e_bike_lati+ ",'" + bus_num+"',"+ fsBikeLong + "," + fsBikeLati + ","+feBikeLong + "," + feBikeLati + ")");
-        return await result.insertId;
-
+        connection.end();
+        return await result.insertId;    
     } catch (error) {
         console.log(error);
     }
+
 } 
 
 module.exports = main;

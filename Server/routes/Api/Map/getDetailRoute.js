@@ -209,14 +209,15 @@ function calcuBike(startLong, startLati, endLong, endLati) {
 
 async function getDB (routeId){
     const id = routeId;
+    let connection = await mysql.createConnection({
+        host: process.env.host,
+        user: process.env.user,
+        password: process.env.password,
+        database: process.env.database
+    })
     try {
-        let connection = await mysql.createConnection({
-            host: process.env.host,
-            user: process.env.user,
-            password: process.env.password,
-            database: process.env.database
-        })
         let [result] = await connection.query('select * from route where id = ' + id);
+        connection.end();
         return await result[0];
 
     } catch (error) {
