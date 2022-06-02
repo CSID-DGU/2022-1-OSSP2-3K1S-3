@@ -217,12 +217,11 @@ async function getDB (routeId){
     })
     try {
         let [result] = await connection.query('select * from route where id = ' + id);
+        connection.end();
         return await result[0];
 
     } catch (error) {
         console.log(error);
-    } finally {
-        connection.end();
     }
 } 
 
