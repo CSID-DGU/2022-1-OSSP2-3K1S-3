@@ -72,7 +72,7 @@ async function calcBusRoute(sLong, sLati, sName, eLong, eLati, eName, callback) 
     console.log("경로 계산 실행");
     var startPoint = [];
     var endPoint = [];
-    for(var i = 2; i < 15; i++) {
+    for(var i = 10; i < 15; i++) {
         startPoint = getStartBusData(sLati, sLong, i * 0.01);
         endPoint = getEndBusData(eLati, eLong, i * 0.01);
 
@@ -121,6 +121,7 @@ async function calcBusRoute(sLong, sLati, sName, eLong, eLati, eName, callback) 
     var eBusName = endPoint.filter(data => data.name).map(data => data.name);
     eBusName = eBusName.filter((v,i) => eBusName.indexOf(v) === i);
 
+    console.log(sBusName, eBusName);
     var startLocation = startBusNum.sort(function(x,y){
         return x[4] - y[4];
     });
@@ -381,6 +382,7 @@ async function updateRouteTable (sLong, sLati, eLong, eLati, busNum, busStart, b
         })
 
         let [result] = await connection.query('INSERT INTO route (start_long, end_long, start_lati, end_lati, bus_start , bus_end, s_bike_long, s_bike_lati, e_bike_long, e_bike_lati, bus_num, fs_bike_long, fs_bike_lati, fe_bike_long, fe_bike_lati) VALUES ('+ start_long + "," + end_long+ "," +start_lati+ "," +end_lati+ "," +bus_start+ "," +bus_end+ "," +s_bike_long+ "," +s_bike_lati+ "," + e_bike_long+ "," + e_bike_lati+ ",'" + bus_num+"',"+ fsBikeLong + "," + fsBikeLati + ","+feBikeLong + "," + feBikeLati + ")");
+        connection.end();
         return await result.insertId;
 
     } catch (error) {
