@@ -1,14 +1,20 @@
 create table route(
-id INT NOT NULL,
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 start_long DOUBLE NOT NULL, 
 start_lati DOUBLE NOT NULL,
 end_long DOUBLE NOT NULL,
 end_lati DOUBLE NOT NULL,
-bus_num INT  NOT NULL,
+bus_num VARCHAR(10) NOT NULL,
 bus_start INT NOT NULL,
 bus_end INT NOT NULL,
-bicycle BOOLEAN NOT NULL,
-PRIMARY KEY(id)
+s_bike_long DOUBLE,
+s_bike_lati DOUBLE,
+e_bike_long DOUBLE,
+e_bike_lati DOUBLE,
+fs_bike_long DOUBLE,
+fs_bike_lati DOUBLE,
+fe_bike_long DOUBLE,
+fe_bike_lati DOUBLE
 );
 
 create table recommend(
@@ -62,4 +68,5 @@ SELECT ( 6371 * acos ( cos ( radians(start_lati) ) * cos( radians(input_start_la
 FROM route 
 HAVING (distance1 <= 0.3 AND distance2 <= 0.3) -- 반경 300m 와 동일할 경우 
 ORDER BY id 
-LIMIT 0 , 300;
+-- LIMIT 0 , 300;
+
