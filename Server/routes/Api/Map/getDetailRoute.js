@@ -217,6 +217,7 @@ async function getDB (routeId){
             database: process.env.database
         })
         let [result] = await connection.query('select * from route where id = ' + id);
+        connection.end();
         return await result[0];
 
     } catch (error) {
