@@ -11,6 +11,8 @@ const router = require('./routes/index');
 const getStation = require('./routes/Api/Main/getStation');
 const db = require("./module/db_connect");
 var details = require("./routes/Api/Recommend/sumofsum");
+var insert_bad = require("./routes/Api/Recommend/insert_bad");
+var insert_good = require("./routes/Api/Recommend/insert_good");
 var app = express();
 
 // view engine setup
@@ -52,39 +54,15 @@ app.post('/Api/Recommend/good', (req, res) => { // 요청시 추천 데이터 �
   const good3 = req.body.good3? 1:0; // true or false
   const good4 = req.body.good4? 1:0; // true or false
   const good = req.body.good; // 문자열
-  conn.query('SELECT * FROM recommend WHERE route_id=?', [route_id], function(err, recommend, fields){
-    if(err) throw err;     
-    if(recommend[0] == null){
-        conn.query('INSERT INTO recommend VALUES(?, ?, ?, ?, ? ,?)',[route_id, route_id, good1, good2, good3, good4], (err, result) => {
-          conn.query('INSERT INTO reco_string VALUES(?, ?, ?)',[1, route_id, good], (err, result) => {
-            if(err) throw err;
-            conn.end(); // DB 접속 종료
-          })
-          if(err) throw err;
-          
-          res.end();
-        })
-      }else{
-        const sql1 = 'UPDATE recommend SET good1 = good1 + ?, good2 = good2 + ?, good3 = good3 + ?, good4 = good4 + ?';
-        const sql2 = 'INSERT INTO reco_string VALUES(?, ?, ?)';
-        conn.query(sql1, [good1, good2, good3, good4], (err, results) => {
-          conn.query('SELECT * FROM reco_string WHERE route_id = ?', [route_id], (err, results) =>{
-            if (err) throw err;
-          a = results[results.length - 1].string_id; // 문자열에 갱신할 값을 가져온다.
-          conn.query(sql2, [a + 1, route_id, good], (err, results) => {
-            if(err) throw err;
-            conn.end(); 
-          }) 
-        })
-          if (err) throw err;
-          res.end();
-        }) 
-      }
-  })
+
+  insert_good.good(route_id, good1, good2, good3, good4, good);
+  res.end();
 })
 
 app.post('/Api/Recommend/bad', (req, res) => { // 요청시 비추천 데이터 값이 갱신된다..
-  const conn = db.conn();
+  
+  console.log("[Recommend bad requestData]", req.body.id, req.body.bad1, req.body.bad2, req.body.bad3, req.body.bad4, req.body.bad);
+
   const route_id = req.body.id; // 경로에 대한 키 값
   const bad1 = req.body.bad1? 1:0; // true or false
   const bad2 = req.body.bad2? 1:0; // true or false
@@ -92,55 +70,30 @@ app.post('/Api/Recommend/bad', (req, res) => { // 요청시 비추천 데이터 
   const bad4 = req.body.bad4? 1:0; // true or false
   const bad = req.body.bad; // 문자열
 
-  conn.query('SELECT * FROM not_recommend WHERE route_id=?', [route_id], function(err, not_recommend, fields){
-    if(err) throw err;
-      if(not_recommend[0] == null){ // 기존 경로에 대한 route_id가 존재하지 않을 때
-        conn.query('INSERT INTO not_recommend VALUES(?, ?, ?, ?, ? ,?)',[route_id, route_id, bad1, bad2, bad3, bad4], (err, result) => {
-          if(err) throw err;
-          conn.query('INSERT INTO notre_string VALUES(?, ?, ?)',[1, route_id, bad], (err, result) => {
-            if(err) throw err;
-            conn.end(); // DB 접속 종료
-          })        
-          res.end();
-        })
-      }else{ // 기존 경로에 대한 route_id가 존재할 때
-        const sql1 = 'UPDATE not_recommend SET bad1 = bad1 + ?, bad2 = bad2 + ?, bad3 = bad3 + ?, bad4 = bad4 + ?';
-        const sql2 = 'INSERT INTO notre_string VALUES(?, ?, ?)';
-        conn.query(sql1, [bad1, bad2, bad3, bad4], (err, results) => {
-          if (err) throw err;
-          conn.query('SELECT * FROM notre_string WHERE route_id = ?', [route_id], (err, results) =>{
-            if (err) throw err;
-          a = results[results.length - 1].string_id; // 문자열에 갱신할 값을 가져온다.
-          conn.query(sql2, [a + 1, route_id, bad], (err, results) => {
-            if(err) throw err;
-            conn.end(); 
-          })
-          })
-        res.end();
-      }) 
-    }
-  })
+  insert_bad.bad(route_id, bad1,bad2,bad3,bad4,bad);
+  res.end();
 })
 
 // API 추천, 비추천 상세보기 상위 2개 항목과 상위 기타항목
 app.post('/Api/Detail', (req, res) => {
   
+ console.log("[Detail id requestData]", req.body.id);
+
  async function test3(id) {
-  a = await details.detail1(id);
+  a = await details.detail1(id); // 추천 데이터 합산하기
   test4(a, id);
   async function test4(a, id) {
-      b = await details.detail2(id);
-      console.log("미친놈 1, 2",a, b);
-      c = [a[0], a[1], a[2], a[3]]; // 추천 값 sorting
+      b = await details.detail2(id); // 비추천 데이터 합산하기
+      c = [a[0], a[1], a[2], a[3]]; // 합산된 추천 값 sorting
       a.sort(function(a, b){
           return b-a;
       })
-      d = [b[0], b[1], b[2], b[3]]; // 비추천 값 sorting
+      d = [b[0], b[1], b[2], b[3]]; // 합산된 비추천 값 sorting
       d.sort(function(a,b){
           return b-a;
       })
 
-      if(a[4].length >= 2){ // 추천 값 기타 항목 추리기
+      if(a[4].length >= 2){ // 합산된 추천 값 기타 항목 추리기
           a1 = a[4][0];
           a2 = a[4][1];
       }
@@ -153,7 +106,7 @@ app.post('/Api/Detail', (req, res) => {
           a2 = null;
       }
 
-      if(b[4].length >= 2){ // 비추천 값 기타 항목 추리기
+      if(b[4].length >= 2){ // 합산된 비추천 값 기타 항목 추리기
           x1 = b[4][0];
           x2 = b[4][1];
       }
@@ -173,7 +126,8 @@ test3(req.body.id);
 
 })
 
-// API 추천 수 
+// API 추천 수
+// 삭제 및 수정할 예정 
 app.get('/Api/reco_number', (req, res) => {
   
   input_start_lati; // 입력받은 시작 위도

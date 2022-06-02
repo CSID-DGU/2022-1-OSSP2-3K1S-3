@@ -35,7 +35,6 @@ async function detail_reco_sum(id, len){
             });
         });
     }
-    console.log("최종 결과_김민수", good_sum[0], good_sum[1], good_sum[2], good_sum[3], good_etc);
     good_sum.push(good_etc);
     return good_sum;
     
@@ -44,12 +43,7 @@ async function detail_reco_sum(id, len){
 
 exports.reco_sum = async function main(idd) {
     id = idd;
-    console.log(id);
-    a= await detail_reco_sum(id, id.length);  // Grace가 출력된다.
-    console.log("제발",a);
-    console.log(a[0],a[4][0], a[4][4]);
-    if(a[4][4] == null){
-        console.log("값 없다.");
-    }
+    // console.log(id);
+    a= await detail_reco_sum(id, id.length); 
     return a;
 }
