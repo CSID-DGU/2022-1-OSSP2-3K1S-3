@@ -148,7 +148,7 @@ async function calcBusRoute(sLong, sLati, sName, eLong, eLati, eName, callback) 
     }
 
     const data = await Promise.all(routeData.map((routeData, index) => callbackToPush(sLong, sLati, eLong, eLati, RD, bikeRoute, eBikeRoute, index, sName, eName)));
-    const data2 = await Promise.all(routeData.map((routeData, index) => callbackNoBikeToPush(sLong, sLati, eLong, eLati,RD, index, sName, eName)));
+    const data2 = await Promise.all(routeData.map((routeData, index) => callbackNoBikeToPush(sLong, sLati, eLong, eLati, RD, index, sName, eName)));
 
     returndata.push(await calculTaxi(sLong, sLati, sName, eLong, eLati, eName));
 
@@ -161,7 +161,7 @@ async function callbackNoBikeToPush(sLong, sLati, eLong, eLati,routeData, index,
         calcWalkingTime(getDistance(routeData[index][1][2], routeData[index][1][3], eLati, eLong));
         var priceData = 2150;
         var esBus = routeData[index][0][6] + "(" + routeData[index][0][0] +"번 버스) -> " + " " + routeData[index][1][6] ;
-        var reco = await getRecommendData(sLong, sLati, eLong, eLati);
+        var reco = await getRecommendData(routeData[index][0][0]);
 
 
         var id = await updateRouteTable(sLong, sLati, eLong, eLati, routeData[index][0][0], routeData[index][0][5], routeData[index][1][5], 0, 0, 0, 0, 0, 0, 0, 0);
@@ -172,7 +172,7 @@ async function callbackToPush (sLong, sLati, eLong, eLati,routeData, bikeRoute, 
 
     var priceData = 2150 + 2000;
     var esBus = routeData[index][0][6] + "(" + routeData[index][0][0] +"번 버스) -> " + " " + routeData[index][1][6] ;
-    var reco = await getRecommendData(sLong, sLati, eLong, eLati);
+    var reco = await getRecommendData(routeData[index][0][0]);
     var timeData = calcuBike(bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude, bikeRoute[index][1][0].longitude, bikeRoute[index][1][0].latitude) +
     calcBusTime(Math.abs(routeData[index][0][5] - routeData[index][1][5]));
 
@@ -197,7 +197,7 @@ function isLocate(startData, endData, startName, endName) {
 
 async function calculTaxi(startLong, startLati, sName, endLong, endLati, eName) {
     //서울시내 최대 속도로 돌았을때, 분당 800미터 가능
-    var reco = await getRecommendData(startLong, startLati, endLong, endLati);
+    var reco = await getRecommendData("taxi");
     var id = await updateRouteTable(startLong, startLati, endLong, endLati,'taxi', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     return {routeID: id, type: "taxi", time: getDistance(startLong, startLati, endLong, endLati) / 300, cost: calcMoney(startLong, startLati, endLong, endLati), route: [sName ,eName], recommend: reco};
 }
@@ -329,34 +329,49 @@ const getEndBikeData = (latitude, longitude, distance) => {
     return endPointBikeStation;
 }
 
-async function getRecommendData(sLong, sLati, eLong, eLati) {
-  const input_start_lati = sLati; // 입력받은 시작 위도
-  const input_start_long = sLong; // 입력받은 시작 경도
-  const input_end_lati = eLati; // 입력받은 끝 위도
-  const input_end_long = eLong; // 입력받은 끝 경도
-
+async function getRecommendData(busNum) {
+  const bus = busNum; // 입력받은 시작 위도
   var resultSum = 0
-  var route_id = [];
+  if(busNum == "taxi") {
+      return 0;
+  }
   // 반경 시작과 끝에 대한 id를 뽑아낸다.
-//   const sql = 'SELECT ( 6371 * acos ( cos ( radians(start_lati) ) * cos( radians(?) ) * cos( radians(start_long) - radians(?) ) + sin ( radians(start_lati) ) * sin( radians(?) ))) AS distance1, ( 6371 * acos ( cos ( radians(end_lati) ) * cos( radians(?) ) * cos( radians(end_long) - radians(?) ) + sin ( radians(end_lati) ) * sin( radians(?) ))) AS distance2, id FROM route HAVING (distance1 <= 0.1 AND distance2 <= 0.1) ORDER BY id'
-//   try {
-//     let connection = await mysql.createConnection({
-//         host: process.env.host,
-//         user: process.env.user,
-//         password: process.env.password,
-//         database: process.env.database
-//     })
+  let connection = await mysql.createConnection({
+    host: process.env.host,
+    user: process.env.user,
+    password: process.env.password,
+    database: process.env.database
+})
+  const sql = 'select sum(good1) AS sg1, sum(good2) AS sg2, sum(good3) AS sg3, sum(good4) AS sg4 from route, recommend where bus_num = ? and route_id = id;'
+  try {
+    let [result] = await connection.query(sql, [bus]);
+    if (result[0].sg1 == null && result[0].sg2 == null && result[0].sg3 == null && result[0].sg4 == null) {
+        console.log(result[0], "result");
+        connection.end();
+        return 0;
+    }
+    else {
+        console.log(result, "result");
+        if(result[0].sg1 != null) {
+            resultSum += result[0].sg1
+        }
+        if(result[0].sg2 != null) {
+            resultSum += result[0].sg2
+        }
+        if(result[0].sg3 != null) {
+            resultSum += result[0].sg3
+        }
+        if(result[0].sg4 != null) {
+            resultSum += result[0].sg4
+        }
+        connection.end();
+        return resultSum;
+    }
 
-//     let [result] = await connection.query(sql, [input_start_lati, input_start_long, input_start_lati, input_end_lati, input_end_long, input_end_lati]);
-//     if (result.length == 0) {
-//         return resultSum;
-//     }
-  
-    // return await result;
-
-// } catch (error) {
-//     console.log(error);
-// }
+} catch (error) {
+    console.log(error);
+    connection.end();
+}
 
 }
 
