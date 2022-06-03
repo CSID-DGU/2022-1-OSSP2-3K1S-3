@@ -171,26 +171,17 @@ app.post('/Api/Detail', (req, res) => {
       var status = res.statusCode
 
       num1 = check1.indexOf(c[0]);
+      check1[num1] = -1; // 중복된 인덱스 방지
       num2 = check1.indexOf(c[1]);
       num3 = check2.indexOf(d[0]);
+      check2[num3] = -1; // 중복된 인덱스 방지
       num4 = check2.indexOf(d[1]);
 
     
-      if(num1 == num2 ){
-        good_check1 ="";
-        good_check2 ="";
-      }
-      else{
       good_check1 = details.detail3(num1); 
       good_check2 = details.detail3(num2); 
-      }
-      if(num3 == num4){
-        bad_check1 ="";
-        bad_check2 ="";
-      }else{
-        bad_check1 = details.detail4(num3); 
-        bad_check2 = details.detail4(num4); 
-      }
+      bad_check1 = details.detail4(num3); 
+      bad_check2 = details.detail4(num4); 
       
       res.json({status: status, data: {good1: c[0], good2: c[1], good_check1: good_check1, good_check2: good_check2, good3: a1, good4: a2, bad1: d[0], bad2: d[1], bad_check1: bad_check1, bad_check2: bad_check2, bad3: x1, bad4: x2}});
   }
