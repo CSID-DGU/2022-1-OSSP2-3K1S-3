@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#292929"
+    android:id="@+id/parent_layout">
+
+
+
+    <ImageView
+        android:id="@+id/centerLine5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/yellow_line4" />
+
+    <ImageView
+        android:id="@+id/centerLine6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/centerLine8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/centerLine5"
+        app:layout_constraintVertical_bias="0.25"
+        app:srcCompat="@drawable/yellow_line4" />
+
+    <ImageView
+        android:id="@+id/centerLine7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        app:layout_constraintBottom_toTopOf="@+id/centerLine8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/centerLine5"
+        app:layout_constraintVertical_bias="0.75"
+        app:srcCompat="@drawable/yellow_line4" />
+
+    <ImageView
+        android:id="@+id/centerLine8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/yellow_line4" />
+
+    <ImageView
+        android:id="@+id/recommendDetail_title"
+        android:layout_width="363dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/centerLine5"
+        app:srcCompat="@drawable/title_box" />
+
+    <ImageView
+        android:id="@+id/recommendDetail"
+        android:layout_width="198dp"
+        android:layout_height="34dp"
+        app:layout_constraintBottom_toBottomOf="@+id/recommendDetail_title"
+        app:layout_constraintEnd_toEndOf="@+id/recommendDetail_title"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="@+id/recommendDetail_title"
+        app:layout_constraintTop_toTopOf="@+id/recommendDetail_title"
+        app:layout_constraintVertical_bias="0.32999998"
+        app:srcCompat="@drawable/less_title1" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#ffffff"
+        app:layout_constraintTop_toBottomOf="@+id/recommendDetail_title"
+        app:layout_constraintBottom_toTopOf="@+id/map"/>
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="234dp"
+        app:layout_constraintBottom_toTopOf="@+id/con_btn"/>
+
+    <ImageButton
+        android:id="@+id/con_btn"
+        android:layout_width="283dp"
+        android:layout_height="59dp"
+        android:background="@drawable/btn_start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
