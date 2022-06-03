@@ -135,6 +135,7 @@ app.post('/Api/Detail', (req, res) => {
       a.sort(function(a, b){
           return b-a;
       })
+
       d = [b[0], b[1], b[2], b[3]]; // 합산된 비추천 값 sorting
       d.sort(function(a,b){
           return b-a;
@@ -146,11 +147,11 @@ app.post('/Api/Detail', (req, res) => {
       }
       else if(a[4].length == 1){
           a1 = a[4][0];
-          a2 = null;
+          a2 = "";
       }
       else{
-          a1 = null;
-          a2 = null;
+          a1 = "";
+          a2 = "";
       }
 
       if(b[4].length >= 2){ // 합산된 비추천 값 기타 항목 추리기
@@ -159,14 +160,14 @@ app.post('/Api/Detail', (req, res) => {
       }
       else if(b[4].length == 1){
           x1 = b[4][0];
-          x2 = null;
+          x2 = "";
       }
       else{
-          x1 = null;
-          x2 = null;
+          x1 = "";
+          x2 = "";
       }
-      
-      res.json({good1: c[0], good2: c[1], good3: a1, good4: a2, bad1: d[0], bad2: d[1], bad3: x1, bad4: x2});
+      var status = res.statusCode
+      res.json({status: status, data: {good1: a[0], good2: a[1], good3: a1, good4: a2, bad1: d[0], bad2: d[1], bad3: x1, bad4: x2}});
   }
 }
 test3(req.body.id);
