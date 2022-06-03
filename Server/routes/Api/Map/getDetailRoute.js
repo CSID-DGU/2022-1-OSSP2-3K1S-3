@@ -26,6 +26,15 @@ async function main(routeId, start, end, callback) {
         returnData.push({name: start + " ~ " + end, time: distanceData[0] / 300, cost: calcMoney(distanceData[0]), type: "taxi"});
         returnData.push({name: end, time: 0, cost: 0, type: "walk"});
     }
+    if (route.bus_num == "walk") {
+        var data = connectOSRM(route.start_long, route.start_lati, route.end_long, route.end_lati);
+        var geoData = encodePolyline();
+
+        returnData.push({route: geoData});
+        returnData.push({name: start, time: 0, cost: 0, type: "walk"});
+        returnData.push({name: start + " ~ " + end, time: calcWalkingTime(getDistance(route.start_lati, route.start_long, route.end_lati, route.end_long)), cost: 0, type: "walk"});
+        returnData.push({name: end, time: 0, cost: 0, type: "walk"});
+    }
     else {
         const startBusStation = route.bus_start;
         const endBusStation = route.bus_end;
