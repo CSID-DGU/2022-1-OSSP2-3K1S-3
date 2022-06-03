@@ -1,27 +1,28 @@
 package com.example.zipgaja;
 
-public class StationInfo
-{
-    private StationData[] data;
+import java.io.Serializable;
 
-    private int status;
+public class SearchList implements Serializable {
+    private RouteData[] data;
 
-    public StationData[] getData ()
+    private String status;
+
+    public RouteData[] getData ()
     {
         return data;
     }
 
-    public void setData (StationData[] data)
+    public void setData (RouteData[] data)
     {
         this.data = data;
     }
 
-    public int getStatus ()
+    public String getStatus ()
     {
         return status;
     }
 
-    public void setStatus (int status)
+    public void setStatus (String status)
     {
         this.status = status;
     }
@@ -32,4 +33,3 @@ public class StationInfo
         return "[data = "+data+", status = "+status+"]";
     }
 }
-

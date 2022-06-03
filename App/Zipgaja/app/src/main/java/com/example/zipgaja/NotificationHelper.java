@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -46,11 +47,16 @@ public class NotificationHelper extends ContextWrapper {
         return notificationManager;
     }
 
-    public NotificationCompat.Builder getChannel1Notification(String title, String text) {
+    public NotificationCompat.Builder getChannel1Notification() {
+
+        Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 101, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         return new NotificationCompat.Builder(getApplicationContext(), channel1ID)
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentTitle("집가자")
-                .setContentText("~~~ 역 막차 시간 0분 전입니다.");
+                .setContentText("이게 보이면 안됨")
+                .setContentIntent(pendingIntent);
     }
 }

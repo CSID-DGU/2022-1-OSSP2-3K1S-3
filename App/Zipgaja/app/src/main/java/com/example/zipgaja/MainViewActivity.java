@@ -1,15 +1,15 @@
 package com.example.zipgaja;
 
-import static android.content.ContentValues.TAG;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -37,20 +37,22 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.IOException;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 
-public class MainViewActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainViewActivity extends AppCompatActivity
+        implements OnMapReadyCallback {
 
     boolean alarm = false;
-    public NotificationHelper notificationHelper;
+    private AlarmManager alarmManager;
+    private GregorianCalendar mCalendar;
+
+    private NotificationManager notificationManager;
+    NotificationCompat.Builder builder;
 
     private GoogleMap mGoogleMap = null;
 
@@ -113,13 +115,12 @@ public class MainViewActivity extends AppCompatActivity implements OnMapReadyCal
             }
         });
 
-        final Geocoder geocoder = new Geocoder(this);
-        // SearchListActivity 로 Activity 전환
+        // GeocoderLoading 으로 Activity 전환
         ImageButton routeSearchBtn = (ImageButton) findViewById(R.id.routeSearchBtn);
         routeSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SearchListActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RouteLoadingActivity.class);
                 // 다음 Activity 에 출발지 목적지 전달
                 String currentAdd = inputCurrent.getText().toString();
                 if (currentAdd.length() == 0) {
@@ -131,50 +132,11 @@ public class MainViewActivity extends AppCompatActivity implements OnMapReadyCal
                     Toast.makeText(getApplicationContext(), "목적지가 입력되지 않았습니다.", Toast.LENGTH_LONG).show();
                     return;
                 }
-                // 출발지 위도/경도 추출
-                List<Address> currentList = null;
-                try {
-                    currentList = geocoder.getFromLocationName(currentAdd, 10);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (currentList != null) {
-                    if (currentList.size() == 0) {
-                        Toast.makeText(getApplicationContext(), "출발지가 올바른 위치가 아닙니다.", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    else {
-                        Address address = currentList.get(0);
-                        double currentLat = address.getLatitude();
-                        double currentLon = address.getLongitude();
-                        System.out.print("currentLat: " + currentLat);
-                        System.out.println("\t\tcurrentLon: " + currentLon);
-                    }
-                }
-                // 목적지 위도/경도 추출
-                List<Address> destinationList = null;
-                try {
-                    destinationList = geocoder.getFromLocationName(destinationAdd, 10);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (destinationList != null) {
-                    if (destinationList.size() == 0) {
-                        Toast.makeText(getApplicationContext(), "목적지가 올바른 위치가 아닙니다.", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    else {
-                        Address address = destinationList.get(0);
-                        double destinationLat = address.getLatitude();
-                        double destinationLon = address.getLongitude();
-                        System.out.print("destinationLat: " + destinationLat);
-                        System.out.println("\tdestinationLon: " + destinationLon);
-                    }
-                }
 
                 // 다음 Activity 에 text 전달
                 intent.putExtra("currentLocation", currentAdd);
                 intent.putExtra("destinationLocation", destinationAdd);
+                intent.putExtra("sortCriterion", "lessTime");
                 startActivity(intent);
                 finish();
             }
@@ -184,16 +146,18 @@ public class MainViewActivity extends AppCompatActivity implements OnMapReadyCal
         ImageButton alarmSetting = (ImageButton) findViewById(R.id.alarmBtn);
         ImageView alarmOff = findViewById(R.id.alarmOff);
 
-        notificationHelper = new NotificationHelper(this);
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        mCalendar = new GregorianCalendar();
+        Log.v("HelloAlarmActivity", mCalendar.getTime().toString());
+
         alarmSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!alarm) {   // alarm off 일 때
                     alarmOff.setImageResource(R.drawable.alarm_1);
                     alarm = true;
-                    String title = "title";
-                    String text = "text";
-                    sendOnChannel1(title, text);
+                    setAlarm();
 
                 } else {
                     alarmOff.setImageResource(R.drawable.alarm_0);
@@ -201,8 +165,6 @@ public class MainViewActivity extends AppCompatActivity implements OnMapReadyCal
                 }
             }
         });
-
-
 
     }
 
@@ -257,7 +219,6 @@ public class MainViewActivity extends AppCompatActivity implements OnMapReadyCal
         Toast.makeText(getApplicationContext(), "Location Service started.\nyou can test using DDMS.", Toast.LENGTH_LONG).show();
     }
 
-
     private class GPSListener implements LocationListener {
         public void onLocationChanged(Location location) {
             // location 이 null 일 경우
@@ -290,67 +251,28 @@ public class MainViewActivity extends AppCompatActivity implements OnMapReadyCal
     public void onMapReady(@NonNull final GoogleMap googleMap) {
         mGoogleMap = googleMap;
 
-        LatLng SEOUL = new LatLng(37.56, 126.97);
+        float lat = 37.56f;
+        float lon = 126.97f;
+
+        LatLng SEOUL = new LatLng(lat, lon);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(SEOUL);
         markerOptions.title("서울");
         markerOptions.snippet("한국의 수도");
         mGoogleMap.addMarker(markerOptions);
 
-        StationThread stationThread = new StationThread(handler, mContext, 37.56f, 126.97f);
-        stationThread.run();
-
-//        // assets 폴더의 파일을 가져오기 위한 AssetManager
-//        AssetManager assetManager = getAssets();
-//
-//        // assets/bikeStation.json 파일을 읽기 위한 InputStream
-//        try {
-//            InputStream is = assetManager.open("jsons/bikeStation.json");
-//            InputStreamReader isr = new InputStreamReader(is);
-//            BufferedReader reader = new BufferedReader(isr);
-//
-//            StringBuffer buffer = new StringBuffer();
-//            String line = reader.readLine();
-//            while (line != null) {
-//                buffer.append(line + "\n");
-//                line = reader.readLine();
-//            }
-//
-//            String jsonData = buffer.toString();
-//
-//            // 읽어온 json 문자열 확인
-//            JSONArray jsonArray = new JSONArray(jsonData);
-//
-//            for (int i = 0;i < jsonArray.length();i++) {
-//                JSONObject jo = jsonArray.getJSONObject(i);
-//
-//                String num = jo.getString("num");
-//                String name = jo.getString("name");
-//                double latitude = Double.parseDouble(jo.getString("latitude"));
-//                double longitude = Double.parseDouble(jo.getString("longitude"));
-//
-//                MarkerOptions bikeStations = new MarkerOptions();
-//                bikeStations.position(new LatLng(latitude, longitude));
-//                bikeStations.title(name);
-//                bikeStations.snippet(num);
-//
-//                BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.bike_station);
-//                Bitmap b = bitmapdraw.getBitmap();
-//                Bitmap smallMarker = Bitmap.createScaledBitmap(b, 200, 200, false);
-//                bikeStations.icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
-//
-//                mGoogleMap.addMarker(bikeStations);
-//            }
-//
-//        } catch (IOException | JSONException e) {
-//            e.printStackTrace();
-//        }
+        mContext = getApplicationContext();
+        StationThread stationThread = new StationThread(handler, mContext, lat, lon);
+        stationThread.run(mGoogleMap);
 
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 16));
     }
 
     public void onMapCurrent(@NonNull final GoogleMap googleMap, double latitude, double longitude) {
         mGoogleMap = googleMap;
+
+        float lat = (float) latitude;
+        float lon = (float) longitude;
 
         LatLng Current = new LatLng(latitude, longitude);
         MarkerOptions markerOptions = new MarkerOptions();
@@ -359,12 +281,34 @@ public class MainViewActivity extends AppCompatActivity implements OnMapReadyCal
         markerOptions.snippet("Current Location");
         mGoogleMap.addMarker(markerOptions);
 
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Current, 13));
+        mContext = getApplicationContext();
+        StationThread stationThread = new StationThread(handler, mContext, lat, lon);
+        stationThread.run(mGoogleMap);
+
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Current, 16));
     }
 
-    private void sendOnChannel1(String title, String text) {
-        NotificationCompat.Builder nb = notificationHelper.getChannel1Notification(title, text);
-        notificationHelper.getManager().notify(1, nb.build());
+    private void setAlarm() {
+        // AlarmReceiver에 값 전달
+        Intent receiverIntent = new Intent(MainViewActivity.this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainViewActivity.this, 0, receiverIntent, 0);
+
+        //임의로 날짜와 시간을 지정
+        String from = "2022-06-01 12:14:00";
+
+        // 날짜 포맷을 바꿈
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date datetime = null;
+        try {
+            datetime = dateFormat.parse(from);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(datetime);
+
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
     }
 
 

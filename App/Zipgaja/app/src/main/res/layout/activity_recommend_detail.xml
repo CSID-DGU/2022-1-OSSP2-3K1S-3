@@ -163,7 +163,7 @@
         android:layout_width="wrap_content"
         android:layout_height="167dp"
         android:padding="0sp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@+id/recommendBox2"
         app:layout_constraintEnd_toEndOf="@+id/recommendBox1"
         app:layout_constraintHorizontal_bias="0.509"
