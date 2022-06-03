@@ -69,6 +69,15 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
 
 /*버스 경로 탐색*/
 async function calcBusRoute(sLong, sLati, sName, eLong, eLati, eName, callback) {
+    //sLong, sLati, eLong, eLati, busNum, busStart, busEnd, sBikeLong, sBikeLati, eBikeLong, eBikelati, fsBikeLong, fsBikeLati, feBikeLong, feBikeLati
+    if (getDistance(sLati, sLong, eLati, eLong) <= 500) {
+        var timeData = calcWalkingTime(getDistance(sLati, sLong, eLati, eLong));
+        var priceData = 0;
+        var id = await updateRouteTable(sLong, sLati, eLong, eLati, "walk", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        returndata.push({routeID: id, busNum: "", type: "walk", time: timeData, cost: priceData, route: [sName, eName], recommend: 0});
+        return;
+    }
+
     console.log("경로 계산 실행");
     var startPoint = [];
     var endPoint = [];
@@ -165,7 +174,7 @@ async function callbackNoBikeToPush(sLong, sLati, eLong, eLati,routeData, index,
 
 
         var id = await updateRouteTable(sLong, sLati, eLong, eLati, routeData[index][0][0], routeData[index][0][5], routeData[index][1][5], 0, 0, 0, 0, 0, 0, 0, 0);
-        returndata.push({routeID: id, type: "bus", time: timeData, cost: priceData, route: [sName, esBus, eName], recommend: reco});
+        returndata.push({routeID: id, busNum: routeData[index][0][0], type: "bus", time: timeData, cost: priceData, route: [sName, esBus, eName], recommend: reco});
         return await id;
 }
 async function callbackToPush (sLong, sLati, eLong, eLati,routeData, bikeRoute, eBikeRoute, index, sName, eName){
@@ -177,7 +186,7 @@ async function callbackToPush (sLong, sLati, eLong, eLati,routeData, bikeRoute, 
     calcBusTime(Math.abs(routeData[index][0][5] - routeData[index][1][5]));
 
     var id = await updateRouteTable(sLong, sLati, eLong, eLati, routeData[index][0][0], routeData[index][0][5], routeData[index][1][5], bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude, bikeRoute[index][1][0].longitude, bikeRoute[index][1][0].latitude, eBikeRoute[index][0][0].longitude, eBikeRoute[index][0][0].latitude, eBikeRoute[index][1][0].longitude, eBikeRoute[index][1][0].latitude);
-    returndata.push({routeID: id, type: "bus", time: timeData, cost: priceData, route: [sName, bikeRoute[index][0][0].name + "(따릉이)", bikeRoute[index][1][0].name + "(따릉이)", esBus,  eBikeRoute[index][0][0].name + "(따릉이)", eBikeRoute[index][1][0].name + "(따릉이)", eName], recommend: reco})
+    returndata.push({routeID: id, busNum: routeData[index][0][0], type: "bus", time: timeData, cost: priceData, route: [sName, bikeRoute[index][0][0].name + "(따릉이)", bikeRoute[index][1][0].name + "(따릉이)", esBus,  eBikeRoute[index][0][0].name + "(따릉이)", eBikeRoute[index][1][0].name + "(따릉이)", eName], recommend: reco})
 
     return await id;
 }
@@ -199,7 +208,7 @@ async function calculTaxi(startLong, startLati, sName, endLong, endLati, eName) 
     //서울시내 최대 속도로 돌았을때, 분당 800미터 가능
     var reco = await getRecommendData("taxi");
     var id = await updateRouteTable(startLong, startLati, endLong, endLati,'taxi', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    return {routeID: id, type: "taxi", time: getDistance(startLong, startLati, endLong, endLati) / 300, cost: calcMoney(startLong, startLati, endLong, endLati), route: [sName ,eName], recommend: reco};
+    return {routeID: id, busNum: "", type: "taxi", time: getDistance(startLong, startLati, endLong, endLati) / 300, cost: calcMoney(startLong, startLati, endLong, endLati), route: [sName ,eName], recommend: 0};
 }
 
 function calcuBike(startLong, startLati, endLong, endLati) {
