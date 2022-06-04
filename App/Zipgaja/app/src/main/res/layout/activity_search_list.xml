@@ -234,7 +234,7 @@
         app:srcCompat="@drawable/thumb" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/arrow"
         android:layout_width="14dp"
         android:layout_height="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/searchList_title"
@@ -250,7 +250,7 @@
         android:layout_height="wrap_content"
         android:text="출발지"
         app:layout_constraintBottom_toBottomOf="@+id/searchList_title"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintEnd_toStartOf="@+id/arrow"
         app:layout_constraintStart_toStartOf="@+id/searchList_title"
         app:layout_constraintTop_toBottomOf="@+id/searchResult"
         app:layout_constraintVertical_bias="0.25" />
@@ -262,7 +262,7 @@
         android:text="목적지"
         app:layout_constraintBottom_toBottomOf="@+id/searchList_title"
         app:layout_constraintEnd_toEndOf="@+id/searchList_title"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintStart_toEndOf="@+id/arrow"
         app:layout_constraintTop_toBottomOf="@+id/searchResult"
         app:layout_constraintVertical_bias="0.25" />
 
@@ -307,7 +307,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/resultBox1"
         app:layout_constraintEnd_toEndOf="@+id/resultBox1"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="@+id/resultBox1"
         app:layout_constraintTop_toTopOf="@+id/resultBox1"
         app:srcCompat="@drawable/ic_bus" />
@@ -318,7 +318,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/resultBox2"
         app:layout_constraintEnd_toEndOf="@+id/resultBox2"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="@+id/resultBox2"
         app:layout_constraintTop_toTopOf="@+id/resultBox2"
         app:srcCompat="@drawable/ic_bus" />
@@ -329,7 +329,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/resultBox3"
         app:layout_constraintEnd_toEndOf="@+id/resultBox3"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="@+id/resultBox3"
         app:layout_constraintTop_toTopOf="@+id/resultBox3"
         app:srcCompat="@drawable/ic_bus" />
@@ -340,7 +340,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/resultBox4"
         app:layout_constraintEnd_toEndOf="@+id/resultBox4"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="@+id/resultBox4"
         app:layout_constraintTop_toTopOf="@+id/resultBox4"
         app:srcCompat="@drawable/ic_bus" />
@@ -351,7 +351,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/resultBox5"
         app:layout_constraintEnd_toEndOf="@+id/resultBox5"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="@+id/resultBox5"
         app:layout_constraintTop_toTopOf="@+id/resultBox5"
         app:srcCompat="@drawable/ic_bus" />
@@ -360,65 +360,130 @@
         android:id="@+id/typeResult1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="typeResult1"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/resultBox1"
         app:layout_constraintEnd_toEndOf="@+id/resultBox1"
-        app:layout_constraintHorizontal_bias="0.429"
-        app:layout_constraintStart_toStartOf="@+id/resultBox1"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/vehicle1"
         app:layout_constraintTop_toTopOf="@+id/resultBox1"
-        app:layout_constraintVertical_bias="0.224" />
+        app:layout_constraintVertical_bias="0.222" />
 
     <TextView
         android:id="@+id/typeResult2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="typeResult2"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/resultBox2"
         app:layout_constraintEnd_toEndOf="@+id/resultBox2"
-        app:layout_constraintHorizontal_bias="0.429"
-        app:layout_constraintStart_toStartOf="@+id/resultBox2"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/vehicle2"
         app:layout_constraintTop_toTopOf="@+id/resultBox2"
-        app:layout_constraintVertical_bias="0.224" />
+        app:layout_constraintVertical_bias="0.222" />
 
     <TextView
         android:id="@+id/typeResult3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="typeResult3"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/resultBox3"
         app:layout_constraintEnd_toEndOf="@+id/resultBox3"
-        app:layout_constraintHorizontal_bias="0.429"
-        app:layout_constraintStart_toStartOf="@+id/resultBox3"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/vehicle3"
         app:layout_constraintTop_toTopOf="@+id/resultBox3"
-        app:layout_constraintVertical_bias="0.224" />
+        app:layout_constraintVertical_bias="0.222" />
 
     <TextView
         android:id="@+id/typeResult4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="typeResult4"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/resultBox4"
         app:layout_constraintEnd_toEndOf="@+id/resultBox4"
-        app:layout_constraintHorizontal_bias="0.429"
-        app:layout_constraintStart_toStartOf="@+id/resultBox4"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/vehicle4"
         app:layout_constraintTop_toTopOf="@+id/resultBox4"
-        app:layout_constraintVertical_bias="0.224" />
+        app:layout_constraintVertical_bias="0.222" />
 
     <TextView
         android:id="@+id/typeResult5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="typeResult5"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/resultBox5"
         app:layout_constraintEnd_toEndOf="@+id/resultBox5"
-        app:layout_constraintHorizontal_bias="0.429"
-        app:layout_constraintStart_toStartOf="@+id/resultBox5"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/vehicle5"
         app:layout_constraintTop_toTopOf="@+id/resultBox5"
-        app:layout_constraintVertical_bias="0.224" />
+        app:layout_constraintVertical_bias="0.222" />
+
+    <TextView
+        android:id="@+id/routeDetail1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="routeDetail1"
+        app:layout_constraintBottom_toBottomOf="@+id/resultBox1"
+        app:layout_constraintEnd_toEndOf="@+id/resultBox1"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/vehicle1"
+        app:layout_constraintTop_toTopOf="@+id/resultBox1"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <TextView
+        android:id="@+id/routeDetail2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="routeDetail2"
+        app:layout_constraintBottom_toBottomOf="@+id/resultBox2"
+        app:layout_constraintEnd_toEndOf="@+id/resultBox2"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/vehicle2"
+        app:layout_constraintTop_toTopOf="@+id/resultBox2"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <TextView
+        android:id="@+id/routeDetail3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="routeDetail3"
+        app:layout_constraintBottom_toBottomOf="@+id/resultBox3"
+        app:layout_constraintEnd_toEndOf="@+id/resultBox3"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/vehicle3"
+        app:layout_constraintTop_toTopOf="@+id/resultBox3"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <TextView
+        android:id="@+id/routeDetail4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="routeDetail4"
+        app:layout_constraintBottom_toBottomOf="@+id/resultBox4"
+        app:layout_constraintEnd_toEndOf="@+id/resultBox4"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/vehicle4"
+        app:layout_constraintTop_toTopOf="@+id/resultBox4"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <TextView
+        android:id="@+id/routeDetail5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="routeDetail5"
+        app:layout_constraintBottom_toBottomOf="@+id/resultBox5"
+        app:layout_constraintEnd_toEndOf="@+id/resultBox5"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/vehicle5"
+        app:layout_constraintTop_toTopOf="@+id/resultBox5"
+        app:layout_constraintVertical_bias="0.6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

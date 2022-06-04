@@ -53,7 +53,7 @@ public class StationThread extends Thread {
     // @Override
     public void run(GoogleMap googleMap) {
         super.start();
-        String BASEURL = "http://ec2-107-23-186-215.compute-1.amazonaws.com:5000/";
+        String BASEURL = " http://ec2-3-39-232-107.ap-northeast-2.compute.amazonaws.com:3000/";
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(30, TimeUnit.SECONDS)
