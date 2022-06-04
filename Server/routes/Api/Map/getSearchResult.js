@@ -16,6 +16,7 @@ function sleep(ms) {
 async function pushData(sLong, sLati, sName, eLong, eLati, eName, type) {
     //버스에 대한 정보
     allroute.push(await calcBusRoute(sLong, sLati, sName, eLong, eLati, eName));
+    return await sLong;
 }
 //type에 따라 낮은가격순/인기순/낮은시간순
 async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
@@ -23,9 +24,8 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
     switch (type) {
     case "lessMoney":
         returndata = [];
-        pushData(sLong, sLati, sName, eLong, eLati, eName, type);
+        await pushData(sLong, sLati, sName, eLong, eLati, eName, type);
         //금액순으로 정렬
-        await sleep(5500);
         var routeData = returndata.sort(function(x,y){
             return x.cost - y.cost;
         });
@@ -36,8 +36,7 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
 
     case "recommend":
         returndata = [];
-        pushData(sLong, sLati, sName, eLong, eLati, eName, type);
-        await sleep(5500);
+        await pushData(sLong, sLati, sName, eLong, eLati, eName, type);
 
         //추천순으로 정렬
         var routeData = returndata.sort(function(x,y){
@@ -51,9 +50,8 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
 
     case "lessTime":
         returndata = [];
-        pushData(sLong, sLati, sName, eLong, eLati, eName, type);
+        await pushData(sLong, sLati, sName, eLong, eLati, eName, type);
         //시간순으로 정렬
-        await sleep(5500);
 
         var routeData = returndata.sort(function(x,y){
             return x.time - y.time;
@@ -81,7 +79,7 @@ async function calcBusRoute(sLong, sLati, sName, eLong, eLati, eName, callback) 
     console.log("경로 계산 실행");
     var startPoint = [];
     var endPoint = [];
-    for(var i = 10; i < 15; i++) {
+    for(var i = 3; i < 15; i++) {
         startPoint = getStartBusData(sLati, sLong, i * 0.01);
         endPoint = getEndBusData(eLati, eLong, i * 0.01);
 
@@ -168,27 +166,30 @@ async function callbackNoBikeToPush(sLong, sLati, eLong, eLati,routeData, index,
     var timeData = calcWalkingTime(getDistance(sLati, sLong, routeData[index][0][2], routeData[index][0][3])) + 
         calcBusTime(Math.abs(routeData[index][0][5] - routeData[index][1][5]))+
         calcWalkingTime(getDistance(routeData[index][1][2], routeData[index][1][3], eLati, eLong));
+        if (timeData < 120) {
         var priceData = 2150;
         var esBus = routeData[index][0][6] + "(" + routeData[index][0][0] +"번 버스) -> " + " " + routeData[index][1][6] ;
         var reco = await getRecommendData(routeData[index][0][0]);
 
-
         var id = await updateRouteTable(sLong, sLati, eLong, eLati, routeData[index][0][0], routeData[index][0][5], routeData[index][1][5], 0, 0, 0, 0, 0, 0, 0, 0);
         returndata.push({routeID: id, busNum: routeData[index][0][0], type: "bus", time: timeData, cost: priceData, route: [sName, esBus, eName], recommend: reco});
         return await id;
+        }
 }
 async function callbackToPush (sLong, sLati, eLong, eLati,routeData, bikeRoute, eBikeRoute, index, sName, eName){
-
     var priceData = 2150 + 2000;
-    var esBus = routeData[index][0][6] + "(" + routeData[index][0][0] +"번 버스) -> " + " " + routeData[index][1][6] ;
-    var reco = await getRecommendData(routeData[index][0][0]);
     var timeData = calcuBike(bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude, bikeRoute[index][1][0].longitude, bikeRoute[index][1][0].latitude) +
     calcBusTime(Math.abs(routeData[index][0][5] - routeData[index][1][5]));
+
+    if (timeData < 120) {
+        var esBus = routeData[index][0][6] + "(" + routeData[index][0][0] +"번 버스) -> " + " " + routeData[index][1][6] ;
+        var reco = await getRecommendData(routeData[index][0][0]);
 
     var id = await updateRouteTable(sLong, sLati, eLong, eLati, routeData[index][0][0], routeData[index][0][5], routeData[index][1][5], bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude, bikeRoute[index][1][0].longitude, bikeRoute[index][1][0].latitude, eBikeRoute[index][0][0].longitude, eBikeRoute[index][0][0].latitude, eBikeRoute[index][1][0].longitude, eBikeRoute[index][1][0].latitude);
     returndata.push({routeID: id, busNum: routeData[index][0][0], type: "bus", time: timeData, cost: priceData, route: [sName, bikeRoute[index][0][0].name + "(따릉이)", bikeRoute[index][1][0].name + "(따릉이)", esBus,  eBikeRoute[index][0][0].name + "(따릉이)", eBikeRoute[index][1][0].name + "(따릉이)", eName], recommend: reco})
 
     return await id;
+    }
 }
 
 function isLocate(startData, endData, startName, endName) {
