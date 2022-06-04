@@ -10,6 +10,8 @@ public class Route implements Serializable {
 
     private String[] routeDetail;
 
+    private String busNum;
+
     private String recommend;
 
     private float time;
@@ -46,6 +48,17 @@ public class Route implements Serializable {
         this.routeDetail = routeDetail;
     }
 
+    public String getBusNum ()
+    {
+        return busNum;
+    }
+
+    public void setBusNum (String busNum)
+    {
+        this.busNum = busNum;
+    }
+
+
     public String getRecommend ()
     {
         return recommend;
@@ -79,6 +92,6 @@ public class Route implements Serializable {
     @Override
     public String toString()
     {
-        return "[routeID = "+routeID+", cost = "+cost+", route = "+ Arrays.toString(routeDetail) +", recommend = "+recommend+", time = "+time+", type = "+type+"]";
+        return "[routeID = "+routeID+", cost = "+cost+", route = "+ Arrays.toString(routeDetail) +", busNum = "+busNum+", recommend = "+recommend+", time = "+time+", type = "+type+"]";
     }
 }

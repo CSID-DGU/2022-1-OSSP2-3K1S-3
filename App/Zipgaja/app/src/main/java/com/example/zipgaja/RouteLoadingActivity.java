@@ -7,9 +7,12 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,6 +29,9 @@ public class RouteLoadingActivity extends AppCompatActivity {
 
 //        Intent intent = new Intent(getApplicationContext(), SearchListActivity.class);
 
+        ImageView loadingGIF = (ImageView)findViewById(R.id.loadingImage);
+        Glide.with(this).load(R.raw.loading).into(loadingGIF);
+
         String currentLocation = "";
         String destinationLocation = "";
         String sortCriterion = "";
@@ -40,12 +46,16 @@ public class RouteLoadingActivity extends AppCompatActivity {
             sortCriterion = extras.getString("sortCriterion");
         }
 
-        if (sortCriterion.equals("최소시간순")) {
-            sortCriterion = "lessTime";
-        } else if (sortCriterion.equals("최소금액순")) {
-            sortCriterion = "lessMoney";
-        } else if (sortCriterion.equals("추천순")) {
-            sortCriterion = "recommend";
+        switch (sortCriterion) {
+            case "최소시간순":
+                sortCriterion = "lessTime";
+                break;
+            case "최소금액순":
+                sortCriterion = "lessMoney";
+                break;
+            case "추천순":
+                sortCriterion = "recommend";
+                break;
         }
 
         final Geocoder geocoder = new Geocoder(this);

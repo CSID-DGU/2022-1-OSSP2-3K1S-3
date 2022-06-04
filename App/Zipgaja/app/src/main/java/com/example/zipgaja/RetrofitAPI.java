@@ -25,4 +25,10 @@ public interface RetrofitAPI {
             @Body JSONObject jsonObject
     );
 
+    @Headers({"Accept: application/json", "Connection: close"})
+    @POST("Api/Detail")
+    Call<Detail> getRecommendDetail(
+            @Body JSONObject jsonObject
+    );
+
 }

@@ -23,7 +23,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="MAPS_API_KEY" />     <!-- ${MAPS_API_KEY} -->  <!-- @string/maps_api_key -->
+            android:value="api_key" />     <!-- ${MAPS_API_KEY} -->  <!-- @string/maps_api_key -->
 
 
         <uses-library
@@ -43,7 +43,7 @@
         <activity android:name=".SearchListActivity" />
         <activity android:name=".RecommendDetailActivity" />
         <activity android:name=".RouteLoadingActivity" />
-        <activity android:name=".LessActivity"/>
+        <activity android:name=".DetailLoadingActivity" />
         <receiver android:name=".AlarmReceiver"
             android:enabled="true"
             android:exported="false">

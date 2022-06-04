@@ -1,5 +1,6 @@
 package com.example.zipgaja;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +25,7 @@ public class SearchListActivity extends AppCompatActivity {
     Handler handler;
     Context mContext;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +97,15 @@ public class SearchListActivity extends AppCompatActivity {
         TextView typeResult3 = findViewById(R.id.typeResult3);
         TextView typeResult4 = findViewById(R.id.typeResult4);
         TextView typeResult5 = findViewById(R.id.typeResult5);
+        TextView routeDetail1 = findViewById(R.id.routeDetail1);
+        TextView routeDetail2 = findViewById(R.id.routeDetail2);
+        TextView routeDetail3 = findViewById(R.id.routeDetail3);
+        TextView routeDetail4 = findViewById(R.id.routeDetail4);
+        TextView routeDetail5 = findViewById(R.id.routeDetail5);
+        ImageButton recommendBtn1 = findViewById(R.id.recommendDetailBtn1);
+        ImageButton recommendBtn2 = findViewById(R.id.recommendDetailBtn2);
+        ImageButton recommendBtn3 = findViewById(R.id.recommendDetailBtn3);
+        ImageButton recommendBtn4 = findViewById(R.id.recommendDetailBtn4);
 
         int i = 1;
         // 확인
@@ -104,9 +115,18 @@ public class SearchListActivity extends AppCompatActivity {
             String type = route.getType();
             int time = (int) route.getTime();
             int cost = route.getCost();
+            String busNum = route.getBusNum();
             String[] routeDetail = route.getRouteDetail();
+            StringBuilder routeDetail_String = null;
+            if (routeDetail == null) {
+                Log.e(TAG, "routeDetail이 NULL");
+            } else {
+                for (String s : routeDetail) {
+                    routeDetail_String.append(s).append(" -> ");
+                }
+            }
 
-            Log.e(TAG, routeID + type + time + cost);
+            Log.e(TAG, routeID + type + time + cost + busNum);
 
             if (i == 1) {
                 typeResult1.setText(time + "분 / " + cost + "원");
@@ -115,6 +135,17 @@ public class SearchListActivity extends AppCompatActivity {
                 } else if (type.equals("taxi")) {
                     vehicle1.setImageResource(R.drawable.ic_taxi);
                 }
+                routeDetail1.setText(routeDetail_String);
+
+                recommendBtn1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(), DetailLoadingActivity.class);
+                        intent.putExtra("busNum", busNum);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
             } else if (i == 2) {
                 typeResult2.setText(time + "분 / " + cost + "원");
                 if (type.equals("bus")) {
@@ -122,6 +153,17 @@ public class SearchListActivity extends AppCompatActivity {
                 } else if (type.equals("taxi")) {
                     vehicle2.setImageResource(R.drawable.ic_taxi);
                 }
+                routeDetail2.setText(routeDetail_String);
+
+                recommendBtn2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(), DetailLoadingActivity.class);
+                        intent.putExtra("busNum", busNum);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
             } else if (i == 3) {
                 typeResult3.setText(time + "분 / " + cost + "원");
                 if (type.equals("bus")) {
@@ -129,6 +171,17 @@ public class SearchListActivity extends AppCompatActivity {
                 } else if (type.equals("taxi")) {
                     vehicle3.setImageResource(R.drawable.ic_taxi);
                 }
+                routeDetail3.setText(routeDetail_String);
+
+                recommendBtn3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(), DetailLoadingActivity.class);
+                        intent.putExtra("busNum", busNum);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
             } else if (i == 4) {
                 typeResult4.setText(time + "분 / " + cost + "원");
                 if (type.equals("bus")) {
@@ -136,6 +189,17 @@ public class SearchListActivity extends AppCompatActivity {
                 } else if (type.equals("taxi")) {
                     vehicle4.setImageResource(R.drawable.ic_taxi);
                 }
+                routeDetail4.setText(routeDetail_String);
+
+                recommendBtn4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(), DetailLoadingActivity.class);
+                        intent.putExtra("busNum", busNum);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
             } else if (i == 5) {
                 typeResult5.setText(time + "분 / " + cost + "원");
                 if (type.equals("bus")) {
@@ -143,6 +207,7 @@ public class SearchListActivity extends AppCompatActivity {
                 } else if (type.equals("taxi")) {
                     vehicle5.setImageResource(R.drawable.ic_taxi);
                 }
+                routeDetail5.setText(routeDetail_String);
             }
 
             i++;
@@ -155,14 +220,7 @@ public class SearchListActivity extends AppCompatActivity {
 
         ImageButton sortBtn = (ImageButton)findViewById(R.id.sortBtn);
         String finalCurrentLocation = currentLocation;
-        float finalCLat = cLat;
-        float finalCLon = cLon;
         String finalDestinationLocation = destinationLocation;
-        float finalDLat = dLat;
-        float finalDLon = dLon;
-        String finalSort = sort;
-        String finalCurrentLocation1 = currentLocation;
-        String finalDestinationLocation1 = destinationLocation;
         sortBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,8 +246,8 @@ public class SearchListActivity extends AppCompatActivity {
 //                                sortCriterion.setText(items[selectedIndex[0]]);
 
                                 Intent intent = new Intent(getApplicationContext(), RouteLoadingActivity.class);
-                                intent.putExtra("currentLocation", finalCurrentLocation1);
-                                intent.putExtra("destinationLocation", finalDestinationLocation1);
+                                intent.putExtra("currentLocation", finalCurrentLocation);
+                                intent.putExtra("destinationLocation", finalDestinationLocation);
                                 intent.putExtra("sortCriterion", items[selectedIndex[0]]);
                                 startActivity(intent);
                             }
@@ -197,45 +255,5 @@ public class SearchListActivity extends AppCompatActivity {
 
             }
         });
-
-
-        ImageButton recommendBtn1 = (ImageButton) findViewById(R.id.recommendDetailBtn1);
-        ImageButton recommendBtn2 = (ImageButton) findViewById(R.id.recommendDetailBtn2);
-        ImageButton recommendBtn3 = (ImageButton) findViewById(R.id.recommendDetailBtn3);
-        ImageButton recommendBtn4 = (ImageButton) findViewById(R.id.recommendDetailBtn4);
-
-        recommendBtn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), RecommendDetailActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        recommendBtn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), RecommendDetailActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        recommendBtn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), RecommendDetailActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        recommendBtn4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), RecommendDetailActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-
     }
 }
