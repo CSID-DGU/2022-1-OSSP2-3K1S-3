@@ -8,13 +8,14 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:usesCleartextTraffic="true"
+        android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Zipgaja"
-        android:usesCleartextTraffic="true">
+        android:theme="@style/Theme.Zipgaja">
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -22,7 +23,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" />     <!-- ${MAPS_API_KEY} -->  <!-- @string/maps_api_key -->
+            android:value="api_key" />     <!-- ${MAPS_API_KEY} -->  <!-- @string/maps_api_key -->
 
 
         <uses-library
@@ -41,7 +42,15 @@
         <activity android:name=".MainViewActivity" />
         <activity android:name=".SearchListActivity" />
         <activity android:name=".RecommendDetailActivity" />
-        <activity android:name=".LessActivity"/>
+        <activity android:name=".RouteLoadingActivity" />
+        <activity android:name=".DetailLoadingActivity" />
+        <receiver android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
     <!-- -->

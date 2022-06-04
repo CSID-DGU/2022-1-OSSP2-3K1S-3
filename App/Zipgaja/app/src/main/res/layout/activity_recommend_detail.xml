@@ -163,12 +163,112 @@
         android:layout_width="wrap_content"
         android:layout_height="167dp"
         android:padding="0sp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@+id/recommendBox2"
         app:layout_constraintEnd_toEndOf="@+id/recommendBox1"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="@+id/recommendBox1"
         app:layout_constraintTop_toBottomOf="@+id/detailBox4"
         app:srcCompat="@drawable/recommend_detailbox" />
+
+    <TextView
+        android:id="@+id/good1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GOOD1"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox1"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox1"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="@+id/detailBox1"
+        app:layout_constraintTop_toTopOf="@+id/detailBox1" />
+
+    <TextView
+        android:id="@+id/good2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GOOD2"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox2"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox2"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="@+id/detailBox2"
+        app:layout_constraintTop_toTopOf="@+id/detailBox2" />
+
+    <TextView
+        android:id="@+id/bad1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BAD1"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox3"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox3"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="@+id/detailBox3"
+        app:layout_constraintTop_toTopOf="@+id/detailBox3" />
+
+    <TextView
+        android:id="@+id/bad2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BAD2"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox4"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox4"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="@+id/detailBox4"
+        app:layout_constraintTop_toTopOf="@+id/detailBox4" />
+
+    <TextView
+        android:id="@+id/etcText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ETC"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox5"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox5"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="@+id/detailBox5"
+        app:layout_constraintTop_toTopOf="@+id/detailBox5"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <TextView
+        android:id="@+id/good1cnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GOOD1CNT"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox1"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox1"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="@+id/detailBox1"
+        app:layout_constraintTop_toTopOf="@+id/detailBox1" />
+
+    <TextView
+        android:id="@+id/good2cnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GOOD2CNT"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox2"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox2"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="@+id/detailBox2"
+        app:layout_constraintTop_toTopOf="@+id/detailBox2" />
+
+    <TextView
+        android:id="@+id/bad1cnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BAD1CNT"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox3"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox3"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="@+id/detailBox3"
+        app:layout_constraintTop_toTopOf="@+id/detailBox3" />
+
+    <TextView
+        android:id="@+id/bad2cnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BAD2CNT"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox4"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox4"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="@+id/detailBox4"
+        app:layout_constraintTop_toTopOf="@+id/detailBox4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
