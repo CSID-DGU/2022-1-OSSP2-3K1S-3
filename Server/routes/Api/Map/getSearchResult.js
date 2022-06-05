@@ -42,7 +42,6 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
         callback(undefined,{   
             routeData: routeData
         });
-        connection.end();
         return;
 
     case "recommend":
@@ -57,7 +56,6 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
         callback(undefined,{   
             routeData: routeData
         });
-        connection.end();
         return;
 
     case "lessTime":
@@ -72,9 +70,7 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
         callback(undefined,{   
             routeData: routeData
         });
-        connection.end();
         return;
-
     }
 }
 
