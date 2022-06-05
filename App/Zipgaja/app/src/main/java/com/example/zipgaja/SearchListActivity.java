@@ -303,6 +303,7 @@ public class SearchListActivity extends AppCompatActivity {
                 for (String s : routeDetail) {
                     routeDetail_String += " → " + s;
                 }
+                routeDetail_String += "(도착)";
             }
 
             if (i == 1) {
@@ -333,6 +334,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -378,6 +380,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -423,6 +426,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -468,6 +472,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -513,6 +518,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -558,6 +564,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -603,6 +610,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -648,6 +656,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -693,6 +702,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -738,6 +748,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -783,6 +794,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -828,6 +840,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -873,6 +886,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -918,6 +932,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -963,6 +978,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1008,6 +1024,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1053,6 +1070,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1098,6 +1116,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1143,6 +1162,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1188,6 +1208,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1233,6 +1254,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1278,6 +1300,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1323,6 +1346,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1368,6 +1392,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1413,6 +1438,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1458,6 +1484,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1503,6 +1530,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1548,6 +1576,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1593,6 +1622,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1638,6 +1668,7 @@ public class SearchListActivity extends AppCompatActivity {
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
+                        intent.putExtra("sort", finalSort);
                         startActivity(intent);
                         finish();
                     }
@@ -1696,5 +1727,13 @@ public class SearchListActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), MainViewActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

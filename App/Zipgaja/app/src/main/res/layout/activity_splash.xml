@@ -90,6 +90,7 @@
         android:id="@+id/zipgaja_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfbold"
         android:text="집가자"
         android:textColor="#FFFFFF"
         android:textSize="96sp"

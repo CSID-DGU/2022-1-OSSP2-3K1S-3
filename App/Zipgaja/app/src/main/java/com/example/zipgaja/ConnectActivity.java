@@ -7,6 +7,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ConnectActivity extends AppCompatActivity {
+
+    String cLoc = "";
+    String dLoc = "";
+    String sort = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,10 +21,16 @@ public class ConnectActivity extends AppCompatActivity {
         String id = "";
         String start = "";
         String end = "";
+        String sort = "";
 
         id = intent.getStringExtra("id");
         start = intent.getStringExtra("start");
         end = intent.getStringExtra("end");
+        sort = intent.getStringExtra("sort");
+
+        this.cLoc = start;
+        this.dLoc = end;
+        this.sort = sort;
 
         TextView id_tv = findViewById(R.id.id);
         TextView start_tv = findViewById(R.id.start);
@@ -29,5 +40,17 @@ public class ConnectActivity extends AppCompatActivity {
         start_tv.setText("start: " + start);
         end_tv.setText("end: " + end);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), RouteLoadingActivity.class);
+
+        intent.putExtra("currentLocation", this.cLoc);
+        intent.putExtra("destinationLocation", this.dLoc);
+        intent.putExtra("sortCriterion", this.sort);
+        startActivity(intent);
+        finish();
     }
 }
