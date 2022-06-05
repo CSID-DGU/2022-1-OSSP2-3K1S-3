@@ -2,12 +2,22 @@ searchRoute = require('./getLessMRoute');
 const { route } = require('../..');
 const {bus_location} = require('./nightBusData');
 const {bikeStationArr} = require('../Main/bikeStation');
-const mysql = require("mysql2/promise");
+const mysql = require("mysql2");
 
 var startData = [];
 var allroute = [];
 var routeID = 0;
 var returndata = [];
+
+const connection = mysql.createPool({
+    host: process.env.host,
+    user: process.env.user,
+    password: process.env.password,
+    database: process.env.database,
+    connectionLimit: 50
+    })
+
+
 
 function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms))
@@ -32,6 +42,7 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
         callback(undefined,{   
             routeData: routeData
         });
+        connection.end();
         return;
 
     case "recommend":
@@ -46,6 +57,7 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
         callback(undefined,{   
             routeData: routeData
         });
+        connection.end();
         return;
 
     case "lessTime":
@@ -60,6 +72,7 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
         callback(undefined,{   
             routeData: routeData
         });
+        connection.end();
         return;
 
     }
@@ -170,7 +183,7 @@ async function callbackNoBikeToPush(sLong, sLati, eLong, eLati,routeData, index,
         var priceData = 2150;
         var esBus = routeData[index][0][6] + "(" + routeData[index][0][0] +"번 버스) -> " + " " + routeData[index][1][6] ;
         var reco = await getRecommendData(routeData[index][0][0]);
-
+        console.log(reco, "reco");
         var id = await updateRouteTable(sLong, sLati, eLong, eLati, routeData[index][0][0], routeData[index][0][5], routeData[index][1][5], 0, 0, 0, 0, 0, 0, 0, 0);
         returndata.push({routeID: id, busNum: routeData[index][0][0], type: "bus", time: timeData, cost: priceData, route: [sName, esBus, eName], recommend: reco});
         return await id;
@@ -206,7 +219,6 @@ function isLocate(startData, endData, startName, endName) {
 }
 
 async function calculTaxi(startLong, startLati, sName, endLong, endLati, eName) {
-    //서울시내 최대 속도로 돌았을때, 분당 800미터 가능
     var reco = await getRecommendData("taxi");
     var id = await updateRouteTable(startLong, startLati, endLong, endLati,'taxi', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     return {routeID: id, busNum: "", type: "taxi", time: getDistance(startLong, startLati, endLong, endLati) / 300, cost: calcMoney(startLong, startLati, endLong, endLati), route: [sName ,eName], recommend: 0};
@@ -340,28 +352,21 @@ const getEndBikeData = (latitude, longitude, distance) => {
 }
 
 async function getRecommendData(busNum) {
-  const bus = busNum; // 입력받은 시작 위도
+  const bus = busNum; // 버스번호
   var resultSum = 0
   if(busNum == "taxi") {
       return 0;
   }
-  // 반경 시작과 끝에 대한 id를 뽑아낸다.
-  let connection = await mysql.createConnection({
-    host: process.env.host,
-    user: process.env.user,
-    password: process.env.password,
-    database: process.env.database
-})
   const sql = 'select sum(good1) AS sg1, sum(good2) AS sg2, sum(good3) AS sg3, sum(good4) AS sg4 from route, recommend where bus_num = ? and route_id = id;'
+  const promisePool = connection.promise();
   try {
-    let [result] = await connection.query(sql, [bus]);
+    const [result] = await promisePool.query(sql, [bus]);
     if (result[0].sg1 == null && result[0].sg2 == null && result[0].sg3 == null && result[0].sg4 == null) {
-        console.log(result[0], "result");
-        connection.end();
+        console.log(result[0], "result1");
         return 0;
     }
     else {
-        console.log(result, "result");
+        console.log(result, "result2");
         if(result[0].sg1 != null) {
             resultSum += result[0].sg1
         }
@@ -374,19 +379,14 @@ async function getRecommendData(busNum) {
         if(result[0].sg4 != null) {
             resultSum += result[0].sg4
         }
-        connection.end();
         return resultSum;
     }
-
-} catch (error) {
-    console.log(error);
-    connection.end();
+  } catch (err) {
+    return err;
 }
-
 }
 
 async function updateRouteTable (sLong, sLati, eLong, eLati, busNum, busStart, busEnd, sBikeLong, sBikeLati, eBikeLong, eBikelati, fsBikeLong, fsBikeLati, feBikeLong, feBikeLati, callback){
-
     const start_long = sLong;
     const start_lati = sLati;
     const end_long = eLong;
@@ -398,18 +398,14 @@ async function updateRouteTable (sLong, sLati, eLong, eLati, busNum, busStart, b
     const s_bike_lati = sBikeLati;
     const e_bike_long = eBikeLong;
     const e_bike_lati = eBikelati;
-    let connection = await mysql.createConnection({
-        host: process.env.host,
-        user: process.env.user,
-        password: process.env.password,
-        database: process.env.database
-    })
+
+    const sql = 'INSERT INTO route (start_long, end_long, start_lati, end_lati, bus_start , bus_end, s_bike_long, s_bike_lati, e_bike_long, e_bike_lati, bus_num, fs_bike_long, fs_bike_lati, fe_bike_long, fe_bike_lati) VALUES ('+ start_long + "," + end_long+ "," +start_lati+ "," +end_lati+ "," +bus_start+ "," +bus_end+ "," +s_bike_long+ "," +s_bike_lati+ "," + e_bike_long+ "," + e_bike_lati+ ",'" + bus_num+"',"+ fsBikeLong + "," + fsBikeLati + ","+feBikeLong + "," + feBikeLati + ")";
+    const promisePool = connection.promise();
     try {
-        let [result] = await connection.query('INSERT INTO route (start_long, end_long, start_lati, end_lati, bus_start , bus_end, s_bike_long, s_bike_lati, e_bike_long, e_bike_lati, bus_num, fs_bike_long, fs_bike_lati, fe_bike_long, fe_bike_lati) VALUES ('+ start_long + "," + end_long+ "," +start_lati+ "," +end_lati+ "," +bus_start+ "," +bus_end+ "," +s_bike_long+ "," +s_bike_lati+ "," + e_bike_long+ "," + e_bike_lati+ ",'" + bus_num+"',"+ fsBikeLong + "," + fsBikeLati + ","+feBikeLong + "," + feBikeLati + ")");
-        connection.end();
-        return await result.insertId;    
-    } catch (error) {
-        console.log(error);
+        const [result] = await promisePool.query(sql);
+        return result.insertId;
+      } catch (err) {
+        return err;
     }
 
 } 
