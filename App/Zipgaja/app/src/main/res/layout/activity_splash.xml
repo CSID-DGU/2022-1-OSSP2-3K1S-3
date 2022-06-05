@@ -86,16 +86,19 @@
         app:layout_constraintVertical_bias="0.37"
         app:srcCompat="@drawable/owl" />
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="213dp"
-        android:layout_height="87dp"
+    <TextView
+        android:id="@+id/zipgaja_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="집가자"
+        android:textColor="#FFFFFF"
+        android:textSize="96sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/yellow1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.723"
-        app:srcCompat="@drawable/zipgaja_logo" />
+        app:layout_constraintVertical_bias="0.723" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

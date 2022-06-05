@@ -116,7 +116,7 @@ public class MainViewActivity extends AppCompatActivity
         });
 
         // GeocoderLoading 으로 Activity 전환
-        ImageButton routeSearchBtn = (ImageButton) findViewById(R.id.routeSearchBtn);
+        ImageButton routeSearchBtn = findViewById(R.id.routeSearchBtn);
         routeSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

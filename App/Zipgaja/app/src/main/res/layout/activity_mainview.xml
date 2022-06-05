@@ -61,28 +61,31 @@
         app:layout_constraintTop_toTopOf="@+id/destinationBox"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <ImageView
-        android:id="@+id/searchBox"
+    <ImageButton
+        android:id="@+id/routeSearchBtn"
         android:layout_width="155dp"
         android:layout_height="55dp"
         android:layout_marginTop="20dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.14"
+        app:layout_constraintHorizontal_bias="0.10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/destinationBox"
         app:srcCompat="@drawable/mainview_searchbtn" />
 
-    <ImageButton
-        android:id="@+id/routeSearchBtn"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:backgroundTint="#00FFFFFF"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="@+id/searchBox"
-        app:layout_constraintEnd_toEndOf="@+id/searchBox"
-        app:layout_constraintStart_toStartOf="@+id/searchBox"
-        app:layout_constraintTop_toTopOf="@+id/searchBox"
-        app:srcCompat="@drawable/route_search"
+    <TextView
+        android:id="@+id/routeSearch_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="경로 검색"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/routeSearchBtn"
+        app:layout_constraintEnd_toEndOf="@+id/routeSearchBtn"
+        app:layout_constraintStart_toStartOf="@+id/routeSearchBtn"
+        app:layout_constraintTop_toTopOf="@+id/routeSearchBtn"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <ImageButton
@@ -146,6 +149,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/yellow3"
         tools:context=".MapsActivity" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

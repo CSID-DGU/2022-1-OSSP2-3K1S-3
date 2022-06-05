@@ -53,22 +53,27 @@
         android:layout_width="363dp"
         android:layout_height="97dp"
         android:layout_marginTop="28dp"
+        android:padding="0sp"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/centerLine5"
         app:srcCompat="@drawable/title_box" />
 
-    <ImageView
-        android:id="@+id/recommendDetail"
-        android:layout_width="198dp"
-        android:layout_height="40dp"
+    <TextView
+        android:id="@+id/recommendDetail_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="추천 상세보기"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/recommendDetail_title"
         app:layout_constraintEnd_toEndOf="@+id/recommendDetail_title"
         app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="@+id/recommendDetail_title"
         app:layout_constraintTop_toTopOf="@+id/recommendDetail_title"
-        app:layout_constraintVertical_bias="0.32999998"
-        app:srcCompat="@drawable/recommend_detail" />
+        app:layout_constraintVertical_bias="0.333" />
 
     <ImageView
         android:id="@+id/recommendBox1"
@@ -92,37 +97,43 @@
         app:layout_constraintVertical_bias="0.92"
         app:srcCompat="@drawable/recommend_resultbox" />
 
-    <ImageView
-        android:id="@+id/like"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
+    <TextView
+        android:id="@+id/like_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="추천"
+        android:textColor="#1C3AA9"
+        android:textSize="28sp"
+        android:textStyle="bold"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="@+id/recommendBox1"
         app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="@+id/recommendBox1"
-        app:layout_constraintTop_toBottomOf="@+id/recommendDetail_title"
-        app:srcCompat="@drawable/like" />
+        app:layout_constraintTop_toBottomOf="@+id/recommendDetail_title" />
 
-    <ImageView
-        android:id="@+id/hate"
-        android:layout_width="75dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="176dp"
+    <TextView
+        android:id="@+id/hate_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비추천"
+        android:textColor="#AD0000"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginTop="160dp"
         app:layout_constraintEnd_toEndOf="@+id/recommendBox1"
         app:layout_constraintHorizontal_bias="0.084"
         app:layout_constraintStart_toStartOf="@+id/recommendBox1"
-        app:layout_constraintTop_toBottomOf="@+id/like"
-        app:srcCompat="@drawable/hate" />
+        app:layout_constraintTop_toBottomOf="@+id/like_tv" />
 
     <ImageView
         android:id="@+id/detailBox1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/recommendBox1"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="@+id/recommendBox1"
-        app:layout_constraintTop_toBottomOf="@+id/like"
+        app:layout_constraintTop_toBottomOf="@+id/like_tv"
         app:srcCompat="@drawable/recommend_detailbox" />
 
     <ImageView
@@ -140,11 +151,11 @@
         android:id="@+id/detailBox3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/recommendBox1"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="@+id/recommendBox1"
-        app:layout_constraintTop_toBottomOf="@+id/hate"
+        app:layout_constraintTop_toBottomOf="@+id/hate_tv"
         app:srcCompat="@drawable/recommend_detailbox" />
 
     <ImageView
@@ -169,7 +180,7 @@
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="@+id/recommendBox1"
         app:layout_constraintTop_toBottomOf="@+id/detailBox4"
-        app:srcCompat="@drawable/recommend_detailbox" />
+        app:srcCompat="@drawable/recommend_detailbox_big" />
 
     <TextView
         android:id="@+id/good1"

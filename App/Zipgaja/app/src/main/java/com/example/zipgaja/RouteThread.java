@@ -107,28 +107,11 @@ public class RouteThread {
 
                         // 다음 Activity 에 text 및 data 전달
                         intent.putExtra("currentLocation", sName);
-                        intent.putExtra("currentLat", sLati);
-                        intent.putExtra("currentLon", sLong);
                         intent.putExtra("destinationLocation", eName);
-                        intent.putExtra("destinationLat", eLati);
-                        intent.putExtra("destinationLon", eLong);
                         intent.putExtra("sortCriterion", type);
                         intent.putExtra("result", searchList);
                         mContext.startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK));
                         // finish();
-
-                        // 확인
-//                        for (Route route : searchList.getData()[0].getRoute()) {
-//                            Log.d(TAG, "route " + route.toString());
-//                            String routeID = route.getRouteID();
-//                            String type = route.getType();
-//                            int time = (int) route.getTime();
-//                            int cost = route.getCost();
-//                            String[] routeDetail = route.getRouteDetail();
-//
-//                            Log.e(TAG, routeID + type + time + cost );
-
-//                        }
 
                     } else {
                         Log.e(TAG, "요청 실패 / status: " + response.code());

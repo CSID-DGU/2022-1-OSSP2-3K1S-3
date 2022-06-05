@@ -27,8 +27,6 @@ public class RouteLoadingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
 
-//        Intent intent = new Intent(getApplicationContext(), SearchListActivity.class);
-
         ImageView loadingGIF = (ImageView)findViewById(R.id.loadingImage);
         Glide.with(this).load(R.raw.loading).into(loadingGIF);
 
@@ -48,12 +46,15 @@ public class RouteLoadingActivity extends AppCompatActivity {
 
         switch (sortCriterion) {
             case "최소시간순":
+            case "lessTime":
                 sortCriterion = "lessTime";
                 break;
             case "최소금액순":
+            case "lessMoney":
                 sortCriterion = "lessMoney";
                 break;
             case "추천순":
+            case "recommend":
                 sortCriterion = "recommend";
                 break;
         }
@@ -62,6 +63,7 @@ public class RouteLoadingActivity extends AppCompatActivity {
 
         // 출발지 위도/경도 추출
         List<Address> currentList = null;
+        String currentName = "";
         double currentLat = 0;
         double currentLon = 0;
         try {
@@ -70,25 +72,23 @@ public class RouteLoadingActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(TAG, "출발지 위도경도 error");
+            Toast.makeText(getApplicationContext(), "출발지(" + currentLocation + ")가 올바른 위치가 아닙니다.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getApplicationContext(), MainViewActivity.class);
+            startActivity(intent);
+            finish();
+            return;
         }
-//        int i = 0;
-//        while (currentList == null) {
-//            try {
-//                currentList = geocoder.getFromLocationName(currentLocation, 10);
-//                Log.e("DANCE", "출발지 위도경도" + currentList);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                Log.e("DANCE", "출발지 위도경도 error" + i);
-//            }
-//            i++;
-//        }
         if (currentList != null) {
             if (currentList.size() == 0) {
-                Toast.makeText(getApplicationContext(), "출발지가 올바른 위치가 아닙니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "출발지(" + currentLocation + ")가 올바른 위치가 아닙니다.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), MainViewActivity.class);
+                startActivity(intent);
+                finish();
                 return;
             }
             else {
                 Address address = currentList.get(0);
+                currentName = address.getAddressLine(0);
                 currentLat = address.getLatitude();
                 currentLon = address.getLongitude();
                 System.out.print("currentLat: " + currentLat);
@@ -98,6 +98,7 @@ public class RouteLoadingActivity extends AppCompatActivity {
 
         // 목적지 위도/경도 추출
         List<Address> destinationList = null;
+        String destinationName = "";
         double destinationLat = 0;
         double destinationLon = 0;
         try {
@@ -106,25 +107,23 @@ public class RouteLoadingActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(TAG, "목적지 위도경도 error");
+            Toast.makeText(getApplicationContext(), "목적지(" + destinationLocation + ")가 올바른 위치가 아닙니다.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getApplicationContext(), MainViewActivity.class);
+            startActivity(intent);
+            finish();
+            return;
         }
-//        int j = 0;
-//        while (currentList == null) {
-//            try {
-//                destinationList = geocoder.getFromLocationName(destinationLocation, 10);
-//                Log.e("DANCE", "목적지 위도경도" + destinationList);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                Log.e("DANCE", "목적지 위도경도 error" + j);
-//            }
-//            j++;
-//        }
         if (destinationList != null) {
             if (destinationList.size() == 0) {
-                Toast.makeText(getApplicationContext(), "목적지가 올바른 위치가 아닙니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "목적지(" + destinationLocation + ")가 올바른 위치가 아닙니다.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), MainViewActivity.class);
+                startActivity(intent);
+                finish();
                 return;
             }
             else {
                 Address address = destinationList.get(0);
+                destinationName = address.getAddressLine(0);
                 destinationLat = address.getLatitude();
                 destinationLon = address.getLongitude();
                 System.out.print("destinationLat: " + destinationLat);
@@ -137,32 +136,13 @@ public class RouteLoadingActivity extends AppCompatActivity {
         float dLat = (float) destinationLat;
         float dLon = (float) destinationLon;
 
-        Log.e(TAG, currentLocation + " " + cLat + " " + cLon + " " + destinationLocation + " " + dLat + " " + dLon);
+        Log.e(TAG, currentName + " " + cLat + " " + cLon + " " + destinationName + " " + dLat + " " + dLon);
 
 
         mContext = getApplicationContext();
         RouteThread routeThread = new RouteThread(handler, mContext, currentLocation, cLat, cLon, destinationLocation, dLat, dLon, sortCriterion);
+//        RouteThread routeThread = new RouteThread(handler, mContext, currentName, cLat, cLon, destinationName, dLat, dLon, sortCriterion);
         routeThread.run();
-
-//        int i = 0;
-//        while (true) {
-//            if (resultList != null) {
-//                break;
-//            }
-//            System.out.println(i);
-//            i++;
-//        }
-
-        // Log.e(TAG, resultList);
-
-
-
-
-        // 다음 Activity 에 text 및 data 전달
-//        intent.putExtra("currentLocation", currentLocation);
-//        intent.putExtra("destinationLocation", destinationLocation);
-//        startActivity(intent);
-//        finish();
 
     }
 }

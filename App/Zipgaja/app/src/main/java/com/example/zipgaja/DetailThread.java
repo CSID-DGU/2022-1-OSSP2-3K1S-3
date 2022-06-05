@@ -28,11 +28,17 @@ public class DetailThread {
     Handler handler;
 
     String id;
+    String cLoc;
+    String dLoc;
+    String sort;
 
-    public DetailThread(Handler handler, Context mContext, String id) {
+    public DetailThread(Handler handler, Context mContext, String id, String cLoc, String dLoc, String sort) {
         this.handler = handler;
         this.mContext = mContext;
         this.id = id;
+        this.cLoc = cLoc;
+        this.dLoc = dLoc;
+        this.sort = sort;
     }
 
     public void run() {
@@ -94,10 +100,7 @@ public class DetailThread {
                         String bad3 = detail.getData().getBad3();
                         String bad4 = detail.getData().getBad4();
 
-
                         // 다음 Activity 에 text 전달
-//                        intent.putExtra("recommendDetail", detail);
-//                        mContext.startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK));
                         intent.putExtra("good1", good1);
                         intent.putExtra("good2", good2);
                         intent.putExtra("good1cnt", good1cnt);
@@ -110,6 +113,9 @@ public class DetailThread {
                         intent.putExtra("good4", good4);
                         intent.putExtra("bad3", bad3);
                         intent.putExtra("bad4", bad4);
+                        intent.putExtra("currentLoc", cLoc);
+                        intent.putExtra("destinationLoc", dLoc);
+                        intent.putExtra("sort", sort);
                         mContext.startActivity(intent);
                         // finish();
 

@@ -18,6 +18,10 @@ public class RecommendDetailActivity extends AppCompatActivity {
     Handler handler;
     Context mContext;
 
+    String cLoc = "";
+    String dLoc = "";
+    String sort = "";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +39,6 @@ public class RecommendDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-//        Detail result = new Detail();
-//        result = (Detail) intent.getSerializableExtra("recommendDetail");
         String good1S = intent.getStringExtra("good1");
         String good2S = intent.getStringExtra("good2");
         String good1cntS = intent.getStringExtra("good1cnt");
@@ -45,10 +47,17 @@ public class RecommendDetailActivity extends AppCompatActivity {
         String bad2S = intent.getStringExtra("bad2");
         String bad1cntS = intent.getStringExtra("bad1cnt");
         String bad2cntS = intent.getStringExtra("bad2cnt");
-        String good3S = intent.getStringExtra("good3");
-        String good4S = intent.getStringExtra("good4");
-        String bad3S = intent.getStringExtra("bad3");
+        String good3S = intent.getStringExtra("good3") + "\n";
+        String good4S = intent.getStringExtra("good4") + "\n";
+        String bad3S = intent.getStringExtra("bad3") + "\n";
         String bad4S = intent.getStringExtra("bad4");
+        String cLoc = intent.getStringExtra("currentLoc");
+        String dLoc = intent.getStringExtra("destinationLoc");
+        String sort = intent.getStringExtra("sort");
+        this.cLoc = cLoc;
+        this.dLoc = dLoc;
+        this.sort = sort;
+
 
         good1.setText(good1S);
         good2.setText(good2S);
@@ -58,9 +67,19 @@ public class RecommendDetailActivity extends AppCompatActivity {
         bad2.setText(bad2S);
         bad1cnt.setText(bad1cntS + "회");
         bad2cnt.setText(bad2cntS + "회");
-        etc.setText(good3S + "\n" + good4S + "\n" + bad3S + "\n" + bad4S);
+        etc.setText(good3S + good4S + bad3S + bad4S);
 
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), RouteLoadingActivity.class);
 
+        intent.putExtra("currentLocation", this.cLoc);
+        intent.putExtra("destinationLocation", this.dLoc);
+        intent.putExtra("sortCriterion", this.sort);
+        startActivity(intent);
+        finish();
     }
 }
