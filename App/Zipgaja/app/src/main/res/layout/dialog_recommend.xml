@@ -4,12 +4,15 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="5dp">
-    <ImageView
+    <TextView
         android:id="@+id/dialog_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:src="@drawable/dialog_title"
+        android:textSize="25dp"
+        android:text="추천사유"
+        android:textColor="#000000"
+        android:fontFamily="@font/g_sans_ttf_bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -31,6 +34,7 @@
         android:text=""
         android:textColor="#000000"
         android:textSize="18dp"
+        android:fontFamily="@font/g_sans_ttf_medium"
         app:layout_constraintTop_toTopOf="@+id/dialog_text_background1"
         app:layout_constraintLeft_toLeftOf="@+id/dialog_text_background1"
         app:layout_constraintBottom_toBottomOf="@+id/dialog_text_background1"/>
@@ -60,6 +64,7 @@
         android:text=""
         android:textColor="#000000"
         android:textSize="18dp"
+        android:fontFamily="@font/g_sans_ttf_medium"
         app:layout_constraintTop_toTopOf="@+id/dialog_text_background2"
         app:layout_constraintLeft_toLeftOf="@+id/dialog_text_background2"
         app:layout_constraintBottom_toBottomOf="@+id/dialog_text_background2"/>
@@ -88,6 +93,7 @@
         android:text=""
         android:textColor="#000000"
         android:textSize="18dp"
+        android:fontFamily="@font/g_sans_ttf_medium"
         app:layout_constraintTop_toTopOf="@+id/dialog_text_background3"
         app:layout_constraintLeft_toLeftOf="@+id/dialog_text_background3"
         app:layout_constraintBottom_toBottomOf="@+id/dialog_text_background3"/>
@@ -116,6 +122,7 @@
         android:text=""
         android:textColor="#000000"
         android:textSize="18dp"
+        android:fontFamily="@font/g_sans_ttf_medium"
         app:layout_constraintTop_toTopOf="@+id/dialog_text_background4"
         app:layout_constraintLeft_toLeftOf="@+id/dialog_text_background4"
         app:layout_constraintBottom_toBottomOf="@+id/dialog_text_background4"/>
@@ -165,28 +172,39 @@
         android:hint="사유"
         android:textColor="#000000"
         android:textSize="18dp"
+        android:fontFamily="@font/g_sans_ttf_medium"
         app:layout_constraintLeft_toLeftOf="@+id/dialog_text_background6"
         app:layout_constraintRight_toRightOf="@+id/dialog_text_background6"
         app:layout_constraintTop_toTopOf="@+id/dialog_text_background6"
         app:layout_constraintBottom_toBottomOf="@+id/dialog_text_background6"/>
-    <ImageView
+    <TextView
         android:id="@+id/dialog_recom_btn"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="15dp"
-        android:background="@drawable/dialog_rec_recommend_btn"
+        android:background="#1c3aa9"
+        android:text="추천"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:fontFamily="@font/g_sans_ttf_bold"
         app:layout_constraintTop_toBottomOf="@+id/dialog_edit"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/dialog_not_recom_btn"/>
 
-    <ImageView
+    <TextView
         android:id="@+id/dialog_not_recom_btn"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="15dp"
-        android:background="@drawable/dialog_rec_cancle_btn"
+        android:background="#dedede"
+        android:text="취소"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:fontFamily="@font/g_sans_ttf_bold"
         app:layout_constraintTop_toBottomOf="@+id/dialog_edit"
         app:layout_constraintLeft_toRightOf="@+id/dialog_recom_btn"
         app:layout_constraintRight_toRightOf="parent"/>

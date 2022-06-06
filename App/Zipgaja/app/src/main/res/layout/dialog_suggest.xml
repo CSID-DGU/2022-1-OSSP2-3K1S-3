@@ -5,12 +5,15 @@
     android:background="@drawable/dialog_background"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
+    <TextView
         android:id="@+id/dialog_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:src="@drawable/dialog_recommend_title"
+        android:textSize="20dp"
+        android:text="경로 추천"
+        android:textColor="#000000"
+        android:fontFamily="@font/g_sans_ttf_bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -25,22 +28,34 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <ImageButton
+    <TextView
         android:id="@+id/dialog_recom_btn"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/dialog_recommend_btn"
+        android:layout_marginHorizontal="5dp"
+        android:background="#1c3aa9"
+        android:text="추천"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:fontFamily="@font/g_sans_ttf_bold"
         app:layout_constraintTop_toBottomOf="@+id/dialog_text1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/dialog_not_recom_btn"/>
 
-    <ImageButton
+    <TextView
         android:id="@+id/dialog_not_recom_btn"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/dialog_not_recommend_btn"
+        android:layout_marginHorizontal="5dp"
+        android:background="#AD0000"
+        android:text="비추천"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:fontFamily="@font/g_sans_ttf_bold"
         app:layout_constraintTop_toBottomOf="@+id/dialog_text1"
         app:layout_constraintLeft_toRightOf="@+id/dialog_recom_btn"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -53,6 +68,8 @@
         android:layout_marginTop="15dp"
         android:paddingBottom="15dp"
         android:text="다음에 할게요"
+        android:textColor="#b0b0b0"
+        android:fontFamily="@font/g_sans_ttf_bold"
         app:layout_constraintTop_toBottomOf="@+id/dialog_recom_btn"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>

@@ -30,6 +30,8 @@
         android:layout_marginLeft="40dp"
         android:textSize="30dp"
         android:text="출발지"
+        android:textColor="#000000"
+        android:fontFamily="@font/g_sans_ttf_bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/list_detail_icon_image" />
 
@@ -40,6 +42,8 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="20dp"
         android:textSize="15dp"
+        android:textColor="#000000"
+        android:fontFamily="@font/g_sans_ttf_medium"
         android:text="20분 / 2000원"
         app:layout_constraintTop_toBottomOf="@+id/list_detail_name"
         app:layout_constraintLeft_toRightOf="@+id/list_detail_icon_image" />

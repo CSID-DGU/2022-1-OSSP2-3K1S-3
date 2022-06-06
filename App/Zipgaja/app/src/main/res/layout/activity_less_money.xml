@@ -59,10 +59,14 @@
         app:layout_constraintTop_toTopOf="@+id/centerLine5"
         app:srcCompat="@drawable/title_box" />
 
-    <ImageView
+    <TextView
         android:id="@+id/recommendDetail"
         android:layout_width="198dp"
         android:layout_height="34dp"
+        android:text="상세경로"
+        android:textSize="30dp"
+        android:textColor="#000000"
+        android:fontFamily="@font/g_sans_ttf_bold"
         app:layout_constraintBottom_toBottomOf="@+id/recommendDetail_title"
         app:layout_constraintEnd_toEndOf="@+id/recommendDetail_title"
         app:layout_constraintHorizontal_bias="0.08"
@@ -86,11 +90,15 @@
         android:layout_height="234dp"
         app:layout_constraintBottom_toTopOf="@+id/con_btn"/>
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/con_btn"
         android:layout_width="283dp"
         android:layout_height="59dp"
-        android:background="@drawable/btn_start"
+        android:background="#1C3AA9"
+        android:text="출발"
+        android:textSize="30dp"
+        android:textColor="#ffffff"
+        android:fontFamily="@font/g_sans_ttf_bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>

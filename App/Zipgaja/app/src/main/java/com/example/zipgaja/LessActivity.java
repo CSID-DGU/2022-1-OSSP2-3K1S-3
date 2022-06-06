@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -46,12 +47,12 @@ import retrofit2.Response;
 public class LessActivity extends AppCompatActivity implements OnMapReadyCallback  {
     RecyclerView recyclerView = null;
     RecyclerviewItemAdapter recyclerviewItemAdapter = null;
-    ImageButton controlBtn;
+    AppCompatButton controlBtn;
     String state = "start";
     private GoogleMap mGoogleMap = null;
     SupportMapFragment mapFragment;
     ArrayList<LessMoneyResponseData> data;
-
+    TextView recommendDetail;
     String good1Str, good2Str, good3Str, good4Str, bad1Str, bad2Str, bad3Str, bad4Str;
     Dialog suggestDialog, recommendDialog, notRecommendDialog;
 
@@ -61,6 +62,7 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_less_money);
+        recommendDetail = findViewById(R.id.recommendDetail);
         recyclerView = findViewById(R.id.recyclerview);
         controlBtn = findViewById(R.id.con_btn);
         controlBtn.setOnClickListener(view -> {
@@ -74,15 +76,20 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
                 constraintSet.connect(R.id.recyclerview,ConstraintSet.TOP, R.id.map,ConstraintSet.BOTTOM,0);
                 constraintSet.connect(R.id.recyclerview,ConstraintSet.BOTTOM, R.id.con_btn,ConstraintSet.TOP,0);
                 constraintSet.applyTo(constraintLayout);
-                controlBtn.setImageResource(R.drawable.btn_arrive);
+                recommendDetail.setText("경로 안내");
+                controlBtn.setBackgroundColor(Color.parseColor("#AD0000"));
+                controlBtn.setText("도착");
                 state = "arrive";
-                ClientInterface service = ClientModule.getRetrofit("http://ec2-107-23-186-215.compute-1.amazonaws.com:5000").create(ClientInterface.class);
+                ClientInterface service = ClientModule.getRetrofit("http://ec2-3-39-232-107.ap-northeast-2.compute.amazonaws.com:3000").create(ClientInterface.class);
                 Call<DetailResponse> call = service.getDetail(id);// todo 서버 세팅되면 바꿔주세요
                 call.enqueue(new Callback<DetailResponse>() {
                     @Override
                     public void onResponse(Call<DetailResponse> call, Response<DetailResponse> response) {
-                        if(response!=null){
+                        if(response != null){
                             DetailResponse result = response.body();
+                            if(result == null ){
+                                return;
+                            }
                             good1Str = result.getGood1();
                             good2Str = result.getGood2();
                             good3Str = result.getGood3();
@@ -103,7 +110,7 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
             } else {
 
 
-                ImageButton recomBtn, notRecomBtn;
+                TextView recomBtn, notRecomBtn;
                 TextView cancleBtn;
                 recomBtn = suggestDialog.findViewById(R.id.dialog_recom_btn);
                 notRecomBtn = suggestDialog.findViewById(R.id.dialog_not_recom_btn);
@@ -111,7 +118,7 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 recomBtn.setOnClickListener(view1 -> {
                     suggestDialog.dismiss();
-                    ImageView recommendBtn, recCancleBtn;
+                    TextView recommendBtn, recCancleBtn;
                     TextView good1,good2,good3,good4;
                     CheckBox checkBox1,checkBox2,checkBox3,checkBox4;
                     EditText good5;
@@ -137,7 +144,7 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
                     recommendBtn.setOnClickListener(view2 -> {
-                        ClientInterface service = ClientModule.getRetrofit("http://ec2-107-23-186-215.compute-1.amazonaws.com:5000").create(ClientInterface.class);
+                        ClientInterface service = ClientModule.getRetrofit("http://ec2-3-39-232-107.ap-northeast-2.compute.amazonaws.com:3000").create(ClientInterface.class);
                         Call<StatusResponse> call = service.postRecommnedGood(id,
                                 checkBox1.isChecked(),
                                 checkBox2.isChecked(),
@@ -168,7 +175,7 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
                 });
                 notRecomBtn.setOnClickListener(view1 -> {
                     suggestDialog.dismiss();
-                    ImageView notRecmmendBtn, notCancleBtn;
+                    TextView notRecmmendBtn, notCancleBtn;
                     TextView bad1,bad2,bad3,bad4;
                     EditText bad5;
                     CheckBox checkBox1,checkBox2,checkBox3,checkBox4;
@@ -192,7 +199,7 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
                     bad4.setText(bad4Str);
 
                     notRecmmendBtn.setOnClickListener(view2 -> {
-                        ClientInterface service = ClientModule.getRetrofit("http://ec2-107-23-186-215.compute-1.amazonaws.com:5000").create(ClientInterface.class);
+                        ClientInterface service = ClientModule.getRetrofit("http://ec2-3-39-232-107.ap-northeast-2.compute.amazonaws.com:3000").create(ClientInterface.class);
                         Call<StatusResponse> call = service.postRecommnedBad(id,
                                 checkBox1.isChecked(),
                                 checkBox2.isChecked(),
@@ -256,7 +263,7 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(@NonNull final GoogleMap googleMap) {
         mGoogleMap = googleMap;
         //todo ============== 임시 데이터 세팅 서버 구현되면 반영필요
-//        ClientInterface service = ClientModule.getRetrofit("http://ec2-107-23-186-215.compute-1.amazonaws.com:5000").create(ClientInterface.class);
+//        ClientInterface service = ClientModule.getRetrofit("http://ec2-3-39-232-107.ap-northeast-2.compute.amazonaws.com:3000").create(ClientInterface.class);
 //        Call<LessMoneyResponse> call = service.getLessMoney(id);
 //        call.enqueue(new Callback<LessMoneyResponse>() {
 //            @Override

@@ -6,7 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.zipgaja.module.api.LessMoneyResponseData;
+
+import com.example.zipgaja.api.LessMoneyResponseData;
 
 import java.util.ArrayList;
 
@@ -38,7 +39,7 @@ class RecyclerviewItemAdapter extends RecyclerView.Adapter<RecyclerviewItemAdapt
     // UI에 리스트데이터 포지션 별로 데이터 초기화 하는부분
     @Override
     public void onBindViewHolder(RecyclerviewItemAdapter.MyViewHolder holder, final int position) {
-        holder.num.setText(list.get(position).getTimev()+"분 / "+list.get(position).getCost() + "원");
+        holder.num.setText(String.format("%.0f", list.get(position).getTimev())+" 분 / "+list.get(position).getCost() + " 원");
         holder.name.setText(list.get(position).getName());
         switch (list.get(position).getType()){
             case "walk":
