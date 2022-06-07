@@ -140,7 +140,7 @@ public class RouteLoadingActivity extends AppCompatActivity {
 
 
         mContext = getApplicationContext();
-        RouteThread routeThread = new RouteThread(handler, mContext, currentLocation, cLat, cLon, destinationLocation, dLat, dLon, sortCriterion);
+        RouteThread routeThread = new RouteThread(handler, mContext, currentName, currentLocation, cLat, cLon, destinationName, destinationLocation, dLat, dLon, sortCriterion);
 //        RouteThread routeThread = new RouteThread(handler, mContext, currentName, cLat, cLon, destinationName, dLat, dLon, sortCriterion);
         routeThread.run();
 

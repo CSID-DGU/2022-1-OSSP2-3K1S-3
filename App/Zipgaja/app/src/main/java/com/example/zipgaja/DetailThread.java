@@ -116,7 +116,7 @@ public class DetailThread {
                         intent.putExtra("currentLoc", cLoc);
                         intent.putExtra("destinationLoc", dLoc);
                         intent.putExtra("sort", sort);
-                        mContext.startActivity(intent);
+                        mContext.startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK));
                         // finish();
 
                     } else {

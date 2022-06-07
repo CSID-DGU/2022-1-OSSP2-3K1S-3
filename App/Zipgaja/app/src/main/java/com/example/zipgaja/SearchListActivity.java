@@ -32,19 +32,27 @@ public class SearchListActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         String currentLocation = "";
+        String currentAddress = "";
         String destinationLocation = "";
+        String destinationAddress = "";
         String sort = "";
         SearchList result = new SearchList();
 
         currentLocation = intent.getStringExtra("currentLocation");
+        currentAddress = intent.getStringExtra("currentAddress");
         destinationLocation = intent.getStringExtra("destinationLocation");
+        destinationAddress = intent.getStringExtra("destinationAddress");
         sort = intent.getStringExtra("sortCriterion");
         result = (SearchList) intent.getSerializableExtra("result");
 
         TextView current = findViewById(R.id.currentLocation);
+        TextView currentAdd = findViewById(R.id.currentAddress);
         TextView destination = findViewById(R.id.destinationLocation);
+        TextView destinationAdd = findViewById(R.id.destinationAddress);
         current.setText(currentLocation);
+        currentAdd.setText(currentAddress);
         destination.setText(destinationLocation);
+        destinationAdd.setText(destinationAddress);
 
         String finalCurrentLocation = currentLocation;
         String finalDestinationLocation = destinationLocation;

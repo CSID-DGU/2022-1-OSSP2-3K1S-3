@@ -29,22 +29,26 @@ public class RouteThread {
     SearchList searchList;
     Handler handler;
 
+    String sAdd;    // 시작 주소
     float sLong;    // 시작 longitude
     float sLati;    // 시작 latitude
     String sName;   // 시작 장소명
+    String eAdd;    // 도착 주소
     float eLong;    // 도착 longitude
     float eLati;    // 도착 latitude
     String eName;   // 도착 장소명
     String type;    // lessMoney, recommend, lessTime
 
     public RouteThread(Handler handler, Context mContext,
-                       String sName, float sLati, float sLong,
-                       String eName, float eLati, float eLong, String type) {
+                       String sAdd, String sName, float sLati, float sLong,
+                       String eAdd, String eName, float eLati, float eLong, String type) {
         this.handler = handler;
         this.mContext = mContext;
+        this.sAdd = sAdd;
         this.sName = sName;
         this.sLati = sLati;
         this.sLong = sLong;
+        this.eAdd = eAdd;
         this.eName = eName;
         this.eLati = eLati;
         this.eLong = eLong;
@@ -107,7 +111,9 @@ public class RouteThread {
 
                         // 다음 Activity 에 text 및 data 전달
                         intent.putExtra("currentLocation", sName);
+                        intent.putExtra("currentAddress", sAdd);
                         intent.putExtra("destinationLocation", eName);
+                        intent.putExtra("destinationAddress", eAdd);
                         intent.putExtra("sortCriterion", type);
                         intent.putExtra("result", searchList);
                         mContext.startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK));
