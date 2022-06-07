@@ -9,6 +9,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -47,7 +48,10 @@ import java.util.GregorianCalendar;
 public class MainViewActivity extends AppCompatActivity
         implements OnMapReadyCallback {
 
-    boolean alarm = false;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
+    boolean alarm;
     private AlarmManager alarmManager;
     private GregorianCalendar mCalendar;
 
@@ -61,8 +65,6 @@ public class MainViewActivity extends AppCompatActivity
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
     };
-    private final String BASEURL = "http://ec2-107-23-186-215.compute-1.amazonaws.com:5000";
-    private TextView textView;
     Handler handler;
     Context mContext;
 
@@ -116,7 +118,7 @@ public class MainViewActivity extends AppCompatActivity
         });
 
         // GeocoderLoading 으로 Activity 전환
-        ImageButton routeSearchBtn = (ImageButton) findViewById(R.id.routeSearchBtn);
+        ImageButton routeSearchBtn = findViewById(R.id.routeSearchBtn);
         routeSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,25 +145,47 @@ public class MainViewActivity extends AppCompatActivity
         });
 
         // Alarm Setting
+
+        // 1. Shared Preference 초기화
+        pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        editor = pref.edit();
+
+        // 2. 저장해둔 값 불러오기 ("식별값", 초기값)
+        alarm = pref.getBoolean("Alarm_setting", false);
+
+        // 3. 레이아웃 변수 초기화
         ImageButton alarmSetting = (ImageButton) findViewById(R.id.alarmBtn);
         ImageView alarmOff = findViewById(R.id.alarmOff);
+
+        // 4. 앱을 새로 켜면 이전에 저장해둔 값이 표시됨
+        if (!alarm) {
+            alarmOff.setImageResource(R.drawable.alarm_0);
+        } else {
+            alarmOff.setImageResource(R.drawable.alarm_1);
+        }
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         mCalendar = new GregorianCalendar();
         Log.v("HelloAlarmActivity", mCalendar.getTime().toString());
 
+        // 5. 각 버튼 클릭 시 새로운 값 저장
         alarmSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!alarm) {   // alarm off 일 때
                     alarmOff.setImageResource(R.drawable.alarm_1);
                     alarm = true;
+                    editor.putBoolean("Alarm_setting", true);
+                    editor.apply();
                     setAlarm();
 
                 } else {
                     alarmOff.setImageResource(R.drawable.alarm_0);
                     alarm = false;
+                    editor.putBoolean("Alarm_setting", false);
+                    editor.apply();
+                    notificationManager.cancelAll();
                 }
             }
         });
@@ -293,20 +317,8 @@ public class MainViewActivity extends AppCompatActivity
         Intent receiverIntent = new Intent(MainViewActivity.this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainViewActivity.this, 0, receiverIntent, 0);
 
-        //임의로 날짜와 시간을 지정
-        String from = "2022-06-01 12:14:00";
-
-        // 날짜 포맷을 바꿈
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date datetime = null;
-        try {
-            datetime = dateFormat.parse(from);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(datetime);
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 23, 0, 0);
 
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
     }
