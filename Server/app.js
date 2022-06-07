@@ -94,6 +94,9 @@ app.post('/Api/route/detailRoute', (req, res) => {
 
 // 추천 비추천 데이터 API
 app.post('/Api/Recommend/good', (req, res) => { // 요청시 추천 데이터 값이 갱신된다.
+  
+  console.log("[Recommend good requestData]", req.body.id, req.body.good1, req.body.good2, req.body.good3, req.body.good4, req.body.good);
+
   const conn = db.conn();
   const route_id = req.body.id; // 경로에 대한 키 값
   const good1 = req.body.good1? 1:0; // true or false
