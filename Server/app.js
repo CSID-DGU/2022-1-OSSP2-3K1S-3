@@ -131,11 +131,13 @@ app.post('/Api/Detail', (req, res) => {
   test4(a, id);
   async function test4(a, id) {
       b = await details.detail2(id); // 비추천 데이터 합산하기
+      check1 = [a[0], a[1], a[2], a[3]];
       c = [a[0], a[1], a[2], a[3]]; // 합산된 추천 값 sorting
-      a.sort(function(a, b){
+      c.sort(function(a, b){
           return b-a;
       })
 
+      check2 = [b[0], b[1], b[2], b[3]];
       d = [b[0], b[1], b[2], b[3]]; // 합산된 비추천 값 sorting
       d.sort(function(a,b){
           return b-a;
@@ -167,7 +169,21 @@ app.post('/Api/Detail', (req, res) => {
           x2 = "";
       }
       var status = res.statusCode
-      res.json({status: status, data: {good1: a[0], good2: a[1], good3: a1, good4: a2, bad1: d[0], bad2: d[1], bad3: x1, bad4: x2}});
+
+      num1 = check1.indexOf(c[0]);
+      check1[num1] = -1; // 중복된 인덱스 방지
+      num2 = check1.indexOf(c[1]);
+      num3 = check2.indexOf(d[0]);
+      check2[num3] = -1; // 중복된 인덱스 방지
+      num4 = check2.indexOf(d[1]);
+
+    
+      good_check1 = details.detail3(num1); 
+      good_check2 = details.detail3(num2); 
+      bad_check1 = details.detail4(num3); 
+      bad_check2 = details.detail4(num4); 
+      
+      res.json({status: status, data: {good1: c[0], good2: c[1], good_check1: good_check1, good_check2: good_check2, good3: a1, good4: a2, bad1: d[0], bad2: d[1], bad_check1: bad_check1, bad_check2: bad_check2, bad3: x1, bad4: x2}});
   }
 }
 test3(req.body.id);
