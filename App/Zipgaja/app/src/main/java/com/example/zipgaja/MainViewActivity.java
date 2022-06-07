@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -51,6 +52,7 @@ public class MainViewActivity extends AppCompatActivity
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
+    private long backBtnTime = 0;
     boolean alarm;
     private AlarmManager alarmManager;
     private GregorianCalendar mCalendar;
@@ -126,12 +128,12 @@ public class MainViewActivity extends AppCompatActivity
                 // 다음 Activity 에 출발지 목적지 전달
                 String currentAdd = inputCurrent.getText().toString();
                 if (currentAdd.length() == 0) {
-                    Toast.makeText(getApplicationContext(), "출발지가 입력되지 않았습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "출발지가 입력되지 않았습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String destinationAdd = inputDestination.getText().toString();
                 if (destinationAdd.length() == 0) {
-                    Toast.makeText(getApplicationContext(), "목적지가 입력되지 않았습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "목적지가 입력되지 않았습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -175,6 +177,7 @@ public class MainViewActivity extends AppCompatActivity
             public void onClick(View view) {
                 if (!alarm) {   // alarm off 일 때
                     alarmOff.setImageResource(R.drawable.alarm_1);
+                    Toast.makeText(getApplicationContext(), "매일 23시 알람 ON", Toast.LENGTH_SHORT).show();
                     alarm = true;
                     editor.putBoolean("Alarm_setting", true);
                     editor.apply();
@@ -182,6 +185,7 @@ public class MainViewActivity extends AppCompatActivity
 
                 } else {
                     alarmOff.setImageResource(R.drawable.alarm_0);
+                    Toast.makeText(getApplicationContext(), "알람 OFF", Toast.LENGTH_SHORT).show();
                     alarm = false;
                     editor.putBoolean("Alarm_setting", false);
                     editor.apply();
@@ -216,9 +220,9 @@ public class MainViewActivity extends AppCompatActivity
             for (int i = 0;i < grantResults.length; i++) {
                 // 허용됐다면
                 if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getApplicationContext(), "앱 권한 설정 허용", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "앱 권한 설정 허용", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "앱 권한 설정 거부\n해당 앱 이용에 제한이 생길 수 있습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "앱 권한 설정 거부\n해당 앱 이용에 제한이 생길 수 있습니다.", Toast.LENGTH_SHORT).show();
                     // finish();
                 }
             }
@@ -240,13 +244,14 @@ public class MainViewActivity extends AppCompatActivity
                 minTime,
                 minDistance,
                 gpsListener);
-        Toast.makeText(getApplicationContext(), "Location Service started.\nyou can test using DDMS.", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "현재 위치를 찾는 중입니다...", Toast.LENGTH_LONG).show();
     }
 
     private class GPSListener implements LocationListener {
         public void onLocationChanged(Location location) {
             // location 이 null 일 경우
             if (location == null) {
+                Toast.makeText(getApplicationContext(), "위치를 알 수 없습니다.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -254,14 +259,14 @@ public class MainViewActivity extends AppCompatActivity
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
 
-            String msg = "Latitude : " + latitude + "\nLongitude : " + longitude;
-            Log.i("GPSLocationService", msg);
-            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+//            // 확인용
+//            latitude = 37.491208259143;
+//            longitude = 127.14636050729;
 
-            // 지울거지울거지울거지울거
-            latitude = 37.514543;
-            longitude = 127.106597;
-            // 지울거지울거지울거지울거
+            String msg = "Latitude : " + latitude + "\nLongitude : " + longitude;
+//            String msg = "현재 위치를 찾았습니다";
+            Log.i("GPSLocationService", msg);
+            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
 
             onMapCurrent(mGoogleMap, latitude, longitude);
         }
@@ -315,7 +320,8 @@ public class MainViewActivity extends AppCompatActivity
     private void setAlarm() {
         // AlarmReceiver에 값 전달
         Intent receiverIntent = new Intent(MainViewActivity.this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainViewActivity.this, 0, receiverIntent, 0);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainViewActivity.this, 0, receiverIntent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainViewActivity.this, 0, receiverIntent, PendingIntent.FLAG_MUTABLE);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 23, 0, 0);
@@ -323,5 +329,22 @@ public class MainViewActivity extends AppCompatActivity
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
     }
 
+    @Override
+    public void onBackPressed() {
+        /// 기존 뒤로가기 버튼의 기능을 막기위해 주석처리 또는 삭제
+        // super.onBackPressed();
+
+        // 뒤로 가기 두번 누르면 앱 종료
+        long curTime = System.currentTimeMillis();
+        long gapTime = curTime - backBtnTime;
+        if(0 <= gapTime && 2000 >= gapTime) {
+            ActivityCompat.finishAffinity(this);    // 액티비티를 종료하고
+            System.exit(0); // 프로세스를 종료
+        } else {
+            backBtnTime = curTime;
+            Toast.makeText(this,"한 번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
 }

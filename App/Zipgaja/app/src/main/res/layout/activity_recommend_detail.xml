@@ -111,7 +111,7 @@
         app:layout_constraintEnd_toEndOf="@+id/recommendBox1"
         app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="@+id/recommendBox1"
-        app:layout_constraintTop_toBottomOf="@+id/recommendDetail_title" />
+        app:layout_constraintTop_toTopOf="@+id/recommendBox1" />
 
     <TextView
         android:id="@+id/hate_tv"
@@ -176,11 +176,11 @@
         android:id="@+id/detailBox5"
         android:layout_width="wrap_content"
         android:layout_height="167dp"
+        android:layout_marginTop="20dp"
         android:padding="0sp"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@+id/recommendBox2"
         app:layout_constraintEnd_toEndOf="@+id/recommendBox1"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="@+id/recommendBox1"
         app:layout_constraintTop_toBottomOf="@+id/detailBox4"
         app:srcCompat="@drawable/recommend_detailbox_big" />
@@ -252,6 +252,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/gmarketsansttfbold"
         android:text="GOOD1CNT"
+        android:textColor="#1C3AA9"
         app:layout_constraintBottom_toBottomOf="@+id/detailBox1"
         app:layout_constraintEnd_toEndOf="@+id/detailBox1"
         app:layout_constraintHorizontal_bias="0.92"
@@ -264,6 +265,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/gmarketsansttfbold"
         android:text="GOOD2CNT"
+        android:textColor="#1C3AA9"
         app:layout_constraintBottom_toBottomOf="@+id/detailBox2"
         app:layout_constraintEnd_toEndOf="@+id/detailBox2"
         app:layout_constraintHorizontal_bias="0.92"
@@ -276,6 +278,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/gmarketsansttfbold"
         android:text="BAD1CNT"
+        android:textColor="#AD0000"
         app:layout_constraintBottom_toBottomOf="@+id/detailBox3"
         app:layout_constraintEnd_toEndOf="@+id/detailBox3"
         app:layout_constraintHorizontal_bias="0.92"
@@ -288,6 +291,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/gmarketsansttfbold"
         android:text="BAD2CNT"
+        android:textColor="#AD0000"
         app:layout_constraintBottom_toBottomOf="@+id/detailBox4"
         app:layout_constraintEnd_toEndOf="@+id/detailBox4"
         app:layout_constraintHorizontal_bias="0.92"

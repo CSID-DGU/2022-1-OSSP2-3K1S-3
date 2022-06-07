@@ -40,7 +40,9 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         // 알림창 클릭 시 activity 화면 부름
         Intent intent2 = new Intent(context, SplashActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 101, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(context, 101, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 101, intent2, PendingIntent.FLAG_MUTABLE);
+
 
         builder.setContentTitle("집가자")
                 .setContentText("현재 시각 23시! 막차 놓치지 마세요 :)")
