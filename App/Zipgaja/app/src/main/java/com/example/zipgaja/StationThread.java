@@ -53,7 +53,7 @@ public class StationThread extends Thread {
     // @Override
     public void run(GoogleMap googleMap) {
         super.start();
-        String BASEURL = "http://ec2-107-23-186-215.compute-1.amazonaws.com:5000/";
+        String BASEURL = " http://ec2-3-39-232-107.ap-northeast-2.compute.amazonaws.com:3000/";
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(30, TimeUnit.SECONDS)
@@ -117,29 +117,27 @@ public class StationThread extends Thread {
 
                             googleMap.addMarker(bikeStations);
                         }
-
-                        System.out.println(stationInfo.getData().length);
                         // Bus Station 표시
-//                        for (Bus bus : stationInfo.getData()[1].getBus()) {
-//                            Log.d(TAG, "bus " + bus.toString());
-//                            String name = bus.getName();
-//                            String station_name = bus.getStation_name();
-//                            float latitude = bus.getLatitude();
-//                            float longitude = bus.getLongitude();
-//
-//                            MarkerOptions busStations = new MarkerOptions();
-//                            busStations.position(new LatLng(latitude, longitude));
-//                            busStations.title(name);
-//                            busStations.snippet(station_name);
-//
-//                            @SuppressLint("UseCompatLoadingForDrawables")
-//                            BitmapDrawable bitmapdraw = (BitmapDrawable) mContext.getResources().getDrawable(R.drawable.bus_station);
-//                            Bitmap b = bitmapdraw.getBitmap();
-//                            Bitmap smallMarker = Bitmap.createScaledBitmap(b, 120, 232, false);
-//                            busStations.icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
-//
-//                            googleMap.addMarker(busStations);
-//                        }
+                        for (Bus bus : stationInfo.getData()[0].getBus()) {
+                            Log.d(TAG, "bus " + bus.toString());
+                            String name = bus.getName();
+                            String station_name = bus.getStation_name();
+                            float latitude = bus.getLatitude();
+                            float longitude = bus.getLongitude();
+
+                            MarkerOptions busStations = new MarkerOptions();
+                            busStations.position(new LatLng(latitude, longitude));
+                            busStations.title(name);
+                            busStations.snippet(station_name);
+
+                            @SuppressLint("UseCompatLoadingForDrawables")
+                            BitmapDrawable bitmapdraw = (BitmapDrawable) mContext.getResources().getDrawable(R.drawable.bus_station);
+                            Bitmap b = bitmapdraw.getBitmap();
+                            Bitmap smallMarker = Bitmap.createScaledBitmap(b, 45, 93, false);
+                            busStations.icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
+
+                            googleMap.addMarker(busStations);
+                        }
 
                     } else {
                         Log.e(TAG, "요청 실패 / status: " + response.code());

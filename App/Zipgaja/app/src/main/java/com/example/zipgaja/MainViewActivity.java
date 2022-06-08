@@ -9,6 +9,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -47,7 +49,11 @@ import java.util.GregorianCalendar;
 public class MainViewActivity extends AppCompatActivity
         implements OnMapReadyCallback {
 
-    boolean alarm = false;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
+    private long backBtnTime = 0;
+    boolean alarm;
     private AlarmManager alarmManager;
     private GregorianCalendar mCalendar;
 
@@ -61,8 +67,6 @@ public class MainViewActivity extends AppCompatActivity
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
     };
-    private final String BASEURL = "http://ec2-107-23-186-215.compute-1.amazonaws.com:5000";
-    private TextView textView;
     Handler handler;
     Context mContext;
 
@@ -116,7 +120,7 @@ public class MainViewActivity extends AppCompatActivity
         });
 
         // GeocoderLoading 으로 Activity 전환
-        ImageButton routeSearchBtn = (ImageButton) findViewById(R.id.routeSearchBtn);
+        ImageButton routeSearchBtn = findViewById(R.id.routeSearchBtn);
         routeSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,12 +128,12 @@ public class MainViewActivity extends AppCompatActivity
                 // 다음 Activity 에 출발지 목적지 전달
                 String currentAdd = inputCurrent.getText().toString();
                 if (currentAdd.length() == 0) {
-                    Toast.makeText(getApplicationContext(), "출발지가 입력되지 않았습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "출발지가 입력되지 않았습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String destinationAdd = inputDestination.getText().toString();
                 if (destinationAdd.length() == 0) {
-                    Toast.makeText(getApplicationContext(), "목적지가 입력되지 않았습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "목적지가 입력되지 않았습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -143,25 +147,49 @@ public class MainViewActivity extends AppCompatActivity
         });
 
         // Alarm Setting
+
+        // 1. Shared Preference 초기화
+        pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        editor = pref.edit();
+
+        // 2. 저장해둔 값 불러오기 ("식별값", 초기값)
+        alarm = pref.getBoolean("Alarm_setting", false);
+
+        // 3. 레이아웃 변수 초기화
         ImageButton alarmSetting = (ImageButton) findViewById(R.id.alarmBtn);
         ImageView alarmOff = findViewById(R.id.alarmOff);
+
+        // 4. 앱을 새로 켜면 이전에 저장해둔 값이 표시됨
+        if (!alarm) {
+            alarmOff.setImageResource(R.drawable.alarm_0);
+        } else {
+            alarmOff.setImageResource(R.drawable.alarm_1);
+        }
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         mCalendar = new GregorianCalendar();
         Log.v("HelloAlarmActivity", mCalendar.getTime().toString());
 
+        // 5. 각 버튼 클릭 시 새로운 값 저장
         alarmSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!alarm) {   // alarm off 일 때
                     alarmOff.setImageResource(R.drawable.alarm_1);
+                    Toast.makeText(getApplicationContext(), "매일 23시 알람 ON", Toast.LENGTH_SHORT).show();
                     alarm = true;
+                    editor.putBoolean("Alarm_setting", true);
+                    editor.apply();
                     setAlarm();
 
                 } else {
                     alarmOff.setImageResource(R.drawable.alarm_0);
+                    Toast.makeText(getApplicationContext(), "알람 OFF", Toast.LENGTH_SHORT).show();
                     alarm = false;
+                    editor.putBoolean("Alarm_setting", false);
+                    editor.apply();
+                    notificationManager.cancelAll();
                 }
             }
         });
@@ -192,9 +220,9 @@ public class MainViewActivity extends AppCompatActivity
             for (int i = 0;i < grantResults.length; i++) {
                 // 허용됐다면
                 if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getApplicationContext(), "앱 권한 설정 허용", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "앱 권한 설정 허용", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "앱 권한 설정 거부\n해당 앱 이용에 제한이 생길 수 있습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "앱 권한 설정 거부\n해당 앱 이용에 제한이 생길 수 있습니다.", Toast.LENGTH_SHORT).show();
                     // finish();
                 }
             }
@@ -216,13 +244,14 @@ public class MainViewActivity extends AppCompatActivity
                 minTime,
                 minDistance,
                 gpsListener);
-        Toast.makeText(getApplicationContext(), "Location Service started.\nyou can test using DDMS.", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "현재 위치를 찾는 중입니다...", Toast.LENGTH_LONG).show();
     }
 
     private class GPSListener implements LocationListener {
         public void onLocationChanged(Location location) {
             // location 이 null 일 경우
             if (location == null) {
+                Toast.makeText(getApplicationContext(), "위치를 알 수 없습니다.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -230,14 +259,14 @@ public class MainViewActivity extends AppCompatActivity
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
 
-            String msg = "Latitude : " + latitude + "\nLongitude : " + longitude;
-            Log.i("GPSLocationService", msg);
-            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+//            // 확인용
+//            latitude = 37.491208259143;
+//            longitude = 127.14636050729;
 
-            // 지울거지울거지울거지울거
-            latitude = 37.514543;
-            longitude = 127.106597;
-            // 지울거지울거지울거지울거
+            String msg = "Latitude : " + latitude + "\nLongitude : " + longitude;
+//            String msg = "현재 위치를 찾았습니다";
+            Log.i("GPSLocationService", msg);
+            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
 
             onMapCurrent(mGoogleMap, latitude, longitude);
         }
@@ -291,25 +320,31 @@ public class MainViewActivity extends AppCompatActivity
     private void setAlarm() {
         // AlarmReceiver에 값 전달
         Intent receiverIntent = new Intent(MainViewActivity.this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainViewActivity.this, 0, receiverIntent, 0);
-
-        //임의로 날짜와 시간을 지정
-        String from = "2022-06-01 12:14:00";
-
-        // 날짜 포맷을 바꿈
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date datetime = null;
-        try {
-            datetime = dateFormat.parse(from);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainViewActivity.this, 0, receiverIntent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainViewActivity.this, 0, receiverIntent, PendingIntent.FLAG_MUTABLE);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(datetime);
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 23, 0, 0);
 
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
     }
 
+    @Override
+    public void onBackPressed() {
+        /// 기존 뒤로가기 버튼의 기능을 막기위해 주석처리 또는 삭제
+        // super.onBackPressed();
+
+        // 뒤로 가기 두번 누르면 앱 종료
+        long curTime = System.currentTimeMillis();
+        long gapTime = curTime - backBtnTime;
+        if(0 <= gapTime && 2000 >= gapTime) {
+            ActivityCompat.finishAffinity(this);    // 액티비티를 종료하고
+            System.exit(0); // 프로세스를 종료
+        } else {
+            backBtnTime = curTime;
+            Toast.makeText(this,"한 번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
 }

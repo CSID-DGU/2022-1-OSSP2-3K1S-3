@@ -11,21 +11,25 @@
         android:id="@+id/centerLine1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/yellow_line4" />
+        app:srcCompat="@drawable/yellow_line4"
+        tools:ignore="ContentDescription,HardcodedText" />
 
     <ImageView
         android:id="@+id/centerLine2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toTopOf="@+id/centerLine4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/centerLine1"
         app:layout_constraintVertical_bias="0.25"
-        app:srcCompat="@drawable/yellow_line4" />
+        app:srcCompat="@drawable/yellow_line4"
+        tools:ignore="ContentDescription,HardcodedText" />
 
     <ImageView
         android:id="@+id/centerLine3"
@@ -36,235 +40,109 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/centerLine1"
         app:layout_constraintVertical_bias="0.75"
-        app:srcCompat="@drawable/yellow_line4" />
+        app:srcCompat="@drawable/yellow_line4"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/centerLine4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/yellow_line4" />
+        app:srcCompat="@drawable/yellow_line4"
+        tools:ignore="ContentDescription,HardcodedText" />
 
     <ImageView
         android:id="@+id/searchList_title"
         android:layout_width="363dp"
         android:layout_height="97dp"
         android:layout_marginTop="28dp"
+        android:contentDescription="TODO"
+        android:padding="0sp"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/centerLine1"
-        app:srcCompat="@drawable/title_box" />
+        app:srcCompat="@drawable/title_box"
+        tools:ignore="ContentDescription,HardcodedText" />
 
-    <ImageView
-        android:id="@+id/searchResult"
-        android:layout_width="144dp"
-        android:layout_height="40dp"
+    <TextView
+        android:id="@+id/searchResult_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfbold"
+        android:text="검색 결과"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/searchList_title"
         app:layout_constraintEnd_toEndOf="@+id/searchList_title"
-        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="@+id/searchList_title"
         app:layout_constraintTop_toTopOf="@+id/searchList_title"
-        app:layout_constraintVertical_bias="0.333"
-        app:srcCompat="@drawable/search_result" />
+        app:layout_constraintVertical_bias="0.15"
+        tools:ignore="HardcodedText" />
 
     <ImageView
-        android:id="@+id/resultBox1"
-        android:layout_width="363dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="24dp"
-        android:padding="0sp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchList_title"
-        app:srcCompat="@drawable/searchlist_resultbox" />
-
-    <ImageView
-        android:id="@+id/resultBox2"
-        android:layout_width="363dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="24dp"
-        android:padding="0sp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultBox1"
-        app:srcCompat="@drawable/searchlist_resultbox" />
-
-    <ImageView
-        android:id="@+id/resultBox3"
-        android:layout_width="363dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="24dp"
-        android:padding="0sp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultBox2"
-        app:srcCompat="@drawable/searchlist_resultbox" />
-
-    <ImageView
-        android:id="@+id/resultBox4"
-        android:layout_width="363dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="24dp"
-        android:padding="0sp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultBox3"
-        app:srcCompat="@drawable/searchlist_resultbox" />
-
-    <ImageView
-        android:id="@+id/resultBox5"
-        android:layout_width="363dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="24dp"
-        android:padding="0sp"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultBox4"
-        app:srcCompat="@drawable/searchlist_resultbox" />
-
-    <ImageButton
-        android:id="@+id/recommendDetailBtn1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:backgroundTint="#00FFFFFF"
-        android:minHeight="48dp"
-        android:padding="0sp"
-        app:layout_constraintBottom_toBottomOf="@+id/resultBox1"
-        app:layout_constraintEnd_toEndOf="@+id/resultBox1"
-        app:layout_constraintHorizontal_bias="0.923"
-        app:layout_constraintStart_toStartOf="@+id/resultBox1"
-        app:srcCompat="@drawable/searchlist_recommendbtn"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/recommendDetailBtn2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:backgroundTint="#00FFFFFF"
-        android:minHeight="48dp"
-        android:padding="0sp"
-        app:layout_constraintBottom_toBottomOf="@+id/resultBox2"
-        app:layout_constraintEnd_toEndOf="@+id/resultBox2"
-        app:layout_constraintHorizontal_bias="0.92"
-        app:layout_constraintStart_toStartOf="@+id/resultBox2"
-        app:srcCompat="@drawable/searchlist_recommendbtn"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/recommendDetailBtn3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:backgroundTint="#00FFFFFF"
-        android:minHeight="48dp"
-        android:padding="0sp"
-        app:layout_constraintBottom_toBottomOf="@+id/resultBox3"
-        app:layout_constraintEnd_toEndOf="@+id/resultBox3"
-        app:layout_constraintHorizontal_bias="0.92"
-        app:layout_constraintStart_toStartOf="@+id/resultBox3"
-        app:srcCompat="@drawable/searchlist_recommendbtn"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/recommendDetailBtn4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:backgroundTint="#00FFFFFF"
-        android:minHeight="48dp"
-        android:padding="0sp"
-        app:layout_constraintBottom_toBottomOf="@+id/resultBox4"
-        app:layout_constraintEnd_toEndOf="@+id/resultBox4"
-        app:layout_constraintHorizontal_bias="0.92"
-        app:layout_constraintStart_toStartOf="@+id/resultBox4"
-        app:srcCompat="@drawable/searchlist_recommendbtn"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageView
-        android:id="@+id/thumb1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn1"
-        app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn1"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn1"
-        app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn1"
-        app:srcCompat="@drawable/thumb" />
-
-    <ImageView
-        android:id="@+id/thumb2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn2"
-        app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn2"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn2"
-        app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn2"
-        app:srcCompat="@drawable/thumb" />
-
-    <ImageView
-        android:id="@+id/thumb3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn3"
-        app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn3"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn3"
-        app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn3"
-        app:srcCompat="@drawable/thumb" />
-
-    <ImageView
-        android:id="@+id/thumb4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn4"
-        app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn4"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn4"
-        app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn4"
-        app:srcCompat="@drawable/thumb" />
-
-    <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/arrow"
         android:layout_width="14dp"
         android:layout_height="20dp"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="@+id/searchList_title"
         app:layout_constraintEnd_toEndOf="@+id/searchList_title"
         app:layout_constraintStart_toStartOf="@+id/searchList_title"
-        app:layout_constraintTop_toBottomOf="@+id/searchResult"
+        app:layout_constraintTop_toBottomOf="@+id/searchResult_tv"
         app:layout_constraintVertical_bias="0.25"
-        app:srcCompat="@drawable/arrow" />
+        app:srcCompat="@drawable/arrow"
+        tools:ignore="ContentDescription,HardcodedText" />
 
     <TextView
         android:id="@+id/currentLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfmedium"
         android:text="출발지"
-        app:layout_constraintBottom_toBottomOf="@+id/searchList_title"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintEnd_toStartOf="@+id/arrow"
         app:layout_constraintStart_toStartOf="@+id/searchList_title"
-        app:layout_constraintTop_toBottomOf="@+id/searchResult"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintTop_toBottomOf="@+id/searchResult_tv"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/currentAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfmedium"
+        android:text="출발지 상세주소"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/searchList_title"
+        app:layout_constraintEnd_toStartOf="@+id/arrow"
+        app:layout_constraintStart_toStartOf="@+id/searchList_title"
+        app:layout_constraintTop_toBottomOf="@+id/currentLocation" />
 
     <TextView
         android:id="@+id/destinationLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfmedium"
         android:text="목적지"
+        app:layout_constraintEnd_toEndOf="@+id/searchList_title"
+        app:layout_constraintStart_toEndOf="@+id/arrow"
+        app:layout_constraintTop_toBottomOf="@+id/searchResult_tv"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/destinationAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfmedium"
+        android:text="목적지 상세주소"
+        android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="@+id/searchList_title"
         app:layout_constraintEnd_toEndOf="@+id/searchList_title"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/searchResult"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintStart_toEndOf="@+id/arrow"
+        app:layout_constraintTop_toBottomOf="@+id/destinationLocation" />
 
     <ImageButton
         android:id="@+id/sortBtn"
@@ -276,8 +154,9 @@
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="@+id/searchList_title"
         app:layout_constraintTop_toTopOf="@+id/searchList_title"
-        app:layout_constraintVertical_bias="0.292"
-        app:srcCompat="@drawable/sort_btn" />
+        app:layout_constraintVertical_bias="0.15"
+        app:srcCompat="@drawable/sort_btn"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageView
         android:id="@+id/white_tri"
@@ -288,137 +167,3218 @@
         app:layout_constraintHorizontal_bias="0.92"
         app:layout_constraintStart_toStartOf="@+id/sortBtn"
         app:layout_constraintTop_toTopOf="@+id/sortBtn"
-        app:srcCompat="@drawable/white_triangle" />
+        app:srcCompat="@drawable/white_triangle"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/sort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfmedium"
         android:text="최소시간순"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/sortBtn"
         app:layout_constraintEnd_toStartOf="@+id/white_tri"
         app:layout_constraintStart_toStartOf="@+id/sortBtn"
-        app:layout_constraintTop_toTopOf="@+id/sortBtn" />
+        app:layout_constraintTop_toTopOf="@+id/sortBtn"
+        tools:ignore="HardcodedText" />
 
-    <ImageView
-        android:id="@+id/vehicle1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/resultBox1"
-        app:layout_constraintEnd_toEndOf="@+id/resultBox1"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="@+id/resultBox1"
-        app:layout_constraintTop_toTopOf="@+id/resultBox1"
-        app:srcCompat="@drawable/ic_bus" />
+    <ScrollView
+        android:id="@+id/resultScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchList_title"
+        app:layout_constraintVertical_bias="1.0">
 
-    <ImageView
-        android:id="@+id/vehicle2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/resultBox2"
-        app:layout_constraintEnd_toEndOf="@+id/resultBox2"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="@+id/resultBox2"
-        app:layout_constraintTop_toTopOf="@+id/resultBox2"
-        app:srcCompat="@drawable/ic_bus" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/vehicle3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/resultBox3"
-        app:layout_constraintEnd_toEndOf="@+id/resultBox3"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="@+id/resultBox3"
-        app:layout_constraintTop_toTopOf="@+id/resultBox3"
-        app:srcCompat="@drawable/ic_bus" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
 
-    <ImageView
-        android:id="@+id/vehicle4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/resultBox4"
-        app:layout_constraintEnd_toEndOf="@+id/resultBox4"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="@+id/resultBox4"
-        app:layout_constraintTop_toTopOf="@+id/resultBox4"
-        app:srcCompat="@drawable/ic_bus" />
+                <ImageButton
+                    android:id="@+id/resultBox1"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout1"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
 
-    <ImageView
-        android:id="@+id/vehicle5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/resultBox5"
-        app:layout_constraintEnd_toEndOf="@+id/resultBox5"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="@+id/resultBox5"
-        app:layout_constraintTop_toTopOf="@+id/resultBox5"
-        app:srcCompat="@drawable/ic_bus" />
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn1"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox1"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox1"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox1"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-    <TextView
-        android:id="@+id/typeResult1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/resultBox1"
-        app:layout_constraintEnd_toEndOf="@+id/resultBox1"
-        app:layout_constraintHorizontal_bias="0.429"
-        app:layout_constraintStart_toStartOf="@+id/resultBox1"
-        app:layout_constraintTop_toTopOf="@+id/resultBox1"
-        app:layout_constraintVertical_bias="0.224" />
+                <ImageView
+                    android:id="@+id/thumb1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn1"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn1"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn1"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn1"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/typeResult2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/resultBox2"
-        app:layout_constraintEnd_toEndOf="@+id/resultBox2"
-        app:layout_constraintHorizontal_bias="0.429"
-        app:layout_constraintStart_toStartOf="@+id/resultBox2"
-        app:layout_constraintTop_toTopOf="@+id/resultBox2"
-        app:layout_constraintVertical_bias="0.224" />
+                <ImageView
+                    android:id="@+id/vehicle1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox1"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox1"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox1"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox1"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/typeResult3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/resultBox3"
-        app:layout_constraintEnd_toEndOf="@+id/resultBox3"
-        app:layout_constraintHorizontal_bias="0.429"
-        app:layout_constraintStart_toStartOf="@+id/resultBox3"
-        app:layout_constraintTop_toTopOf="@+id/resultBox3"
-        app:layout_constraintVertical_bias="0.224" />
+                <TextView
+                    android:id="@+id/typeResult1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult1"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox1"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle1"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox1"
+                    tools:ignore="HardcodedText" />
 
-    <TextView
-        android:id="@+id/typeResult4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/resultBox4"
-        app:layout_constraintEnd_toEndOf="@+id/resultBox4"
-        app:layout_constraintHorizontal_bias="0.429"
-        app:layout_constraintStart_toStartOf="@+id/resultBox4"
-        app:layout_constraintTop_toTopOf="@+id/resultBox4"
-        app:layout_constraintVertical_bias="0.224" />
+                <TextView
+                    android:id="@+id/routeDetail1"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail1"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn1"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox1"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle1"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult1"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
 
-    <TextView
-        android:id="@+id/typeResult5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/resultBox5"
-        app:layout_constraintEnd_toEndOf="@+id/resultBox5"
-        app:layout_constraintHorizontal_bias="0.429"
-        app:layout_constraintStart_toStartOf="@+id/resultBox5"
-        app:layout_constraintTop_toTopOf="@+id/resultBox5"
-        app:layout_constraintVertical_bias="0.224" />
+                <TextView
+                    android:id="@+id/reNum1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn1"
+                    app:layout_constraintStart_toEndOf="@+id/thumb1"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn1"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox2"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout2"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,HardcodedText,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn2"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox2"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox2"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox2"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn2"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn2"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn2"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn2"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox2"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox2"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox2"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox2"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult2"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox2"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle2"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox2"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail2"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail2"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn2"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox2"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle2"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult2"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn2"
+                    app:layout_constraintStart_toEndOf="@+id/thumb2"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn2"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox3"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout3"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn3"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox3"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox3"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox3"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn3"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn3"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn3"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn3"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox3"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox3"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox3"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox3"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult3"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox3"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle3"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox3"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail3"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail3"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn3"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox3"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle3"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult3"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn3"
+                    app:layout_constraintStart_toEndOf="@+id/thumb3"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn3"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox4"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout4"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn4"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox4"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox4"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox4"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn4"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn4"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn4"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn4"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox4"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox4"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox4"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox4"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult4"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox4"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle4"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox4"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail4"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail4"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn4"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox4"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle4"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult4"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn4"
+                    app:layout_constraintStart_toEndOf="@+id/thumb4"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn4"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox5"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout5"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn5"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox5"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox5"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox5"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/thumb5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn5"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn5"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn5"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn5"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox5"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox5"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox5"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox5"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult5"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox5"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle5"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox5"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail5"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail5"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn5"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox5"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle5"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult5"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn5"
+                    app:layout_constraintStart_toEndOf="@+id/thumb5"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn5"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox6"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout6"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn6"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox6"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox6"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox6"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/thumb6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn6"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn6"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn6"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn6"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox6"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox6"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox6"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox6"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult6"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox6"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle6"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox6"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail6"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail6"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn6"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox6"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle6"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult6"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn6"
+                    app:layout_constraintStart_toEndOf="@+id/thumb6"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn6"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout7"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox7"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout7"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn7"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox7"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox7"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox7"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/thumb7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn7"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn7"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn7"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn7"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox7"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox7"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox7"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox7"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult7"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox7"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle7"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox7"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail7"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail7"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn7"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox7"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle7"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult7"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn7"
+                    app:layout_constraintStart_toEndOf="@+id/thumb7"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn7"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout8"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox8"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout8"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn8"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox8"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox8"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox8"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/thumb8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn8"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn8"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn8"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn8"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox8"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox8"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox8"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox8"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult8"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox8"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle8"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox8"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail8"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail8"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn8"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox8"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle8"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult8"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn8"
+                    app:layout_constraintStart_toEndOf="@+id/thumb8"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn8"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout9"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox9"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout9"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn9"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox9"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox9"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox9"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/thumb9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn9"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn9"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn9"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn9"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox9"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox9"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox9"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox9"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult9"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox9"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle9"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox9"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail9"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail9"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn9"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox9"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle9"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult9"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn9"
+                    app:layout_constraintStart_toEndOf="@+id/thumb9"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn9"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout10"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox10"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout10"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn10"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox10"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox10"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox10"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/thumb10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn10"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn10"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn10"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn10"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox10"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox10"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox10"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox10"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult10"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox10"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle10"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox10"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail10"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail10"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn10"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox10"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle10"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult10"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn10"
+                    app:layout_constraintStart_toEndOf="@+id/thumb10"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn10"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout11"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox11"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout11"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn11"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox11"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox11"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox11"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/thumb11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn11"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn11"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn11"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn11"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox11"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox11"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox11"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox11"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult11"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox11"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle11"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox11"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail11"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail11"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn11"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox11"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle11"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult11"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn11"
+                    app:layout_constraintStart_toEndOf="@+id/thumb11"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn11"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout12"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox12"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout12"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn12"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox12"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox12"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox12"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn12"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn12"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn12"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn12"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox12"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox12"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox12"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox12"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult12"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox12"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle12"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox12"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail12"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail12"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn12"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox12"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle12"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult12"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn12"
+                    app:layout_constraintStart_toEndOf="@+id/thumb12"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn12"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout13"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox13"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout13"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn13"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox13"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox13"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox13"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn13"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn13"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn13"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn13"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox13"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox13"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox13"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox13"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult13"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox13"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle13"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox13"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail13"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail13"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn13"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox13"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle13"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult13"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn13"
+                    app:layout_constraintStart_toEndOf="@+id/thumb13"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn13"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout14"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox14"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout14"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn14"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox14"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox14"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox14"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn14"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn14"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn14"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn14"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox14"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox14"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox14"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox14"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult14"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox14"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle14"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox14"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail14"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail14"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn14"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox14"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle14"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult14"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn14"
+                    app:layout_constraintStart_toEndOf="@+id/thumb14"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn14"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout15"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox15"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout15"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn15"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox15"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox15"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox15"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn15"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn15"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn15"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn15"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox15"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox15"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox15"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox15"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult15"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox15"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle15"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox15"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail15"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail15"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn15"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox15"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle15"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult15"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn15"
+                    app:layout_constraintStart_toEndOf="@+id/thumb15"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn15"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout16"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox16"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout16"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn16"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox16"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox16"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox16"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn16"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn16"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn16"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn16"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox16"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox16"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox16"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox16"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult16"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox16"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle16"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox16"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail16"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail16"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn16"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox16"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle16"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult16"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn16"
+                    app:layout_constraintStart_toEndOf="@+id/thumb16"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn16"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout17"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox17"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout17"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn17"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox17"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox17"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox17"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn17"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn17"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn17"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn17"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox17"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox17"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox17"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox17"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult17"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox17"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle17"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox17"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail17"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail17"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn17"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox17"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle17"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult17"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn17"
+                    app:layout_constraintStart_toEndOf="@+id/thumb17"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn17"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout18"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox18"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout18"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn18"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox18"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox18"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox18"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn18"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn18"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn18"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn18"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox18"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox18"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox18"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox18"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult18"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox18"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle18"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox18"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail18"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail18"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn18"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox18"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle18"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult18"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn18"
+                    app:layout_constraintStart_toEndOf="@+id/thumb18"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn18"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout19"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox19"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout19"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn19"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox19"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox19"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox19"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn19"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn19"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn19"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn19"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox19"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox19"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox19"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox19"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult19"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox19"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle19"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox19"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail19"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail19"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn19"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox19"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle19"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult19"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn19"
+                    app:layout_constraintStart_toEndOf="@+id/thumb19"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn19"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout20"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox20"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout20"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,HardcodedText,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn20"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox20"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox20"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox20"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn20"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn20"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn20"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn20"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox20"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox20"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox20"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox20"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult20"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox20"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle20"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox20"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail20"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail20"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn20"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox20"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle20"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult20"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn20"
+                    app:layout_constraintStart_toEndOf="@+id/thumb20"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn20"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout21"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox21"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout21"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,HardcodedText,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn21"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox21"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox21"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox21"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn21"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn21"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn21"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn21"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox21"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox21"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox21"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox21"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult21"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox21"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle21"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox21"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail21"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail21"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn21"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox21"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle21"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult21"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn21"
+                    app:layout_constraintStart_toEndOf="@+id/thumb21"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn21"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout22"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox22"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout22"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,HardcodedText,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn22"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox22"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox22"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox22"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn22"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn22"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn22"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn22"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox22"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox22"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox22"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox22"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult22"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox22"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle22"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox22"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail22"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail22"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn22"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox22"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle22"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult22"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn22"
+                    app:layout_constraintStart_toEndOf="@+id/thumb22"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn22"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout23"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox23"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout23"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,HardcodedText,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn23"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox23"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox23"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox23"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn23"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn23"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn23"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn23"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox23"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox23"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox23"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox23"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult23"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox23"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle23"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox23"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail23"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail23"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn23"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox23"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle23"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult23"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn23"
+                    app:layout_constraintStart_toEndOf="@+id/thumb23"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn23"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout24"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox24"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout24"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,HardcodedText,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn24"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox24"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox24"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox24"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn24"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn24"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn24"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn24"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox24"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox24"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox24"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox24"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult24"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox24"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle24"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox24"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail24"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail24"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn24"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox24"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle24"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult24"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn24"
+                    app:layout_constraintStart_toEndOf="@+id/thumb24"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn24"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout25"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox25"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout25"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,HardcodedText,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn25"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox25"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox25"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox25"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn25"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn25"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn25"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn25"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox25"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox25"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox25"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox25"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult25"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox25"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle25"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox25"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail25"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail25"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn25"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox25"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle25"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult25"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn25"
+                    app:layout_constraintStart_toEndOf="@+id/thumb25"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn25"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout26"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox26"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout26"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,HardcodedText,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn26"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox26"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox26"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox26"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn26"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn26"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn26"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn26"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox26"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox26"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox26"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox26"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult26"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox26"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle26"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox26"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail26"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail26"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn26"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox26"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle26"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult26"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn26"
+                    app:layout_constraintStart_toEndOf="@+id/thumb26"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn26"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout27"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox27"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout27"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,HardcodedText,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn27"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox27"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox27"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox27"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn27"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn27"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn27"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn27"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox27"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox27"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox27"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox27"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult27"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox27"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle27"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox27"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail27"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail27"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn27"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox27"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle27"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult27"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn27"
+                    app:layout_constraintStart_toEndOf="@+id/thumb27"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn27"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout28"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox28"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout28"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,HardcodedText,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn28"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox28"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox28"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox28"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn28"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn28"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn28"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn28"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox28"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox28"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox28"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox28"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult28"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox28"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle28"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox28"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail28"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail28"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn28"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox28"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle28"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult28"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn28"
+                    app:layout_constraintStart_toEndOf="@+id/thumb28"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn28"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout29"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox29"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout29"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,HardcodedText,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn29"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox29"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox29"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox29"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn29"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn29"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn29"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn29"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox29"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox29"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox29"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox29"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult29"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox29"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle29"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox29"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail29"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail29"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn29"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox29"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle29"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult29"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn29"
+                    app:layout_constraintStart_toEndOf="@+id/thumb29"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn29"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ConstraintLayout30"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageButton
+                    android:id="@+id/resultBox30"
+                    android:layout_width="363dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/transparent"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ConstraintLayout30"
+                    app:srcCompat="@drawable/searchlist_resultbox"
+                    tools:ignore="ContentDescription,HardcodedText,NotSibling,SpeakableTextPresentCheck" />
+
+                <ImageButton
+                    android:id="@+id/recommendDetailBtn30"
+                    android:layout_width="98dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="#00FFFFFF"
+                    android:minHeight="48dp"
+                    android:padding="0sp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox30"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox30"
+                    app:layout_constraintHorizontal_bias="0.96"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox30"
+                    app:srcCompat="@drawable/searchlist_recommendbtn"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <ImageView
+                    android:id="@+id/thumb30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn30"
+                    app:layout_constraintEnd_toEndOf="@+id/recommendDetailBtn30"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/recommendDetailBtn30"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn30"
+                    app:srcCompat="@drawable/thumb"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/vehicle30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/resultBox30"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox30"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="@+id/resultBox30"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox30"
+                    app:srcCompat="@drawable/ic_bus"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/typeResult30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gmarketsansttfbold"
+                    android:text="typeResult30"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox30"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle30"
+                    app:layout_constraintTop_toTopOf="@+id/resultBox30"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/routeDetail30"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="routeDetail30"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@+id/recommendDetailBtn30"
+                    app:layout_constraintEnd_toEndOf="@+id/resultBox30"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/vehicle30"
+                    app:layout_constraintTop_toBottomOf="@+id/typeResult30"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    android:id="@+id/reNum30"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/gmarketsansttfmedium"
+                    android:text="추천수 : 100"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/recommendDetailBtn30"
+                    app:layout_constraintStart_toEndOf="@+id/thumb30"
+                    app:layout_constraintTop_toTopOf="@+id/recommendDetailBtn30"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

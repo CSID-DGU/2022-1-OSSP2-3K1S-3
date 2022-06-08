@@ -53,22 +53,28 @@
         android:layout_width="363dp"
         android:layout_height="97dp"
         android:layout_marginTop="28dp"
+        android:padding="0sp"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/centerLine5"
         app:srcCompat="@drawable/title_box" />
 
-    <ImageView
-        android:id="@+id/recommendDetail"
-        android:layout_width="198dp"
-        android:layout_height="40dp"
+    <TextView
+        android:id="@+id/recommendDetail_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfbold"
+        android:text="추천 상세보기"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/recommendDetail_title"
         app:layout_constraintEnd_toEndOf="@+id/recommendDetail_title"
         app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="@+id/recommendDetail_title"
         app:layout_constraintTop_toTopOf="@+id/recommendDetail_title"
-        app:layout_constraintVertical_bias="0.32999998"
-        app:srcCompat="@drawable/recommend_detail" />
+        app:layout_constraintVertical_bias="0.333" />
 
     <ImageView
         android:id="@+id/recommendBox1"
@@ -92,37 +98,45 @@
         app:layout_constraintVertical_bias="0.92"
         app:srcCompat="@drawable/recommend_resultbox" />
 
-    <ImageView
-        android:id="@+id/like"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
+    <TextView
+        android:id="@+id/like_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:fontFamily="@font/gmarketsansttfbold"
+        android:text="추천"
+        android:textColor="#1C3AA9"
+        android:textSize="28sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/recommendBox1"
         app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="@+id/recommendBox1"
-        app:layout_constraintTop_toBottomOf="@+id/recommendDetail_title"
-        app:srcCompat="@drawable/like" />
+        app:layout_constraintTop_toTopOf="@+id/recommendBox1" />
 
-    <ImageView
-        android:id="@+id/hate"
-        android:layout_width="75dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="176dp"
+    <TextView
+        android:id="@+id/hate_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:fontFamily="@font/gmarketsansttfbold"
+        android:text="비추천"
+        android:textColor="#AD0000"
+        android:textSize="28sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/recommendBox1"
         app:layout_constraintHorizontal_bias="0.084"
         app:layout_constraintStart_toStartOf="@+id/recommendBox1"
-        app:layout_constraintTop_toBottomOf="@+id/like"
-        app:srcCompat="@drawable/hate" />
+        app:layout_constraintTop_toBottomOf="@+id/like_tv" />
 
     <ImageView
         android:id="@+id/detailBox1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/recommendBox1"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="@+id/recommendBox1"
-        app:layout_constraintTop_toBottomOf="@+id/like"
+        app:layout_constraintTop_toBottomOf="@+id/like_tv"
         app:srcCompat="@drawable/recommend_detailbox" />
 
     <ImageView
@@ -140,11 +154,11 @@
         android:id="@+id/detailBox3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/recommendBox1"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="@+id/recommendBox1"
-        app:layout_constraintTop_toBottomOf="@+id/hate"
+        app:layout_constraintTop_toBottomOf="@+id/hate_tv"
         app:srcCompat="@drawable/recommend_detailbox" />
 
     <ImageView
@@ -162,13 +176,126 @@
         android:id="@+id/detailBox5"
         android:layout_width="wrap_content"
         android:layout_height="167dp"
+        android:layout_marginTop="20dp"
         android:padding="0sp"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="@+id/recommendBox2"
         app:layout_constraintEnd_toEndOf="@+id/recommendBox1"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="@+id/recommendBox1"
         app:layout_constraintTop_toBottomOf="@+id/detailBox4"
-        app:srcCompat="@drawable/recommend_detailbox" />
+        app:srcCompat="@drawable/recommend_detailbox_big" />
+
+    <TextView
+        android:id="@+id/good1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfbold"
+        android:text="GOOD1"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox1"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox1"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="@+id/detailBox1"
+        app:layout_constraintTop_toTopOf="@+id/detailBox1" />
+
+    <TextView
+        android:id="@+id/good2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfbold"
+        android:text="GOOD2"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox2"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox2"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="@+id/detailBox2"
+        app:layout_constraintTop_toTopOf="@+id/detailBox2" />
+
+    <TextView
+        android:id="@+id/bad1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfbold"
+        android:text="BAD1"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox3"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox3"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="@+id/detailBox3"
+        app:layout_constraintTop_toTopOf="@+id/detailBox3" />
+
+    <TextView
+        android:id="@+id/bad2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfbold"
+        android:text="BAD2"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox4"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox4"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="@+id/detailBox4"
+        app:layout_constraintTop_toTopOf="@+id/detailBox4" />
+
+    <TextView
+        android:id="@+id/etcText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfbold"
+        android:text="ETC"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox5"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox5"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="@+id/detailBox5"
+        app:layout_constraintTop_toTopOf="@+id/detailBox5"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <TextView
+        android:id="@+id/good1cnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfbold"
+        android:text="GOOD1CNT"
+        android:textColor="#1C3AA9"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox1"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox1"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="@+id/detailBox1"
+        app:layout_constraintTop_toTopOf="@+id/detailBox1" />
+
+    <TextView
+        android:id="@+id/good2cnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfbold"
+        android:text="GOOD2CNT"
+        android:textColor="#1C3AA9"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox2"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox2"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="@+id/detailBox2"
+        app:layout_constraintTop_toTopOf="@+id/detailBox2" />
+
+    <TextView
+        android:id="@+id/bad1cnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfbold"
+        android:text="BAD1CNT"
+        android:textColor="#AD0000"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox3"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox3"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="@+id/detailBox3"
+        app:layout_constraintTop_toTopOf="@+id/detailBox3" />
+
+    <TextView
+        android:id="@+id/bad2cnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarketsansttfbold"
+        android:text="BAD2CNT"
+        android:textColor="#AD0000"
+        app:layout_constraintBottom_toBottomOf="@+id/detailBox4"
+        app:layout_constraintEnd_toEndOf="@+id/detailBox4"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="@+id/detailBox4"
+        app:layout_constraintTop_toTopOf="@+id/detailBox4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

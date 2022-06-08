@@ -29,22 +29,26 @@ public class RouteThread {
     SearchList searchList;
     Handler handler;
 
+    String sAdd;    // 시작 주소
     float sLong;    // 시작 longitude
     float sLati;    // 시작 latitude
     String sName;   // 시작 장소명
+    String eAdd;    // 도착 주소
     float eLong;    // 도착 longitude
     float eLati;    // 도착 latitude
     String eName;   // 도착 장소명
     String type;    // lessMoney, recommend, lessTime
 
     public RouteThread(Handler handler, Context mContext,
-                       String sName, float sLati, float sLong,
-                       String eName, float eLati, float eLong, String type) {
+                       String sAdd, String sName, float sLati, float sLong,
+                       String eAdd, String eName, float eLati, float eLong, String type) {
         this.handler = handler;
         this.mContext = mContext;
+        this.sAdd = sAdd;
         this.sName = sName;
         this.sLati = sLati;
         this.sLong = sLong;
+        this.eAdd = eAdd;
         this.eName = eName;
         this.eLati = eLati;
         this.eLong = eLong;
@@ -55,7 +59,7 @@ public class RouteThread {
     public void run() {
         // super.run();
         Intent intent = new Intent(mContext.getApplicationContext(), SearchListActivity.class);
-        String BASEURL = "http://ec2-107-23-186-215.compute-1.amazonaws.com:5000/";
+        String BASEURL = " http://ec2-3-39-232-107.ap-northeast-2.compute.amazonaws.com:3000/";
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(600, TimeUnit.MINUTES)
                 .readTimeout(600, TimeUnit.SECONDS)
@@ -107,28 +111,13 @@ public class RouteThread {
 
                         // 다음 Activity 에 text 및 data 전달
                         intent.putExtra("currentLocation", sName);
-                        intent.putExtra("currentLat", sLati);
-                        intent.putExtra("currentLon", sLong);
+                        intent.putExtra("currentAddress", sAdd);
                         intent.putExtra("destinationLocation", eName);
-                        intent.putExtra("destinationLat", eLati);
-                        intent.putExtra("destinationLon", eLong);
+                        intent.putExtra("destinationAddress", eAdd);
                         intent.putExtra("sortCriterion", type);
                         intent.putExtra("result", searchList);
                         mContext.startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK));
                         // finish();
-
-                        // 확인
-//                        for (Route route : searchList.getData()[0].getRoute()) {
-//                            Log.d(TAG, "route " + route.toString());
-//                            String routeID = route.getRouteID();
-//                            String type = route.getType();
-//                            int time = (int) route.getTime();
-//                            int cost = route.getCost();
-//                            String[] routeDetail = route.getRouteDetail();
-//
-//                            Log.e(TAG, routeID + type + time + cost );
-
-//                        }
 
                     } else {
                         Log.e(TAG, "요청 실패 / status: " + response.code());

@@ -1,15 +1,6 @@
 plugins {
     id 'com.android.application'
 }
-//
-//// Properties 선언 및 키값을 불러옴
-////Properties properties = new Properties()
-////properties.load(project.rootProject.file('local.properties').newDataInputStream())
-//
-//// local.properties 에서 키, 값 가져오기
-//def localProperties = new Properties()
-//localProperties.load(new FileInputStream(rootProject.file("local.properties")))
-//def MAPS_API_KEY = localProperties.getProperty('MAPS_API_KEY')
 
 android {
     compileSdk 32
@@ -22,9 +13,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        resValue "string", "maps_api_key",
-                (project.findProperty("MAPS_API_KEY")?: "")
 
     }
 
@@ -57,7 +45,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:19.0.1'
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.3.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
-    implementation 'com.google.maps.android:android-maps-utils:2.2.3'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
+
 }

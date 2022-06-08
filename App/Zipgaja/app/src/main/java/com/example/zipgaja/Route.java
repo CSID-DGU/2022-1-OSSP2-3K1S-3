@@ -1,16 +1,20 @@
 package com.example.zipgaja;
 
+import androidx.annotation.Keep;
+
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Route implements Serializable {
     private String routeID;
 
     private int cost;
 
-    private String[] routeDetail;
+    private String[] route;
 
-    private String recommend;
+    private String busNum;
+
+    private int recommend;
 
     private float time;
 
@@ -38,20 +42,31 @@ public class Route implements Serializable {
 
     public String[] getRouteDetail ()
     {
-        return routeDetail;
+        return route;
     }
 
-    public void setRouteDetail (String[] routeDetail)
+    public void setRouteDetail (String[] route)
     {
-        this.routeDetail = routeDetail;
+        this.route = route;
     }
 
-    public String getRecommend ()
+    public String getBusNum ()
+    {
+        return busNum;
+    }
+
+    public void setBusNum (String busNum)
+    {
+        this.busNum = busNum;
+    }
+
+
+    public int getRecommend ()
     {
         return recommend;
     }
 
-    public void setRecommend (String recommend)
+    public void setRecommend (int recommend)
     {
         this.recommend = recommend;
     }
@@ -79,6 +94,6 @@ public class Route implements Serializable {
     @Override
     public String toString()
     {
-        return "[routeID = "+routeID+", cost = "+cost+", route = "+ Arrays.toString(routeDetail) +", recommend = "+recommend+", time = "+time+", type = "+type+"]";
+        return "[routeID = "+routeID+", cost = "+cost+", routeDetail = "+ route +", busNum = "+busNum+", recommend = "+recommend+", time = "+time+", type = "+type+"]";
     }
 }
