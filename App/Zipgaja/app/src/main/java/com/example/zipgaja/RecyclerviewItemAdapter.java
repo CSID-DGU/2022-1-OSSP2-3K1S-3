@@ -6,24 +6,25 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.zipgaja.api.LessMoneyResponseData;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 // 리스트뷰에 붙일 어뎁터 , UI 정의
 class RecyclerviewItemAdapter extends RecyclerView.Adapter<RecyclerviewItemAdapter.MyViewHolder> {
 
     private ArrayList<LessMoneyResponseData> list = null;
+
     RecyclerviewItemAdapter(ArrayList<LessMoneyResponseData> list) {
-        list =  new ArrayList<>();
+        list = new ArrayList<>();
         this.list = list;
     }
 
     public void setList(ArrayList<LessMoneyResponseData> list) {
-        if(list !=null){
+        if (list != null) {
             list.remove(0);
             this.list = list;
         }
@@ -38,9 +39,10 @@ class RecyclerviewItemAdapter extends RecyclerView.Adapter<RecyclerviewItemAdapt
     // UI에 리스트데이터 포지션 별로 데이터 초기화 하는부분
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.num.setText(list.get(position).getTimev()+"분 / "+list.get(position).getCost() + "원");
+        holder.num.setText(Math.round(list.get(position).getTimev()) + "분 / " + list.get(position).getCost() + "원");
         holder.name.setText(list.get(position).getName());
-        switch (list.get(position).getType()){
+
+        switch (list.get(position).getType()) {
             case "walk":
                 holder.icon.setImageResource(R.drawable.ic_walk);
                 break;
@@ -54,8 +56,10 @@ class RecyclerviewItemAdapter extends RecyclerView.Adapter<RecyclerviewItemAdapt
                 holder.icon.setImageResource(R.drawable.ic_bus);
                 break;
         }
-        if(position == list.size()-1){
+        if (position == list.size() - 1) {
             holder.arrow.setVisibility(View.GONE);
+        } else {
+            holder.arrow.setVisibility(View.VISIBLE);
         }
 
 //        if(position == 0){
@@ -71,18 +75,19 @@ class RecyclerviewItemAdapter extends RecyclerView.Adapter<RecyclerviewItemAdapt
 
 
     // UI 정의하는 Holder
-    public class MyViewHolder  extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         TextView num;
         ImageView icon;
         ImageView arrow;
         ImageView move;
-        public MyViewHolder (@NonNull View itemView) {
+
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            num = itemView.findViewById(R.id.list_detail_cost);
-            name = itemView.findViewById(R.id.list_detail_name);
-            icon = itemView.findViewById(R.id.list_detail_icon_image);
-            arrow = itemView.findViewById(R.id.list_detail_icon_arrow);
+            num = itemView.findViewById(R.id.tvCost);
+            name = itemView.findViewById(R.id.tvTitle);
+            icon = itemView.findViewById(R.id.ivType);
+            arrow = itemView.findViewById(R.id.ivArrow);
             move = itemView.findViewById(R.id.list_detail_icon_move);
         }
     }

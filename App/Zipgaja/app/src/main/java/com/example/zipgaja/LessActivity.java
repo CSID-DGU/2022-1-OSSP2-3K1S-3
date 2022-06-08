@@ -1,10 +1,15 @@
 package com.example.zipgaja;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -16,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,10 +49,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LessActivity extends AppCompatActivity implements OnMapReadyCallback  {
+public class LessActivity extends AppCompatActivity implements OnMapReadyCallback {
+
+    private final static String BASE_URL = "http://ec2-3-39-232-107.ap-northeast-2.compute.amazonaws.com:3000";
+
+    NestedScrollView nestedScrollView = null;
     RecyclerView recyclerView = null;
     RecyclerviewItemAdapter recyclerviewItemAdapter = null;
-    ImageButton controlBtn;
+    TextView title, controlBtn;
     String state = "start";
     private GoogleMap mGoogleMap = null;
     SupportMapFragment mapFragment;
@@ -54,75 +64,73 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     String good1Str, good2Str, good3Str, good4Str, bad1Str, bad2Str, bad3Str, bad4Str;
     Dialog suggestDialog, recommendDialog, notRecommendDialog;
+    ConstraintLayout loadingView;
 
-    int id = 0;
+    String id = "";
+    String start = "";
+    String end = "";
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_less_money);
+
+        // #5 start (팀원 작업물 연결 작업, 리스트에서 LessActivity 호출시 데이터 전달
+        Intent intent = getIntent();
+        id = intent.getStringExtra("id");
+        start = intent.getStringExtra("start");
+        end = intent.getStringExtra("end");
+        // #5 end
+
+        // TODO: 2022/06/08 추후 제거, 임시 데이터
+        id = "5758";
+        start = "시작 장소(테스트)";
+        end = "도착 장소(테스트)";
+        //
+
+        loadingView = findViewById(R.id.loadingView);
+        title = findViewById(R.id.tvTitle);
+        nestedScrollView = findViewById(R.id.svLess);
         recyclerView = findViewById(R.id.recyclerview);
-        controlBtn = findViewById(R.id.con_btn);
+        controlBtn = findViewById(R.id.tvBottom);
         controlBtn.setOnClickListener(view -> {
-            if(state.equals("start")){
-
-                ConstraintLayout constraintLayout = findViewById(R.id.parent_layout);
-                ConstraintSet constraintSet = new ConstraintSet();
-                constraintSet.clone(constraintLayout);
-                constraintSet.connect(R.id.map,ConstraintSet.TOP, R.id.recommendDetail_title,ConstraintSet.BOTTOM,0);
-                constraintSet.connect(R.id.map,ConstraintSet.BOTTOM, R.id.recyclerview,ConstraintSet.TOP,0);
-                constraintSet.connect(R.id.recyclerview,ConstraintSet.TOP, R.id.map,ConstraintSet.BOTTOM,0);
-                constraintSet.connect(R.id.recyclerview,ConstraintSet.BOTTOM, R.id.con_btn,ConstraintSet.TOP,0);
-                constraintSet.applyTo(constraintLayout);
-                controlBtn.setImageResource(R.drawable.btn_arrive);
+            if (state.equals("start")) {
+                title.setText("경로 안내");
+                controlBtn.setText("도착");
+                controlBtn.setBackground(getDrawable(R.drawable.rect_round_ad0000));
                 state = "arrive";
-                ClientInterface service = ClientModule.getRetrofit("http://ec2-107-23-186-215.compute-1.amazonaws.com:5000").create(ClientInterface.class);
-                Call<DetailResponse> call = service.getDetail(id);// todo 서버 세팅되면 바꿔주세요
-                call.enqueue(new Callback<DetailResponse>() {
-                    @Override
-                    public void onResponse(Call<DetailResponse> call, Response<DetailResponse> response) {
-                        if(response!=null){
-                            DetailResponse result = response.body();
-                            good1Str = result.getGood1();
-                            good2Str = result.getGood2();
-                            good3Str = result.getGood3();
-                            good4Str = result.getGood4();
 
-                            bad1Str = result.getBad1();
-                            bad2Str = result.getBad2();
-                            bad3Str = result.getBad3();
-                            bad4Str = result.getBad4();
-                        }
-                    }
+                good1Str = "돈이 예상보다 적게 들어요";
+                good2Str = "예상 도착 시간과 비슷해요";
+                good3Str = "도보 구간이 적어요";
+                good4Str = "정류장 대기시간이 짧아요";
 
-                    @Override
-                    public void onFailure(Call<DetailResponse> call, Throwable t) {
-
-                    }
-                });
+                bad1Str = "돈이 예상보다 적게 들어요";
+                bad2Str = "예상 도착 시간과 비슷해요";
+                bad3Str = "도보 구간이 적어요";
+                bad4Str = "정류장 대기시간이 짧아요";
             } else {
 
 
-                ImageButton recomBtn, notRecomBtn;
-                TextView cancleBtn;
-                recomBtn = suggestDialog.findViewById(R.id.dialog_recom_btn);
-                notRecomBtn = suggestDialog.findViewById(R.id.dialog_not_recom_btn);
-                cancleBtn = suggestDialog.findViewById(R.id.dialog_cancle_btn);
+                TextView recomBtn, notRecomBtn, cancleBtn;
+                recomBtn = suggestDialog.findViewById(R.id.tvRecommend);
+                notRecomBtn = suggestDialog.findViewById(R.id.tvNotRecommend);
+                cancleBtn = suggestDialog.findViewById(R.id.tvCancel);
 
                 recomBtn.setOnClickListener(view1 -> {
                     suggestDialog.dismiss();
-                    ImageView recommendBtn, recCancleBtn;
-                    TextView good1,good2,good3,good4;
-                    CheckBox checkBox1,checkBox2,checkBox3,checkBox4;
+                    TextView good1, good2, good3, good4, recommendBtn, recCancleBtn;
+                    CheckBox checkBox1, checkBox2, checkBox3, checkBox4;
                     EditText good5;
                     recommendBtn = recommendDialog.findViewById(R.id.dialog_recom_btn);
                     recCancleBtn = recommendDialog.findViewById(R.id.dialog_not_recom_btn);
 
-                    good1= recommendDialog.findViewById(R.id.dialog_text1);
-                    good2= recommendDialog.findViewById(R.id.dialog_text2);
-                    good3= recommendDialog.findViewById(R.id.dialog_text3);
-                    good4= recommendDialog.findViewById(R.id.dialog_text4);
-                    good5= recommendDialog.findViewById(R.id.dialog_edit);
+                    good1 = recommendDialog.findViewById(R.id.dialog_text1);
+                    good2 = recommendDialog.findViewById(R.id.dialog_text2);
+                    good3 = recommendDialog.findViewById(R.id.dialog_text3);
+                    good4 = recommendDialog.findViewById(R.id.dialog_text4);
+                    good5 = recommendDialog.findViewById(R.id.dialog_edit);
 
                     checkBox1 = recommendDialog.findViewById(R.id.dialog_checkbox1);
                     checkBox2 = recommendDialog.findViewById(R.id.dialog_checkbox2);
@@ -137,25 +145,26 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
                     recommendBtn.setOnClickListener(view2 -> {
-                        ClientInterface service = ClientModule.getRetrofit("http://ec2-107-23-186-215.compute-1.amazonaws.com:5000").create(ClientInterface.class);
+                        showLoadingView();
+                        ClientInterface service = ClientModule.getRetrofit(BASE_URL).create(ClientInterface.class);
                         Call<StatusResponse> call = service.postRecommnedGood(id,
                                 checkBox1.isChecked(),
                                 checkBox2.isChecked(),
                                 checkBox3.isChecked(),
                                 checkBox4.isChecked(),
-                                good5.getText().toString());// todo 서버 세팅되면 바꿔주세요
+                                good5.getText().toString());
                         call.enqueue(new Callback<StatusResponse>() {
                             @Override
                             public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
-                                if(response!=null){
+                                if (response != null) {
                                     StatusResponse result = response.body();
-
                                 }
+                                hideLoadingView();
                             }
 
                             @Override
                             public void onFailure(Call<StatusResponse> call, Throwable t) {
-
+                                hideLoadingView();
                             }
                         });
                         recommendDialog.dismiss();
@@ -168,18 +177,17 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
                 });
                 notRecomBtn.setOnClickListener(view1 -> {
                     suggestDialog.dismiss();
-                    ImageView notRecmmendBtn, notCancleBtn;
-                    TextView bad1,bad2,bad3,bad4;
+                    TextView bad1, bad2, bad3, bad4, notRecmmendBtn, notCancleBtn;
                     EditText bad5;
-                    CheckBox checkBox1,checkBox2,checkBox3,checkBox4;
+                    CheckBox checkBox1, checkBox2, checkBox3, checkBox4;
 
                     notRecmmendBtn = notRecommendDialog.findViewById(R.id.dialog_recom_btn);
                     notCancleBtn = notRecommendDialog.findViewById(R.id.dialog_not_recom_btn);
-                    bad1= notRecommendDialog.findViewById(R.id.dialog_not_text1);
-                    bad2= notRecommendDialog.findViewById(R.id.dialog_not_text2);
-                    bad3= notRecommendDialog.findViewById(R.id.dialog_not_text3);
-                    bad4= notRecommendDialog.findViewById(R.id.dialog_not_text4);
-                    bad5= notRecommendDialog.findViewById(R.id.dialog_edit);
+                    bad1 = notRecommendDialog.findViewById(R.id.dialog_not_text1);
+                    bad2 = notRecommendDialog.findViewById(R.id.dialog_not_text2);
+                    bad3 = notRecommendDialog.findViewById(R.id.dialog_not_text3);
+                    bad4 = notRecommendDialog.findViewById(R.id.dialog_not_text4);
+                    bad5 = notRecommendDialog.findViewById(R.id.dialog_edit);
 
                     checkBox1 = notRecommendDialog.findViewById(R.id.dialog_checkbox1);
                     checkBox2 = notRecommendDialog.findViewById(R.id.dialog_checkbox2);
@@ -192,25 +200,27 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
                     bad4.setText(bad4Str);
 
                     notRecmmendBtn.setOnClickListener(view2 -> {
-                        ClientInterface service = ClientModule.getRetrofit("http://ec2-107-23-186-215.compute-1.amazonaws.com:5000").create(ClientInterface.class);
+                        showLoadingView();
+                        ClientInterface service = ClientModule.getRetrofit(BASE_URL).create(ClientInterface.class);
                         Call<StatusResponse> call = service.postRecommnedBad(id,
                                 checkBox1.isChecked(),
                                 checkBox2.isChecked(),
                                 checkBox3.isChecked(),
                                 checkBox4.isChecked(),
-                                bad5.getText().toString());// todo 서버 세팅되면 바꿔주세요
+                                bad5.getText().toString());
                         call.enqueue(new Callback<StatusResponse>() {
                             @Override
                             public void onResponse(Call<StatusResponse> call, Response<StatusResponse> response) {
-                                if(response!=null){
+                                if (response != null) {
                                     StatusResponse result = response.body();
 
                                 }
+                                hideLoadingView();
                             }
 
                             @Override
                             public void onFailure(Call<StatusResponse> call, Throwable t) {
-
+                                hideLoadingView();
                             }
                         });
 
@@ -222,24 +232,27 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
                     notRecommendDialog.show();
                 });
 
-                cancleBtn.setOnClickListener(view1 ->{
+                cancleBtn.setOnClickListener(view1 -> {
                     suggestDialog.dismiss();
                 });
                 suggestDialog.show();
             }
         });
 
-        suggestDialog = new Dialog(this);
+        suggestDialog = new Dialog(this, R.style.widthFullDialogStyle);
+        suggestDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         suggestDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         suggestDialog.setContentView(R.layout.dialog_suggest);
-        recommendDialog = new Dialog(this);
+        recommendDialog = new Dialog(this, R.style.widthFullDialogStyle);
+        recommendDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         recommendDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         recommendDialog.setContentView(R.layout.dialog_recommend);
-        notRecommendDialog = new Dialog(this);
+        notRecommendDialog = new Dialog(this, R.style.widthFullDialogStyle);
+        notRecommendDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         notRecommendDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         notRecommendDialog.setContentView(R.layout.dialog_not_recommend);
 
-        mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
@@ -247,73 +260,52 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
         recyclerView.setAdapter(recyclerviewItemAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
     }
-
 
 
     @Override
     public void onMapReady(@NonNull final GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        //todo ============== 임시 데이터 세팅 서버 구현되면 반영필요
-//        ClientInterface service = ClientModule.getRetrofit("http://ec2-107-23-186-215.compute-1.amazonaws.com:5000").create(ClientInterface.class);
-//        Call<LessMoneyResponse> call = service.getLessMoney(id);
-//        call.enqueue(new Callback<LessMoneyResponse>() {
-//            @Override
-//            public void onResponse(Call<LessMoneyResponse> call, Response<LessMoneyResponse> response) {
-//                if(response!=null){
-//                    LessMoneyResponse result = response.body();
-//                    data = result.getData();
-//                    setMapPolyline(result);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<LessMoneyResponse> call, Throwable t) {
-//
-//            }
-//        });
 
-        //todo ============== 임시 데이터 세팅 서버 구현되면 제거 필요
-        LessMoneyResponse res = new LessMoneyResponse();
-        res.setStatus(200);
-        data = new ArrayList<LessMoneyResponseData>();
-        LessMoneyResponseData data1 = new LessMoneyResponseData();
-        data1.setRoute("axfdFwicfWw@He@\\e@`CiAbATTCb@J|@Oz@}GPmFs_@cAkGWB`A`Gv@nG??`A~G^?{E}[UYCQ??sCuSOmBaDo@??oEsAc@hE{Cw@kDqBx@qEz@h@??bGdDDSeCiAwMiI{GZmDhBOb@}AjA??oMtL??aCnBcDhDy@fBe@zCClA??AbFuGQ}BD??iQ\\??yGZyHjA??aFd@}@i@m@NsEuDmA{BoAuD{BsIu@aBe@cCmBoFyAz@oBoGr@g@BH??pB~F^MgDwJqHwQk@{@yAwGs@}H[cAoANmAcCs@G}@gBuDkCxAqBlCvC??tBzCz@jBTL?]o@wAoB_DkPcR_Bs@k@GKLsBi@cFW??yDG{F[eEo@kA[]WYg@uDaI??qDqFeKoM_B_B??wJqIu@qAcBZaIOmOn@??ySf@oOjE??e_@`L??uf@pN??oJxCsMt@mAa@c@U_CgC??kJiK??qPyQIN??HOoKkLwCcCyFwC??cUaL??{b@iT??iMkGeDkBqFmCEL??DMg@WuHuDiC_Aq\\iDaEw@Eh@lCR??x@Ey@YgC]oYqC?h@zFl@??b@DMnCsGy@CtBeIm@{BW?{BLkCb@F??tKdA?i@{IaAqn@yFE^bQpB??ng@rE?i@YEcmAcLqKBiHb@?j@bLs@vFH??bAFj@g@mGQsEJ}YbC@`@fE_@??hJu@?k@sP~A@`@nBQNFJRPpBE^eBN`BcEr@G");
-        data.add(data1);
-        data1 = new LessMoneyResponseData();
-        data1.setName("출발지");
-        data1.setTimev(21.2f);
-        data1.setCost(0);
-        data1.setType("walk");
-        data.add(data1);
+        // 스크롤뷰 안에 지도 뷰의 움직임 제어
+        ((WorkaroundMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                .setListener(new WorkaroundMapFragment.OnTouchListener() {
+                    @Override
+                    public void onTouch() {
+                        nestedScrollView.requestDisallowInterceptTouchEvent(true);
+                    }
+                });
 
-        data1 = new LessMoneyResponseData();
-        data1.setName("퇴계로5가");
-        data1.setTimev(46.5f);
-        data1.setCost(2250);
-        data1.setType("bus");
-        data.add(data1);
+        showLoadingView();
+        ClientInterface service = ClientModule.getRetrofit(BASE_URL).create(ClientInterface.class);
+        Call<LessMoneyResponse> call = service.getLessMoney(id, start, end);
+        call.enqueue(new Callback<LessMoneyResponse>() {
+            @Override
+            public void onResponse(Call<LessMoneyResponse> call, Response<LessMoneyResponse> response) {
+                if (response != null) {
+                    LessMoneyResponse result = response.body();
+                    data = result.getData();
+                    setMapPolyline(result);
+                }
 
-        data1 = new LessMoneyResponseData();
-        data1.setName("목적지");
-        data1.setTimev(0.4f);
-        data1.setCost(0);
-        data1.setType("walk");
-        data.add(data1);
-        res.setData(data);
-        setMapPolyline(res);
-        //============== 임시 데이터 세팅 서버 구현되면 수정 필요
+                hideLoadingView();
+            }
+
+            @Override
+            public void onFailure(Call<LessMoneyResponse> call, Throwable t) {
+                hideLoadingView();
+            }
+        });
     }
 
-    public void setMapPolyline(LessMoneyResponse res){
+    public void setMapPolyline(LessMoneyResponse res) {
         List<LatLng> entire_path = PolyUtil.decode(res.getData().get(0).getRoute());
 
-        BitmapDrawable bitmapdraw1=(BitmapDrawable)getResources().getDrawable(R.drawable.marker_start);
-        Bitmap b1=bitmapdraw1.getBitmap();
+        BitmapDrawable bitmapdraw1 = (BitmapDrawable) getResources().getDrawable(R.drawable.marker_start);
+        Bitmap b1 = bitmapdraw1.getBitmap();
         Bitmap startMarker = Bitmap.createScaledBitmap(b1, 100, 100, false);
-        BitmapDrawable bitmapdraw2 = (BitmapDrawable)getResources().getDrawable(R.drawable.marker_arive);
-        Bitmap b2=bitmapdraw2.getBitmap();
+        BitmapDrawable bitmapdraw2 = (BitmapDrawable) getResources().getDrawable(R.drawable.marker_arive);
+        Bitmap b2 = bitmapdraw2.getBitmap();
         Bitmap arriveMarker = Bitmap.createScaledBitmap(b2, 100, 100, false);
 
         for (int i = 0; i < entire_path.size(); i++) {
@@ -346,5 +338,13 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
         mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(14));
         recyclerviewItemAdapter.setList(data);
         recyclerviewItemAdapter.notifyDataSetChanged();
+    }
+
+    private void showLoadingView() {
+        loadingView.setVisibility(View.VISIBLE);
+    }
+
+    private void hideLoadingView() {
+        loadingView.setVisibility(View.GONE);
     }
 }
