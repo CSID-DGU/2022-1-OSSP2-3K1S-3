@@ -1,38 +1,47 @@
 package com.example.zipgaja.api;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ClientInterface {
-    @GET("/Api/route/lessmoney")
+
+    @FormUrlEncoded
+    @POST("/Api/route/detailRoute")
     Call<LessMoneyResponse> getLessMoney(
-            @Query("postID") int postID
+            @Field("id") String id,
+            @Field("start") String start,
+            @Field("end") String end
     );
 
-    @GET("/Api/Detail")
+    @FormUrlEncoded
+    @POST("/Api/Detail")
     Call<DetailResponse> getDetail(
-            @Query("id") int id
+            @Field("id") String id
     );
 
+    @FormUrlEncoded
     @POST("/Api/Recommend/good")
     Call<StatusResponse> postRecommnedGood(
-            @Query("id") int id,
-            @Query("good1") boolean good1,
-            @Query("good2") boolean good2,
-            @Query("good3") boolean good3,
-            @Query("good4") boolean good4,
-            @Query("good") String good
+            @Field("id") String id,
+            @Field("good1") boolean good1,
+            @Field("good2") boolean good2,
+            @Field("good3") boolean good3,
+            @Field("good4") boolean good4,
+            @Field("good") String good
     );
 
+    @FormUrlEncoded
     @POST("/Api/Recommend/bad")
     Call<StatusResponse> postRecommnedBad(
-            @Query("id") int id,
-            @Query("bad1") boolean bad1,
-            @Query("bad2") boolean bad2,
-            @Query("bad3") boolean bad3,
-            @Query("bad4") boolean bad4,
-            @Query("bad") String good
+            @Field("id") String id,
+            @Field("bad1") boolean bad1,
+            @Field("bad2") boolean bad2,
+            @Field("bad3") boolean bad3,
+            @Field("bad4") boolean bad4,
+            @Field("bad") String good
     );
 }

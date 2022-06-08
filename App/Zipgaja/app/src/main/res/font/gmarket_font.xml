@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <font
+        android:font="@font/gmarket_sans_bold"
+        app:font="@font/gmarket_sans_bold"/>
+
+    <font
+        android:font="@font/gmarket_sans_medium"
+        app:font="@font/gmarket_sans_medium"/>
+
+    <font
+        android:font="@font/gmarket_sans_light"
+        app:font="@font/gmarket_sans_light"/>
+</font-family>
