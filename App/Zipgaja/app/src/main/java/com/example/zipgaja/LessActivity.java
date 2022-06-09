@@ -109,10 +109,10 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
                 good3Str = "도보 구간이 적어요";
                 good4Str = "정류장 대기시간이 짧아요";
 
-                bad1Str = "돈이 예상보다 적게 들어요";
-                bad2Str = "예상 도착 시간과 비슷해요";
-                bad3Str = "도보 구간이 적어요";
-                bad4Str = "정류장 대기시간이 짧아요";
+                bad1Str = "돈이 예상보다 많이 들어요";
+                bad2Str = "예상 도착 시간보다 늦어요";
+                bad3Str = "도보 구간이 많아요";
+                bad4Str = "정류장 대기시간이 길어요";
             } else {
 
 
