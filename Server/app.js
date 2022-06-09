@@ -99,10 +99,10 @@ app.post('/Api/Recommend/good', (req, res) => { // 요청시 추천 데이터 �
 
   const conn = db.conn();
   const route_id = req.body.id; // 경로에 대한 키 값
-  const good1 = req.body.good1? 1:0; // true or false
-  const good2 = req.body.good2? 1:0; // true or false
-  const good3 = req.body.good3? 1:0; // true or false
-  const good4 = req.body.good4? 1:0; // true or false
+  const good1 = Boolean(req.body.good1)? 1:0; // true or false
+  const good2 = Boolean(req.body.good2)? 1:0; // true or false
+  const good3 = Boolean(req.body.good3)? 1:0; // true or false
+  const good4 = Boolean(req.body.good4)? 1:0; // true or false
   const good = req.body.good; // 문자열
   console.log(good1, good2, good3, good4);
 
