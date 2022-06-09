@@ -104,6 +104,7 @@ app.post('/Api/Recommend/good', (req, res) => { // 요청시 추천 데이터 �
   const good3 = req.body.good3? 1:0; // true or false
   const good4 = req.body.good4? 1:0; // true or false
   const good = req.body.good; // 문자열
+  console.log(good1, good2, good3, good4);
 
   insert_good.good(route_id, good1, good2, good3, good4, good);
   res.end();
