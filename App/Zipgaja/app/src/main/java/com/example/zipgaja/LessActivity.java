@@ -87,6 +87,10 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
         end = intent.getStringExtra("end");
         // #5 end
 
+        this.cLoc = start;
+        this.dLoc = end;
+        this.sort = sort;
+
         loadingView = findViewById(R.id.loadingView);
         title = findViewById(R.id.tvTitle);
         nestedScrollView = findViewById(R.id.svLess);
