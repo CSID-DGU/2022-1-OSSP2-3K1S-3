@@ -1,4 +1,3 @@
-searchRoute = require('./getLessMRoute');
 const { route } = require('../..');
 const {bus_location} = require('./nightBusData');
 const {bikeStationArr} = require('../Main/bikeStation');
@@ -217,7 +216,7 @@ function isLocate(startData, endData, startName, endName) {
 async function calculTaxi(startLong, startLati, sName, endLong, endLati, eName) {
     var reco = await getRecommendData("taxi");
     var id = await updateRouteTable(startLong, startLati, endLong, endLati,'taxi', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    return {routeID: id, busNum: "", type: "taxi", time: getDistance(startLong, startLati, endLong, endLati) / 300, cost: calcMoney(startLong, startLati, endLong, endLati), route: [sName ,eName], recommend: 0};
+    return {routeID: id, busNum: "taxi", type: "taxi", time: getDistance(startLong, startLati, endLong, endLati) / 300, cost: calcMoney(startLong, startLati, endLong, endLati), route: [sName ,eName], recommend: reco};
 }
 
 function calcuBike(startLong, startLati, endLong, endLati) {
@@ -350,30 +349,28 @@ const getEndBikeData = (latitude, longitude, distance) => {
 async function getRecommendData(busNum) {
   const bus = busNum; // 버스번호
   var resultSum = 0
-  if(busNum == "taxi") {
-      return 0;
-  }
+  
   const sql = 'select sum(good1) AS sg1, sum(good2) AS sg2, sum(good3) AS sg3, sum(good4) AS sg4 from route, recommend where bus_num = ? and route_id = id;'
   const promisePool = connection.promise();
   try {
     const [result] = await promisePool.query(sql, [bus]);
     if (result[0].sg1 == null && result[0].sg2 == null && result[0].sg3 == null && result[0].sg4 == null) {
-        console.log(result[0], "result1");
+        console.log(busNum);
         return 0;
     }
     else {
         console.log(result, "result2");
         if(result[0].sg1 != null) {
-            resultSum += result[0].sg1
+            resultSum += parseInt(result[0].sg1)
         }
         if(result[0].sg2 != null) {
-            resultSum += result[0].sg2
+            resultSum += parseInt(result[0].sg2)
         }
         if(result[0].sg3 != null) {
-            resultSum += result[0].sg3
+            resultSum += parseInt(result[0].sg3)
         }
         if(result[0].sg4 != null) {
-            resultSum += result[0].sg4
+            resultSum += parseInt(result[0].sg4)
         }
         return resultSum;
     }
