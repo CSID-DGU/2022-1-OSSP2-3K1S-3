@@ -14,9 +14,4 @@
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
     </style>
-
-    <style name="widthFullDialogStyle" parent="Theme.AppCompat.Dialog">
-        <item name="android:windowMinWidthMajor">85%</item>
-        <item name="android:windowMinWidthMinor">85%</item>
-    </style>
 </resources>

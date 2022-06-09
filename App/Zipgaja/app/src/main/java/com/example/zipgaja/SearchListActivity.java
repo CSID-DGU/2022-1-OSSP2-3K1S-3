@@ -338,7 +338,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -384,7 +384,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -430,7 +430,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -476,7 +476,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -522,7 +522,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox5.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -568,7 +568,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox6.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -614,7 +614,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -660,7 +660,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox8.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -706,7 +706,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox9.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -752,7 +752,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox10.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -798,7 +798,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox11.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -844,7 +844,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox12.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -890,7 +890,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox13.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -936,7 +936,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox14.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -982,7 +982,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox15.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -1028,7 +1028,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox16.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -1074,7 +1074,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox17.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -1120,7 +1120,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox18.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -1166,7 +1166,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox19.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -1212,7 +1212,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox20.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -1258,7 +1258,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox21.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -1304,7 +1304,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox22.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -1350,7 +1350,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox23.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -1396,7 +1396,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox24.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -1442,7 +1442,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox25.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -1488,7 +1488,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox26.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -1534,7 +1534,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox27.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -1580,7 +1580,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox28.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -1626,7 +1626,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox29.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
@@ -1672,7 +1672,7 @@ public class SearchListActivity extends AppCompatActivity {
                 resultBox30.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), LessActivity.class);
                         intent.putExtra("id", routeID);
                         intent.putExtra("start", finalCurrentLocation);
                         intent.putExtra("end", finalDestinationLocation);
