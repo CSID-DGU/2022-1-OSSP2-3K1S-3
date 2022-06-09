@@ -23,7 +23,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCi2Mq1vLHXP9ArSMAx5ygYfxdEFaMPcK4" />     <!-- ${MAPS_API_KEY} -->
+            android:value="AIzaSyDDwoXVzQY1blEj3VnDEuam2GoiKrhq7So" />     <!-- ${MAPS_API_KEY} -->
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -42,7 +42,6 @@
         <activity android:name=".SearchListActivity" />
         <activity android:name=".RecommendDetailActivity" />
         <activity android:name=".RouteLoadingActivity" />
-        <activity android:name=".LessActivity"/>
         <activity android:name=".DetailLoadingActivity" />
         <activity android:name=".ConnectActivity" />
         <receiver android:name=".AlarmReceiver"
