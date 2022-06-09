@@ -102,7 +102,6 @@
         android:id="@+id/currentLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:fontFamily="@font/gmarketsansttfmedium"
         android:text="출발지"
         app:layout_constraintEnd_toStartOf="@+id/arrow"
@@ -126,11 +125,9 @@
         android:id="@+id/destinationLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:fontFamily="@font/gmarketsansttfmedium"
         android:text="목적지"
         app:layout_constraintEnd_toEndOf="@+id/searchList_title"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/arrow"
         app:layout_constraintTop_toBottomOf="@+id/searchResult_tv"
         tools:ignore="HardcodedText" />
@@ -205,7 +202,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ConstraintLayout1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="0dp">
 
                 <ImageButton
                     android:id="@+id/resultBox1"
