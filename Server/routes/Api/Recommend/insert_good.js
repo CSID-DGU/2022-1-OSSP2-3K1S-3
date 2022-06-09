@@ -17,9 +17,9 @@ exports.good = function insert_good(route_id, good1, good2, good3, good4, good) 
               return;
             })
           }else{
-            const sql1 = 'UPDATE recommend SET good1 = good1 + ?, good2 = good2 + ?, good3 = good3 + ?, good4 = good4 + ?';
+            const sql1 = 'UPDATE recommend SET good1 = good1 + ?, good2 = good2 + ?, good3 = good3 + ?, good4 = good4 + ? WHERE route_id = ?';
             const sql2 = 'INSERT INTO reco_string VALUES(?, ?, ?)';
-            conn.query(sql1, [good1, good2, good3, good4], (err, results) => {
+            conn.query(sql1, [good1, good2, good3, good4, route_id], (err, results) => {
               conn.query('SELECT * FROM reco_string WHERE route_id = ?', [route_id], (err, results) =>{
                 if (err) throw err;
               a = results[results.length - 1].string_id; // 문자열에 갱신할 값을 가져온다.

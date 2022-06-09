@@ -16,9 +16,9 @@ exports.bad = function insert_bad(route_id, bad1, bad2, bad3, bad4, bad) {
               return;
             })
           }else{ // 기존 경로에 대한 route_id가 존재할 때
-            const sql1 = 'UPDATE not_recommend SET bad1 = bad1 + ?, bad2 = bad2 + ?, bad3 = bad3 + ?, bad4 = bad4 + ?';
+            const sql1 = 'UPDATE not_recommend SET bad1 = bad1 + ?, bad2 = bad2 + ?, bad3 = bad3 + ?, bad4 = bad4 + ? WHERE route_id = ?';
             const sql2 = 'INSERT INTO notre_string VALUES(?, ?, ?)';
-            conn.query(sql1, [bad1, bad2, bad3, bad4], (err, results) => {
+            conn.query(sql1, [bad1, bad2, bad3, bad4, route_id], (err, results) => {
               if (err) throw err;
               conn.query('SELECT * FROM notre_string WHERE route_id = ?', [route_id], (err, results) =>{
                 if (err) throw err;
