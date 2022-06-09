@@ -85,6 +85,7 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
         id = intent.getStringExtra("id");
         start = intent.getStringExtra("start");
         end = intent.getStringExtra("end");
+        String sort = intent.getStringExtra("sort");
         // #5 end
 
         this.cLoc = start;
