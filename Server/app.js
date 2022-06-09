@@ -99,10 +99,10 @@ app.post('/Api/Recommend/good', (req, res) => { // 요청시 추천 데이터 �
 
   const conn = db.conn();
   const route_id = req.body.id; // 경로에 대한 키 값
-  const good1 = req.body.good1? 1:0; // true or false
-  const good2 = req.body.good2? 1:0; // true or false
-  const good3 = req.body.good3? 1:0; // true or false
-  const good4 = req.body.good4? 1:0; // true or false
+  const good1 = (req.body.good1 == "true")? 1:0; // true or false 문자열로 받아옴
+  const good2 = (req.body.good2 == "true")? 1:0; // true or false
+  const good3 = (req.body.good3 == "true")? 1:0; // true or false
+  const good4 = (req.body.good4 == "true")? 1:0; // true or false
   const good = req.body.good; // 문자열
 
   insert_good.good(route_id, good1, good2, good3, good4, good);
@@ -113,11 +113,11 @@ app.post('/Api/Recommend/bad', (req, res) => { // 요청시 비추천 데이터 
   
   console.log("[Recommend bad requestData]", req.body.id, req.body.bad1, req.body.bad2, req.body.bad3, req.body.bad4, req.body.bad);
 
-  const route_id = req.body.id; // 경로에 대한 키 값
-  const bad1 = req.body.bad1? 1:0; // true or false
-  const bad2 = req.body.bad2? 1:0; // true or false
-  const bad3 = req.body.bad3? 1:0; // true or false
-  const bad4 = req.body.bad4? 1:0; // true or false
+  const route_id = req.body.id; // 경로에 대한 키 값 
+  const bad1 = (req.body.bad1 == "true")? 1:0; // true or false 문자열로 받아옴
+  const bad2 = (req.body.bad2 == "true")? 1:0; // true or false
+  const bad3 = (req.body.bad3 == "true")? 1:0; // true or false
+  const bad4 = (req.body.bad4 == "true")? 1:0; // true or false
   const bad = req.body.bad; // 문자열
 
   insert_bad.bad(route_id, bad1,bad2,bad3,bad4,bad);
