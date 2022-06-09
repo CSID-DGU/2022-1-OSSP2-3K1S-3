@@ -70,6 +70,10 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
     String start = "";
     String end = "";
 
+    String cLoc = "";
+    String dLoc = "";
+    String sort = "";
+
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,12 +86,6 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
         start = intent.getStringExtra("start");
         end = intent.getStringExtra("end");
         // #5 end
-
-        // TODO: 2022/06/08 추후 제거, 임시 데이터
-        id = "5758";
-        start = "시작 장소(테스트)";
-        end = "도착 장소(테스트)";
-        //
 
         loadingView = findViewById(R.id.loadingView);
         title = findViewById(R.id.tvTitle);
@@ -262,6 +260,17 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
         recyclerView.setLayoutManager(layoutManager);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), RouteLoadingActivity.class);
+
+        intent.putExtra("currentLocation", this.cLoc);
+        intent.putExtra("destinationLocation", this.dLoc);
+        intent.putExtra("sortCriterion", this.sort);
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     public void onMapReady(@NonNull final GoogleMap googleMap) {
