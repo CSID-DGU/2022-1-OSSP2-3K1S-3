@@ -126,10 +126,6 @@ app.post('/Api/Detail', (req, res) => {
   
  console.log("[Detail id requestData]", req.body.busNum);
 
-//  const id = req.body.id;
-//  console.log("이거이거",idd);
-//  cono
-//  test3(id);
  async function test3(id) {
    console.log("호출되었습니다.", id);
   a = await details.detail1(id); // 추천 데이터 합산하기
