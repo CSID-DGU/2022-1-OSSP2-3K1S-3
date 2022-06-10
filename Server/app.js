@@ -124,12 +124,18 @@ app.post('/Api/Recommend/bad', (req, res) => { // 요청시 비추천 데이터 
 // API 추천, 비추천 상세보기 상위 2개 항목과 상위 기타항목
 app.post('/Api/Detail', (req, res) => {
   
- console.log("[Detail id requestData]", req.body.id);
+ console.log("[Detail id requestData]", req.body.busNum);
 
+//  const id = req.body.id;
+//  console.log("이거이거",idd);
+//  cono
+//  test3(id);
  async function test3(id) {
+   console.log("호출되었습니다.", id);
   a = await details.detail1(id); // 추천 데이터 합산하기
   test4(a, id);
   async function test4(a, id) {
+    console.log("호출되었습니다.2", id);
       b = await details.detail2(id); // 비추천 데이터 합산하기
       check1 = [a[0], a[1], a[2], a[3]];
       c = [a[0], a[1], a[2], a[3]]; // 합산된 추천 값 sorting
@@ -168,6 +174,7 @@ app.post('/Api/Detail', (req, res) => {
           x1 = "";
           x2 = "";
       }
+
       var status = res.statusCode
 
       num1 = check1.indexOf(c[0]);
@@ -186,7 +193,7 @@ app.post('/Api/Detail', (req, res) => {
       res.json({status: status, data: {good1: c[0], good2: c[1], good_check1: good_check1, good_check2: good_check2, good3: a1, good4: a2, bad1: d[0], bad2: d[1], bad_check1: bad_check1, bad_check2: bad_check2, bad3: x1, bad4: x2}});
   }
 }
-test3(req.body.id);
+test3(req.body.busNum);
 
 })
 
