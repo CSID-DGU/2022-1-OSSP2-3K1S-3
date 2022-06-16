@@ -49,7 +49,7 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
 
         //추천순으로 정렬
         var routeData = returndata.sort(function(x,y){
-            return x.recommend - y.recommend;
+            return y.recommend - x.recommend;
         });
 
         callback(undefined,{   
