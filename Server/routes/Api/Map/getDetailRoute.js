@@ -57,17 +57,17 @@ async function main(routeId, start, end, callback) {
                 returnData.push({route: returnRoute});
 
                 //따릉이
-                returnData.push({name: start + "~" + bikeStationArr.filter(data => data.longitude == route.s_bike_long && data.latitude == route.s_bike_lati)[0].name + "(따릉이)", time: calcWalkingTime(getDistance(route.s_bike_lati, route.s_bike_long, route.start_lati, route.start_long)), cost: 0, type: "walk"});
-                returnData.push({name: bikeStationArr.filter(data => data.longitude == route.s_bike_long && data.latitude == route.s_bike_lati)[0].name + " ~ " + bikeStationArr.filter(data => data.longitude == route.e_bike_long && data.latitude == route.e_bike_lati)[0].name, time: calcuBike(route.s_bike_long, route.s_bike_lati, route.e_bike_long, route.e_bike_lati), cost: 1000, type: "bike"});
-                returnData.push({name: bikeStationArr.filter(data => data.longitude == route.e_bike_long && data.latitude == route.e_bike_lati)[0].name + " ~ " + reversBus[0].station_name + "("+reversBus[0].name+")", time: calcWalkingTime(getDistance(route.e_bike_lati, route.e_bike_long, reversBus[0].latitude, reversBus[0].longitude)), cost: 0, type: "walk"});
+                returnData.push({name: start + "~" + bikeStationArr.filter(data => data.longitude.toFixed(8) == route.s_bike_long && data.latitude.toFixed(8) == route.s_bike_lati)[0].name + "(따릉이)", time: calcWalkingTime(getDistance(route.s_bike_lati, route.s_bike_long, route.start_lati, route.start_long)), cost: 0, type: "walk"});
+                returnData.push({name: bikeStationArr.filter(data => data.longitude.toFixed(8) == route.s_bike_long && data.latitude.toFixed(8) == route.s_bike_lati)[0].name + " ~ " + bikeStationArr.filter(data => data.longitude.toFixed(8) == route.e_bike_long && data.latitude.toFixed(8) == route.e_bike_lati)[0].name, time: calcuBike(route.s_bike_long, route.s_bike_lati, route.e_bike_long, route.e_bike_lati), cost: 1000, type: "bike"});
+                returnData.push({name: bikeStationArr.filter(data => data.longitude.toFixed(8) == route.e_bike_long && data.latitude.toFixed(8) == route.e_bike_lati)[0].name + " ~ " + reversBus[0].station_name + "("+reversBus[0].name+")", time: calcWalkingTime(getDistance(route.e_bike_lati, route.e_bike_long, reversBus[0].latitude, reversBus[0].longitude)), cost: 0, type: "walk"});
 
                 //버스
                 returnData.push({name: reversBus[0].station_name + " ~ " + busStation[0].station_name, time: calcBusTime(busStation.length), cost: 2150, type: "bus"});
 
                 //따릉이
-                returnData.push({name: busStation[0].station_name + "~" + bikeStationArr.filter(data => data.longitude == route.fs_bike_long && data.latitude == route.fs_bike_lati)[0].name + "(따릉이)", time: calcWalkingTime(getDistance(route.fs_bike_lati, route.fs_bike_long, busStation[0].latitude, busStation[0].longitude)), cost: 0, type: "walk"});
-                returnData.push({name: bikeStationArr.filter(data => data.longitude == route.fs_bike_long && data.latitude == route.fs_bike_lati)[0].name + " ~ " + bikeStationArr.filter(data => data.longitude == route.fe_bike_long && data.latitude == route.fe_bike_lati)[0].name, time: calcuBike(route.fs_bike_long, route.fs_bike_lati, route.fe_bike_long, route.fe_bike_lati), cost: 1000, type: "bike"});
-                returnData.push({name: bikeStationArr.filter(data => data.longitude == route.fe_bike_long && data.latitude == route.fe_bike_lati)[0].name + "(따릉이) ~ " + end, time: calcWalkingTime(getDistance(route.fe_bike_lati, route.fe_bike_long, route.end_lati, route.end_long)), cost: 0, type: "walk"});
+                returnData.push({name: busStation[0].station_name + "~" + bikeStationArr.filter(data => data.longitude.toFixed(8) == route.fs_bike_long && data.latitude.toFixed(8) == route.fs_bike_lati)[0].name + "(따릉이)", time: calcWalkingTime(getDistance(route.fs_bike_lati, route.fs_bike_long, busStation[0].latitude, busStation[0].longitude)), cost: 0, type: "walk"});
+                returnData.push({name: bikeStationArr.filter(data => data.longitude.toFixed(8) == route.fs_bike_long && data.latitude.toFixed(8) == route.fs_bike_lati)[0].name + " ~ " + bikeStationArr.filter(data => data.longitude.toFixed(8) == route.fe_bike_long && data.latitude.toFixed(8) == route.fe_bike_lati)[0].name, time: calcuBike(route.fs_bike_long, route.fs_bike_lati, route.fe_bike_long, route.fe_bike_lati), cost: 1000, type: "bike"});
+                returnData.push({name: bikeStationArr.filter(data => data.longitude.toFixed(8) == route.fe_bike_long && data.latitude.toFixed(8) == route.fe_bike_lati)[0].name + "(따릉이) ~ " + end, time: calcWalkingTime(getDistance(route.fe_bike_lati, route.fe_bike_long, route.end_lati, route.end_long)), cost: 0, type: "walk"});
 
             }
             else {
@@ -95,7 +95,7 @@ async function main(routeId, start, end, callback) {
             var resultbust = busStation
             //따릉이 포함 경로일때 
             if (route.s_bike_long != 0) {
-                connectOSRM(route.s_bike_long, route.s_bike_lati, busStation[0].longitude, busStation[0].latitude);
+                connectOSRM(route.s_bike_long.toFixed(8), route.s_bike_lati.toFixed(8), busStation[0].longitude, busStation[0].latitude);
                 
                 busStation.map((busStation, index) => connectOSRM(resultbust[index].longitude, resultbust[index].latitude, resultbust[index + 1 >= resultbust.length ? index : index + 1].longitude, resultbust[index + 1 >= resultbust.length ? index : index + 1].latitude));
                 const returnRoute = encodePolyline()
@@ -106,17 +106,18 @@ async function main(routeId, start, end, callback) {
                 returnData.push({route: returnRoute});
 
                 //따릉이
-                returnData.push({name: start + "~" + bikeStationArr.filter(data => data.longitude == route.s_bike_long && data.latitude == route.s_bike_lati)[0].name + "(따릉이)", time: calcWalkingTime(getDistance(route.s_bike_lati, route.s_bike_long, route.start_lati, route.start_long)), cost: 0, type: "walk"});
-                returnData.push({name: bikeStationArr.filter(data => data.longitude == route.s_bike_long && data.latitude == route.s_bike_lati)[0].name + " ~ " + bikeStationArr.filter(data => data.longitude == route.e_bike_long && data.latitude == route.e_bike_lati)[0].name, time: calcuBike(route.s_bike_long, route.s_bike_lati, route.e_bike_long, route.e_bike_lati), cost: 1000, type: "bike"});
-                returnData.push({name: bikeStationArr.filter(data => data.longitude == route.e_bike_long && data.latitude == route.e_bike_lati)[0].name + " ~ " + busStation[0].station_name + "("+busStation[0].name+")", time: calcWalkingTime(getDistance(route.e_bike_lati, route.e_bike_long, busStation[0].latitude, busStation[0].longitude)), cost: 0, type: "walk"});
+                returnData.push({name: start + "~" + bikeStationArr.filter(data => data.longitude.toFixed(8) == route.s_bike_long && data.latitude.toFixed(8) == route.s_bike_lati)[0].name + "(따릉이)", time: calcWalkingTime(getDistance(route.s_bike_lati, route.s_bike_long, route.start_lati, route.start_long)), cost: 0, type: "walk"});
+                returnData.push({name: bikeStationArr.filter(data => data.longitude.toFixed(8) == route.s_bike_long && data.latitude.toFixed(8) == route.s_bike_lati)[0].name + " ~ " + bikeStationArr.filter(data => data.longitude.toFixed(8) == route.e_bike_long && data.latitude.toFixed(8) == route.e_bike_lati)[0].name, time: calcuBike(route.s_bike_long, route.s_bike_lati, route.e_bike_long, route.e_bike_lati), cost: 1000, type: "bike"});
+                returnData.push({name: bikeStationArr.filter(data => data.longitude.toFixed(8) == route.e_bike_long && data.latitude.toFixed(8) == route.e_bike_lati)[0].name + " ~ " + busStation[0].station_name + "("+busStation[0].name+")", time: calcWalkingTime(getDistance(route.e_bike_lati, route.e_bike_long, busStation[0].latitude, busStation[0].longitude)), cost: 0, type: "walk"});
 
                 //버스
                 returnData.push({name: busStation[0].station_name + " ~ " + busStation[busStation.length - 1].station_name, time: calcBusTime(busStation.length), cost: 2150, type: "bus"});
 
+                console.log(bikeStationArr.filter(data => data.longitude.toFixed(8) == route.fs_bike_long && data.latitude.toFixed(8) == route.fs_bike_lati)[0].name);
                 //따릉이
-                returnData.push({name: busStation[busStation.length - 1].station_name + "~" + bikeStationArr.filter(data => data.longitude == route.fs_bike_long && data.latitude == route.fs_bike_lati)[0].name + "(따릉이)", time: calcWalkingTime(getDistance(route.fs_bike_lati, route.fs_bike_long, busStation[busStation.length - 1].latitude, busStation[busStation.length - 1].longitude)), cost: 0, type: "walk"});
-                returnData.push({name: bikeStationArr.filter(data => data.longitude == route.fs_bike_long && data.latitude == route.fs_bike_lati)[0].name + " ~ " + bikeStationArr.filter(data => data.longitude == route.fe_bike_long && data.latitude == route.fe_bike_lati)[0].name, time: calcuBike(route.fs_bike_long, route.fs_bike_lati, route.fe_bike_long, route.fe_bike_lati), cost: 1000, type: "bike"});
-                returnData.push({name: bikeStationArr.filter(data => data.longitude == route.fe_bike_long && data.latitude == route.fe_bike_lati)[0].name + "(따릉이) ~ " + end, time: calcWalkingTime(getDistance(route.fe_bike_lati, route.fe_bike_long, route.end_lati, route.end_long)), cost: 0, type: "walk"});
+                returnData.push({name: busStation[busStation.length - 1].station_name + "~" + bikeStationArr.filter(data => data.longitude.toFixed(8) == route.fs_bike_long && data.latitude.toFixed(8) == route.fs_bike_lati)[0].name + "(따릉이)", time: calcWalkingTime(getDistance(route.fs_bike_lati, route.fs_bike_long, busStation[busStation.length - 1].latitude, busStation[busStation.length - 1].longitude)), cost: 0, type: "walk"});
+                returnData.push({name: bikeStationArr.filter(data => data.longitude.toFixed(8) == route.fs_bike_long && data.latitude.toFixed(8) == route.fs_bike_lati)[0].name + " ~ " + bikeStationArr.filter(data => data.longitude.toFixed(8) == route.fe_bike_long.toFixed(8) && data.latitude == route.fe_bike_lati)[0].name, time: calcuBike(route.fs_bike_long, route.fs_bike_lati, route.fe_bike_long, route.fe_bike_lati), cost: 1000, type: "bike"});
+                returnData.push({name: bikeStationArr.filter(data => data.longitude.toFixed(8) == route.fe_bike_long && data.latitude.toFixed(8) == route.fe_bike_lati)[0].name + "(따릉이) ~ " + end, time: calcWalkingTime(getDistance(route.fe_bike_lati, route.fe_bike_long, route.end_lati, route.end_long)), cost: 0, type: "walk"});
             }
             else {
                 //도보로 정류장 이동
@@ -212,7 +213,7 @@ function calcBusTime(stationNum) {
 }
 
 function calcuBike(startLong, startLati, endLong, endLati) {
-    var bikeTemp = getDistance(startLati, startLong, endLati, endLong) / 260
+    var bikeTemp = getDistance(startLati, startLong, endLati, endLong) / 260 + 5;
     return bikeTemp;
 }
 
