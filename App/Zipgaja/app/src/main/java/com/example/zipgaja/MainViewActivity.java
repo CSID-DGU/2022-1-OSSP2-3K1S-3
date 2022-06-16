@@ -164,7 +164,6 @@ public class MainViewActivity extends AppCompatActivity
             alarmOff.setImageResource(R.drawable.alarm_0);
         } else {
             alarmOff.setImageResource(R.drawable.alarm_1);
-            setAlarm();
         }
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
