@@ -1739,9 +1739,9 @@ public class SearchListActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        // super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(), MainViewActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
-        finish();
     }
 }

@@ -276,7 +276,7 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        // super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(), RouteLoadingActivity.class);
 
         intent.putExtra("currentLocation", this.cLoc);

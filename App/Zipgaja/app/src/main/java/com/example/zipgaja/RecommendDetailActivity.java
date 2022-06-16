@@ -73,7 +73,7 @@ public class RecommendDetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        // super.onBackPressed();
         Intent intent = new Intent(getApplicationContext(), RouteLoadingActivity.class);
 
         intent.putExtra("currentLocation", this.cLoc);
