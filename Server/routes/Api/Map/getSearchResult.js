@@ -174,7 +174,7 @@ async function callbackNoBikeToPush(sLong, sLati, eLong, eLati,routeData, index,
     var timeData = calcWalkingTime(getDistance(sLati, sLong, routeData[index][0][2], routeData[index][0][3])) + 
         calcBusTime(Math.abs(routeData[index][0][5] - routeData[index][1][5]))+
         calcWalkingTime(getDistance(routeData[index][1][2], routeData[index][1][3], eLati, eLong));
-        if (timeData < 200) {
+        if (timeData < 120) {
         var priceData = 2150;
         var esBus = routeData[index][0][6] + "(" + routeData[index][0][0] +"번 버스) -> " + " " + routeData[index][1][6] ;
         var reco = await getRecommendData(routeData[index][0][0]);
@@ -187,12 +187,12 @@ async function callbackNoBikeToPush(sLong, sLati, eLong, eLati,routeData, index,
 async function callbackToPush (sLong, sLati, eLong, eLati,routeData, bikeRoute, eBikeRoute, index, sName, eName){
     var priceData = 2150 + 2000;
     var timeData = calcuBike(bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude, bikeRoute[index][1][0].longitude, bikeRoute[index][1][0].latitude) +
-    calcWalkingTime(getDistance(sLati, sLong, bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude)) +
-    calcWalkingTime(getDistance(bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude, bikeRoute[index][1][0].longitude, bikeRoute[index][1][0].latitude)) +
+    calcWalkingTime(getDistance(sLati, sLong, bikeRoute[index][0][0].latitude, bikeRoute[index][0][0].longitude)) +
+    calcWalkingTime(getDistance(bikeRoute[index][0][0].latitude, bikeRoute[index][0][0].longitude, bikeRoute[index][1][0].latitude, bikeRoute[index][1][0].longitude)) +
     calcBusTime(Math.abs(routeData[index][0][5] - routeData[index][1][5])) + 
     calcuBike(eBikeRoute[index][0][0].longitude, eBikeRoute[index][0][0].latitude, eBikeRoute[index][1][0].longitude, eBikeRoute[index][1][0].latitude) +
-    calcWalkingTime(getDistance(routeData[index][1][3], routeData[index][1][2].longitude, eBikeRoute[index][0][0].longitude ,eBikeRoute[index][0][0].latitude)) + 
-    calcWalkingTime(getDistance(eBikeRoute[index][1][0].longitude, eBikeRoute[index][1][0].latitude, eLong, eLati));
+    calcWalkingTime(getDistance(routeData[index][1][2], routeData[index][1][3], eBikeRoute[index][0][0].latitude ,eBikeRoute[index][0][0].longitude)) + 
+    calcWalkingTime(getDistance(eBikeRoute[index][1][0].latitude, eBikeRoute[index][1][0].longitude, eLati, eLong));
     console.log(routeData[index][1])
 
     if (timeData < 200) {
