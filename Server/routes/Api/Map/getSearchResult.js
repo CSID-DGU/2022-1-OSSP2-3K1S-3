@@ -49,7 +49,7 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
 
         //추천순으로 정렬
         var routeData = returndata.sort(function(x,y){
-            return x.recommend - y.recommend;
+            return y.recommend - x.recommend;
         });
 
         callback(undefined,{   
@@ -76,7 +76,7 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
 /*버스 경로 탐색*/
 async function calcBusRoute(sLong, sLati, sName, eLong, eLati, eName, callback) {
     //sLong, sLati, eLong, eLati, busNum, busStart, busEnd, sBikeLong, sBikeLati, eBikeLong, eBikelati, fsBikeLong, fsBikeLati, feBikeLong, feBikeLati
-    if (getDistance(sLati, sLong, eLati, eLong) <= 500) {
+    if (getDistance(sLati, sLong, eLati, eLong) <= 1000) {
         var timeData = calcWalkingTime(getDistance(sLati, sLong, eLati, eLong));
         var priceData = 0;
         var id = await updateRouteTable(sLong, sLati, eLong, eLati, "walk", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -220,7 +220,7 @@ async function calculTaxi(startLong, startLati, sName, endLong, endLati, eName) 
 }
 
 function calcuBike(startLong, startLati, endLong, endLati) {
-    var bikeTemp = getDistance(startLati, startLong, endLati, endLong) / 260
+    var bikeTemp = getDistance(startLati, startLong, endLati, endLong) / 160 + 5;
     return bikeTemp;
 }
 function calcMoney(sLong, sLati, endLong, endLati) {
@@ -387,10 +387,10 @@ async function updateRouteTable (sLong, sLati, eLong, eLati, busNum, busStart, b
     const bus_num = busNum;
     const bus_start = busStart;
     const bus_end = busEnd;
-    const s_bike_long = sBikeLong;
-    const s_bike_lati = sBikeLati;
-    const e_bike_long = eBikeLong;
-    const e_bike_lati = eBikelati;
+    const s_bike_long = sBikeLong.toFixed(8);
+    const s_bike_lati = sBikeLati.toFixed(8);
+    const e_bike_long = eBikeLong.toFixed(8);
+    const e_bike_lati = eBikelati.toFixed(8);
 
     const sql = 'INSERT INTO route (start_long, end_long, start_lati, end_lati, bus_start , bus_end, s_bike_long, s_bike_lati, e_bike_long, e_bike_lati, bus_num, fs_bike_long, fs_bike_lati, fe_bike_long, fe_bike_lati) VALUES ('+ start_long + "," + end_long+ "," +start_lati+ "," +end_lati+ "," +bus_start+ "," +bus_end+ "," +s_bike_long+ "," +s_bike_lati+ "," + e_bike_long+ "," + e_bike_lati+ ",'" + bus_num+"',"+ fsBikeLong + "," + fsBikeLati + ","+feBikeLong + "," + feBikeLati + ")";
     const promisePool = connection.promise();
