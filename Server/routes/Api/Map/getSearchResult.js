@@ -76,7 +76,7 @@ async function main(sLong, sLati, sName, eLong, eLati, eName, type, callback) {
 /*버스 경로 탐색*/
 async function calcBusRoute(sLong, sLati, sName, eLong, eLati, eName, callback) {
     //sLong, sLati, eLong, eLati, busNum, busStart, busEnd, sBikeLong, sBikeLati, eBikeLong, eBikelati, fsBikeLong, fsBikeLati, feBikeLong, feBikeLati
-    if (getDistance(sLati, sLong, eLati, eLong) <= 500) {
+    if (getDistance(sLati, sLong, eLati, eLong) <= 1000) {
         var timeData = calcWalkingTime(getDistance(sLati, sLong, eLati, eLong));
         var priceData = 0;
         var id = await updateRouteTable(sLong, sLati, eLong, eLati, "walk", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -220,7 +220,7 @@ async function calculTaxi(startLong, startLati, sName, endLong, endLati, eName) 
 }
 
 function calcuBike(startLong, startLati, endLong, endLati) {
-    var bikeTemp = getDistance(startLati, startLong, endLati, endLong) / 260 + 5;
+    var bikeTemp = getDistance(startLati, startLong, endLati, endLong) / 160 + 5;
     return bikeTemp;
 }
 function calcMoney(sLong, sLati, endLong, endLati) {

@@ -46,13 +46,10 @@ async function main(routeId, start, end, callback) {
             if (route.s_bike_long != 0) {
                 connectOSRM(route.start_long, route.start_lati, route.s_bike_long, route.s_bike_lati);
                 connectOSRM(route.s_bike_long, route.s_bike_lati, reversBus[0].longitude, reversBus[0].latitude);
-                
                 reversBus.map((busStation, index) => connectOSRM(reversBus[index].longitude, reversBus[index].latitude, reversBus[index + 1 > reversBus.length - 1 ? index : index + 1].longitude, reversBus[index + 1 > reversBus.length - 1 ? index : index + 1].latitude));
-                const returnRoute = encodePolyline()
-
                 connectOSRM(route.fs_bike_long, route.fs_bike_lati, route.fe_bike_long, route.fe_bike_lati);
                 connectOSRM(route.fe_bike_long, route.fe_bike_lati, route.end_long, route.end_lati);
-
+                const returnRoute = encodePolyline()
                 
                 returnData.push({route: returnRoute});
 
@@ -98,9 +95,9 @@ async function main(routeId, start, end, callback) {
                 connectOSRM(route.s_bike_long.toFixed(8), route.s_bike_lati.toFixed(8), busStation[0].longitude, busStation[0].latitude);
                 
                 busStation.map((busStation, index) => connectOSRM(resultbust[index].longitude, resultbust[index].latitude, resultbust[index + 1 >= resultbust.length ? index : index + 1].longitude, resultbust[index + 1 >= resultbust.length ? index : index + 1].latitude));
-                const returnRoute = encodePolyline()
                 connectOSRM(route.fs_bike_long, route.fs_bike_lati, route.fe_bike_long, route.fe_bike_lati);
                 connectOSRM(route.fe_bike_long, route.fe_bike_lati, route.end_long, route.end_lati);
+                const returnRoute = encodePolyline()
 
                 
                 returnData.push({route: returnRoute});
@@ -213,7 +210,7 @@ function calcBusTime(stationNum) {
 }
 
 function calcuBike(startLong, startLati, endLong, endLati) {
-    var bikeTemp = getDistance(startLati, startLong, endLati, endLong) / 260 + 5;
+    var bikeTemp = getDistance(startLati, startLong, endLati, endLong) / 160 + 5;
     return bikeTemp;
 }
 
