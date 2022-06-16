@@ -171,6 +171,9 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
                             }
                         });
                         recommendDialog.dismiss();
+                        Intent recInt = new Intent(getApplicationContext(), EndActivity.class);
+                        startActivity(recInt);
+                        finish();
                     });
                     recCancleBtn.setOnClickListener(view2 -> {
                         recommendDialog.dismiss();
@@ -228,6 +231,9 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
                         });
 
                         notRecommendDialog.dismiss();
+                        Intent notRecInt = new Intent(getApplicationContext(), EndActivity.class);
+                        startActivity(notRecInt);
+                        finish();
                     });
                     notCancleBtn.setOnClickListener(view2 -> {
                         notRecommendDialog.dismiss();
@@ -237,6 +243,9 @@ public class LessActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 cancleBtn.setOnClickListener(view1 -> {
                     suggestDialog.dismiss();
+                    Intent cancelInt = new Intent(getApplicationContext(), EndActivity.class);
+                    startActivity(cancelInt);
+                    finish();
                 });
                 suggestDialog.show();
             }
