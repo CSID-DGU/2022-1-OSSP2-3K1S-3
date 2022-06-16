@@ -174,7 +174,7 @@ async function callbackNoBikeToPush(sLong, sLati, eLong, eLati,routeData, index,
     var timeData = calcWalkingTime(getDistance(sLati, sLong, routeData[index][0][2], routeData[index][0][3])) + 
         calcBusTime(Math.abs(routeData[index][0][5] - routeData[index][1][5]))+
         calcWalkingTime(getDistance(routeData[index][1][2], routeData[index][1][3], eLati, eLong));
-        if (timeData < 120) {
+        if (timeData < 200) {
         var priceData = 2150;
         var esBus = routeData[index][0][6] + "(" + routeData[index][0][0] +"번 버스) -> " + " " + routeData[index][1][6] ;
         var reco = await getRecommendData(routeData[index][0][0]);
@@ -195,7 +195,7 @@ async function callbackToPush (sLong, sLati, eLong, eLati,routeData, bikeRoute, 
     calcWalkingTime(getDistance(eBikeRoute[index][1][0].longitude, eBikeRoute[index][1][0].latitude, eLong, eLati));
     console.log(routeData[index][1])
 
-    if (timeData < 120) {
+    if (timeData < 200) {
         var esBus = routeData[index][0][6] + "(" + routeData[index][0][0] +"번 버스) -> " + " " + routeData[index][1][6] ;
         var reco = await getRecommendData(routeData[index][0][0]);
 
