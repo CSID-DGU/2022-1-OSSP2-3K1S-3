@@ -187,7 +187,13 @@ async function callbackNoBikeToPush(sLong, sLati, eLong, eLati,routeData, index,
 async function callbackToPush (sLong, sLati, eLong, eLati,routeData, bikeRoute, eBikeRoute, index, sName, eName){
     var priceData = 2150 + 2000;
     var timeData = calcuBike(bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude, bikeRoute[index][1][0].longitude, bikeRoute[index][1][0].latitude) +
-    calcBusTime(Math.abs(routeData[index][0][5] - routeData[index][1][5]));
+    calcWalkingTime(getDistance(sLati, sLong, bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude)) +
+    calcWalkingTime(getDistance(bikeRoute[index][0][0].longitude, bikeRoute[index][0][0].latitude, bikeRoute[index][1][0].longitude, bikeRoute[index][1][0].latitude)) +
+    calcBusTime(Math.abs(routeData[index][0][5] - routeData[index][1][5])) + 
+    calcuBike(eBikeRoute[index][0][0].longitude, eBikeRoute[index][0][0].latitude, eBikeRoute[index][1][0].longitude, eBikeRoute[index][1][0].latitude) +
+    calcWalkingTime(getDistance(routeData[index][1][3], routeData[index][1][2].longitude, eBikeRoute[index][0][0].longitude ,eBikeRoute[index][0][0].latitude)) + 
+    calcWalkingTime(getDistance(eBikeRoute[index][1][0].longitude, eBikeRoute[index][1][0].latitude, eLong, eLati));
+    console.log(routeData[index][1])
 
     if (timeData < 120) {
         var esBus = routeData[index][0][6] + "(" + routeData[index][0][0] +"번 버스) -> " + " " + routeData[index][1][6] ;
